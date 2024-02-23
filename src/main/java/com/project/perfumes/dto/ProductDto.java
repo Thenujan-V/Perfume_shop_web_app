@@ -1,6 +1,8 @@
 package com.project.perfumes.dto;
 
 import jakarta.persistence.Column;
+
+import java.util.Date;
 //import lombok.AllArgsConstructor;
 //import lombok.Getter;
 //import lombok.NoArgsConstructor;
@@ -27,6 +29,8 @@ public class ProductDto {
     private int deliveryCharge;
     private int productQuantity;
     private int size;
+//    private Date updated_at;
+//    private Date created_at;
 
     public ProductDto(long pId, String pName, String category, String type, String description, String brand, String gender, String status, String imageURL, int price, int discount, int deliveryCharge, int productQuantity, int size) {
 
@@ -44,6 +48,8 @@ public class ProductDto {
         this.deliveryCharge = deliveryCharge;
         this.productQuantity = productQuantity;
         this.size = size;
+//        this.updated_at = updated_at;
+//        this.created_at = created_at;
     }
 
     public long getpId() {

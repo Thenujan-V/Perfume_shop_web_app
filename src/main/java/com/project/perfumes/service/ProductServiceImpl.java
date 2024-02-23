@@ -49,6 +49,8 @@ public class ProductServiceImpl implements ProductService {
                         product.getDeliveryCharge(),
                         product.getProductQuantity(),
                         product.getSize()
+//                        product.getCreated_at(),
+//                        product.getUpdated_at()
                         ))
                 .collect(Collectors.toList());
         return products;
@@ -74,6 +76,8 @@ public class ProductServiceImpl implements ProductService {
                         freeDeleivery.getDeliveryCharge(),
                         freeDeleivery.getProductQuantity(),
                         freeDeleivery.getSize()
+//                        freeDeleivery.getCreated_at(),
+//                        freeDeleivery.getUpdated_at()
                 )).collect(Collectors.toList());
         return brnads;
     }
@@ -103,6 +107,8 @@ public class ProductServiceImpl implements ProductService {
                         discount.getDeliveryCharge(),
                         discount.getProductQuantity(),
                         discount.getSize()
+//                        discount.getCreated_at(),
+//                        discount.getUpdated_at()
                 )).collect(Collectors.toList());
         return discounts;
     }
@@ -129,6 +135,8 @@ public class ProductServiceImpl implements ProductService {
                         product.getDeliveryCharge(),
                         product.getProductQuantity(),
                         product.getSize()
+//                        product.getCreated_at(),
+//                        product.getUpdated_at()
                 )).collect(Collectors.toList());
         return categoryProducts;
     }
@@ -154,8 +162,63 @@ public class ProductServiceImpl implements ProductService {
                         product.getDeliveryCharge(),
                         product.getProductQuantity(),
                         product.getSize()
+//                        product.getCreated_at(),
+//                        product.getUpdated_at()
                 )).collect(Collectors.toList());
         return typeProducts;
+    }
+    @Override
+    public List<ProductDto> getBrandWishProducts(String brand) {
+        List<ProductEntity> productEntities = productRepo.findByBrand(brand);
+
+        List<ProductDto> brandProducts = (List<ProductDto>) productEntities
+                .stream()
+                .map(product -> new ProductDto(
+                        product.getpId(),
+                        product.getpName(),
+                        product.getType(),
+                        product.getCategory(),
+                        product.getGender(),
+                        product.getStatus(),
+                        product.getBrand(),
+                        product.getDescription(),
+                        product.getImageURL(),
+                        product.getPrice(),
+                        product.getDiscount(),
+                        product.getDeliveryCharge(),
+                        product.getProductQuantity(),
+                        product.getSize()
+//                        product.getCreated_at(),
+//                        product.getUpdated_at()
+                )).collect(Collectors.toList());
+        return brandProducts;
+    }
+
+    @Override
+    public List<ProductDto> getSizeWishProducts(String size) {
+        List<ProductEntity> productEntities = productRepo.findBySize(size);
+
+        List<ProductDto> sizeProducts = (List<ProductDto>) productEntities
+                .stream()
+                .map(product -> new ProductDto(
+                        product.getpId(),
+                        product.getpName(),
+                        product.getType(),
+                        product.getCategory(),
+                        product.getGender(),
+                        product.getStatus(),
+                        product.getBrand(),
+                        product.getDescription(),
+                        product.getImageURL(),
+                        product.getPrice(),
+                        product.getDiscount(),
+                        product.getDeliveryCharge(),
+                        product.getProductQuantity(),
+                        product.getSize()
+//                        product.getCreated_at(),
+//                        product.getUpdated_at()
+                )).collect(Collectors.toList());
+        return sizeProducts;
     }
 
     @Override
@@ -177,6 +240,8 @@ public class ProductServiceImpl implements ProductService {
     public List<String> getSize() {
         return productRepo.findAllSize();
     }
+
+
 
 
 }

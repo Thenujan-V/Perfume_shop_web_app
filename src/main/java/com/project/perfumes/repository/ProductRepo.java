@@ -33,4 +33,9 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     @Query("SELECT p FROM ProductEntity p WHERE p.type = :type")
     List<ProductEntity> findByType(@Param("type") String type);
 
+    @Query("SELECT p FROM ProductEntity p WHERE p.brand = :brand")
+    List<ProductEntity> findByBrand(@Param("brand") String brand);
+    @Query("SELECT p FROM ProductEntity p WHERE p.size = :size")
+    List<ProductEntity> findBySize(@Param("size") String size);
+
 }

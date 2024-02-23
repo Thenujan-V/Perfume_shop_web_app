@@ -29,4 +29,8 @@ public interface ProductService {
     List<String> getGender();
 
     List<String> getSize();
+
+    List<ProductDto> getBrandWishProducts(String brand);
+
+    List<ProductDto> getSizeWishProducts(String size);
 }

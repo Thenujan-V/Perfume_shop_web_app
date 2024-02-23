@@ -9,37 +9,51 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1/")
-public class ProductController {
+@RequestMapping("/api/v1/products")
+public class ProductController{
 
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/addproducts")
+    @PostMapping("/")
     public ProductDto createProducts(@RequestBody ProductDto productDto) {
         return productService.createProducts(productDto);
     }
 
-    @GetMapping("/getProducts/")
+    @GetMapping("/")
     public List<ProductDto> getAllProducts() {
         return productService.getProducts();
     }
 
-    @GetMapping("/getProducts/{category}")
+    @GetMapping("/getwisecategory/{category}")
     public List<ProductDto> getProducts(@PathVariable String category) {
         System.out.println(category);
         return productService.getCategoryWishProducts(category);
     }
 
-    @GetMapping("/gettypeswishProducts/{type}")
+    @GetMapping("/getwishtype/{type}")
     public List<ProductDto> getTypeWishProducts(@PathVariable String type) {
         System.out.println(type);
         return productService.getTypeWishProducts(type);
     }
 
-    @GetMapping("/getfreedelivery")
+    @GetMapping("/getwisebrand/{brand}")
+    public List<ProductDto> getBrandWishProducts(@PathVariable String brand) {
+        return productService.getBrandWishProducts(brand);
+    }
+    @GetMapping("/getwisesize/{size}")
+    public List<ProductDto> getBrandWishSize(@PathVariable String size) {
+        return productService.getSizeWishProducts(size);
+    }
+
+    @GetMapping("/freedelivery")
     public List<ProductDto> getFreeDelivery() {
         return productService.getFreeDelivery();
+    }
+
+    @GetMapping("/discounts")
+    public List<ProductDto> getDiscounts() {
+        return productService.getDiscounts();
     }
 
     @GetMapping("/getbrands")
@@ -62,10 +76,7 @@ public class ProductController {
         return productService.getGender();
     }
 
-    @GetMapping("/getdiscounts")
-    public List<ProductDto> getDiscounts() {
-        return productService.getDiscounts();
-    }
+
 }
 
 

@@ -2,6 +2,8 @@ package com.project.perfumes.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 //@Getter
@@ -17,7 +19,7 @@ public class ProductEntity {
     private String description;
     private String brand;
     private String gender;
-    @Column(columnDefinition = "VARCHAR(25) DEFAULT 'available'")
+    @Column(columnDefinition = "DEFAULT 'available'")
     private String status;
     @Column(length = 225)
     private String imageURL;
@@ -26,6 +28,30 @@ public class ProductEntity {
     private int deliveryCharge;
     private int productQuantity;
     private int size;
+//    @Column(columnDefinition = "DEFAULT 'not_update_yet'")
+//    private Date updated_at;
+//    @Column(columnDefinition = "DEFAULT CURRENT_TIMESTAMP")
+//    private Date created_at;
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public Date getCreated_at() {
+//        return created_at;
+//    }
+//
+//    public void setCreated_at(Date created_at) {
+//        this.created_at = created_at;
+//    }
+//
+//    public Date getUpdated_at() {
+//        return updated_at;
+//    }
+//
+//    public void setUpdated_at(Date updated_at) {
+//        this.updated_at = updated_at;
+//    }
 
     public long getpId() {
         return pId;
