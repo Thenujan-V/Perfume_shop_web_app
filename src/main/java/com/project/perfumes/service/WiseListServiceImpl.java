@@ -1,11 +1,13 @@
 package com.project.perfumes.service;
 
 import com.project.perfumes.dto.WiseListDto;
+import com.project.perfumes.entity.ProductEntity;
 import com.project.perfumes.entity.WiseListEntity;
 import com.project.perfumes.repository.WiseListRepo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WiseListServiceImpl implements WiseListService{
@@ -18,12 +20,16 @@ public class WiseListServiceImpl implements WiseListService{
     public WiseListDto createWiseList(Long uId, Long pId) {
         System.out.println(uId +" "+ pId);
 
-        WiseListEntity wiseListEntity = new WiseListEntity(
-            uId,pId
-        );
+        WiseListEntity wiseListEntity = new WiseListEntity();
+            wiseListEntity.setPId(pId);
+            wiseListEntity.setUId(uId);
+
         wiseListRepo.save(wiseListEntity);
         return null;
     }
 
-
+    @Override
+    public List<ProductEntity> getAllWiseList(Long uId) {
+        return wiseListRepo.findAllProducts(uId);
+    }
 }

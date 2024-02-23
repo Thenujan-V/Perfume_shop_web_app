@@ -1,6 +1,7 @@
 package com.project.perfumes.controller;
 
 import com.project.perfumes.dto.ProductDto;
+import com.project.perfumes.entity.ProductEntity;
 import com.project.perfumes.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,11 @@ public class ProductController{
     public List<ProductDto> getProducts(@PathVariable String category) {
         System.out.println(category);
         return productService.getCategoryWishProducts(category);
+    }
+
+    @GetMapping("/getproductdetails/{pId}")
+    public List<ProductEntity> getDetails(@PathVariable Long pId){
+        return productService.getDetails(pId);
     }
 
     @GetMapping("/getwishtype/{type}")

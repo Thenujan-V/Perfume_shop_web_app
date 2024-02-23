@@ -2,6 +2,7 @@ package com.project.perfumes.service;
 
 
 import com.project.perfumes.dto.ProductDto;
+import com.project.perfumes.entity.ProductEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public interface ProductService {
     List<ProductDto> getBrandWishProducts(String brand);
 
     List<ProductDto> getSizeWishProducts(String size);
+
+    List<ProductEntity> getDetails(Long pId);
 }

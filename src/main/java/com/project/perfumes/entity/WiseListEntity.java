@@ -23,8 +23,5 @@ public class WiseListEntity {
     @CreationTimestamp
     private Date createdAt;
 
-    public WiseListEntity(Long pId, Long uId) {
-        this.pId = pId;
-        this.uId = uId;
-    }
+
 }

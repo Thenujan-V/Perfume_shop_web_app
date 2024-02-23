@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -219,6 +220,11 @@ public class ProductServiceImpl implements ProductService {
 //                        product.getUpdated_at()
                 )).collect(Collectors.toList());
         return sizeProducts;
+    }
+
+    @Override
+    public List<ProductEntity> getDetails(Long pId) {
+        return productRepo.findAllById(Collections.singleton(pId));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.project.perfumes.repository;
 
+import com.project.perfumes.dto.ProductDto;
 import com.project.perfumes.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
