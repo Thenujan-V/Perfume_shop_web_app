@@ -20,9 +20,7 @@ public class ProductDto {
     private String description;
     private String brand;
     private String gender;
-    @Column(length = 20, columnDefinition = "VARCHAR(25) DEFAULT 'available'")
     private String status;
-    @Column(length = 225)
     private String imageURL;
     private int price;
     private int discount;
