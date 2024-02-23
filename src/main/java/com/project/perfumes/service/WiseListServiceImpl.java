@@ -18,8 +18,6 @@ public class WiseListServiceImpl implements WiseListService{
 
     @Override
     public WiseListDto createWiseList(Long uId, Long pId) {
-        System.out.println(uId +" "+ pId);
-
         WiseListEntity wiseListEntity = new WiseListEntity();
             wiseListEntity.setPId(pId);
             wiseListEntity.setUId(uId);

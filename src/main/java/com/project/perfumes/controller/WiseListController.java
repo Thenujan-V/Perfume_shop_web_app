@@ -25,5 +25,8 @@ public class WiseListController {
     public List<ProductEntity> getAllWishList(@PathVariable Long uId){
         return wiseListService.getAllWiseList(uId);
     }
+
+    public static class CartController {
+    }
 }
 
