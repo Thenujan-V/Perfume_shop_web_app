@@ -1,0 +1,28 @@
+.newArrival h4 , h2{
+    text-align: center;
+}
+.newArrival h4{
+    font-size: 15px;
+    font-weight: 800;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+.newArrival h2{
+    font-size: 35px;
+    padding-bottom: 40px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    word-spacing: 3px;
+}
+.newArrivalImg img{
+    width: 300px;
+    height: 350px;
+}
+.himNewArrivals{
+    background-color: rgb(85, 75, 75);
+    padding-bottom: 40px;
+}
+.herNewArrivals{
+    background-color: rgb(85, 75, 75);
+    padding-bottom: 40px;
+}
