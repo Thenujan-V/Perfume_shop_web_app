@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 import './BestSales.css'
+// import CartdIcon from '../Assets/card.png'
+
 
 const BestSales = () => {
     const [HimbestSales , setnewHimBestSales] = useState([]);
@@ -67,7 +71,15 @@ const BestSales = () => {
                         {HerbestSales
                             .map((HerbestSale, index) => (
                             <div key={index} className="col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center BestSaleImg">
-                                <img src={HerbestSale.image} className="img-fluid m-2" alt="" />
+                                  <Card  style={{ width: '19rem' }}>
+                                    <Card.Img className='' variant="top" src={HerbestSale.image} style={{ width: '304px', height: '300px' }}/>
+                                    {/* <Card.Link href="#"> <img src={CartdIcon} alt=""  style={{ width: '50px', height: '50px' }}/></Card.Link> */}
+                                    <Card.Body>
+                                        <Card.Title>{HerbestSale.count}</Card.Title>
+                                        <Card.Title>{HerbestSale.gender}</Card.Title>
+                                        {/* <Card.Link href="#">Card Link</Card.Link> */}
+                                    </Card.Body>
+                                    </Card>
                             </div>
                             ))}
                         </div>

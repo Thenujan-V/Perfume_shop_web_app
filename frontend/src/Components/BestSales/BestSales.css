@@ -26,3 +26,7 @@
     background-color: rgb(85, 75, 75);
     padding-bottom: 40px;
 }
+BestSaleImg img{
+    width: 40px;
+    height: 40px;
+}
