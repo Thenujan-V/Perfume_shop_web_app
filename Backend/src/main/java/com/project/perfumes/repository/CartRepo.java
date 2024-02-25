@@ -12,4 +12,6 @@ import java.util.List;
 public interface CartRepo extends JpaRepository<CartEntity, Long> {
     @Query("SELECT p FROM ProductEntity p JOIN CartEntity c ON p.pId = c.pId WHERE c.uId = :uId")
     List<ProductEntity> findAllProducts(Long uId);
-}
+
+    @Query("SELECT c FROM CartEntity c WHERE c.uId = :uId")
+    List<CartEntity> findAllCartItems(Long uId);}
