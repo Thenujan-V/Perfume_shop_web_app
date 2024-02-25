@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OrderService{
     List<OrderEntity> createOrderList(CartDto CartDto);
+
+    String amountDetails(Long uId);
 }
