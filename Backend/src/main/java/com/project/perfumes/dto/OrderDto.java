@@ -18,6 +18,6 @@ public class OrderDto {
     private Long oId;
     private Long uId;
     private Date createdAt;
-    private String productDetails;
+    private String userAddress;
     private String status;
 }

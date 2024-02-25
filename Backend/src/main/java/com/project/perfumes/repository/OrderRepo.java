@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface OrderRepo extends JpaRepository<OrderEntity, Long> {
-    @Query("SELECT o.productDetails FROM OrderEntity o WHERE o.uId = :uId")
-    String findProductDetails(Long uId);
+    @Query("SELECT o.oId FROM OrderEntity o WHERE o.uId = :uId")
+    List<Integer> findOid(Long uId);
+
 }

@@ -14,4 +14,10 @@ public interface CartRepo extends JpaRepository<CartEntity, Long> {
     List<ProductEntity> findAllProducts(Long uId);
 
     @Query("SELECT c FROM CartEntity c WHERE c.uId = :uId")
-    List<CartEntity> findAllCartItems(Long uId);}
+    List<CartEntity> findProducts(Long uId);
+
+    @Query("SELECT c.pId FROM CartEntity c WHERE c.uId = :uId")
+    List<Integer> findPid(Long uId);
+    @Query("SELECT c.quantity FROM CartEntity c WHERE c.uId = :uId")
+    List<Integer> findQuantity(Long uId);
+}

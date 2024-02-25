@@ -20,7 +20,6 @@ public class OrderEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdAt;
-
-    private String productDetails;
+    private String userAddress;
     private String status = "pending";
 }

@@ -2,11 +2,16 @@ package com.project.perfumes.service;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.project.perfumes.dto.CartDto;
+import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.entity.OrderEntity;
+import com.project.perfumes.entity.OrderproductsEntity;
+import com.project.perfumes.repository.CartRepo;
+import com.project.perfumes.repository.OrderProductsRepo;
 import com.project.perfumes.repository.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -14,41 +19,50 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderRepo orderRepo;
 
+    @Autowired
+    private CartRepo cartRepo;
+    @Autowired
+    private OrderProductsRepo orderProductsRepo;
+
     @Override
-    public List<OrderEntity> createOrderList(CartDto CartDto) {
+    public List<OrderEntity> createOrderList(Long uId, CartDto cartDto) {
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setUId(CartDto.getuId());
-            orderEntity.setProductDetails(CartDto.getProductDetails().toString());
+        orderEntity.setUId(uId);
         orderRepo.save(orderEntity);
         return null;
     }
 
     @Override
-    public String amountDetails(Long uId) {
+    public List<OrderEntity> createOrderProducts(Long uId, CartDto cartDto) {
+        OrderproductsEntity orderproductsEntity = new OrderproductsEntity();
         OrderEntity orderEntity = new OrderEntity();
-        String orderEntities = orderRepo.findProductDetails(uId);
-        System.out.println("pId "+orderEntities.split("=")[0]);
-        System.out.println("Quantity "+orderEntities.split("=")[1]);
 
-        return orderEntities;
+        List<CartEntity> cartItems =  cartRepo.findProducts(uId);
+        List <Integer> oID = orderRepo.findOid(uId);
+        List <Integer> pID = cartRepo.findPid(uId);
+        List <Integer> quantity = cartRepo.findQuantity(uId);
+
+//        System.out.println("cart  :"+cartItems);
+
+//        System.out.println("piddd  :"+pID);
+//        System.out.println("oiddd  :"+oID);
+//        System.out.println("qqq  :"+quantity);
+
+        for(int i=0;i < pID.toArray().length; i++){
+            OrderproductsEntity orderproductsEntity1 = new OrderproductsEntity();
+
+            orderproductsEntity1.setOId(Long.valueOf(oID.get(0)));
+            orderproductsEntity1.setPId(Long.valueOf(pID.get(i)));
+            orderproductsEntity1.setQuantity(Integer.valueOf(quantity.get(i)));
+
+            System.out.println("oid    :" + Long.valueOf(oID.get(0)));
+            System.out.println("pid    :" + Long.valueOf(pID.get(i)));
+            System.out.println("quantity    :" + Integer.valueOf(quantity.get(i)));
+
+            orderProductsRepo.save(orderproductsEntity1);
+        }
+
+
+        return null;
     }
-//    @Autowired
-//    private CartRepo cartRepo;
-
-
-//    @Override
-//    public List<OrderEntity> createOrderList(Long uId) {
-//        List<CartEntity> carts = cartRepo.findAllCartItems(uId);
-//        System.out.println(carts);
-//        for(CartEntity cartEntity : carts) {
-//            OrderEntity orderEntity = new OrderEntity();
-//            orderEntity.setPId(cartEntity.getPId());
-//            orderEntity.setUId(uId);
-//            orderEntity.setQuantity(cartEntity.getQuantity());
-//            orderRepo.save(orderEntity);
-//            cartRepo.delete(cartEntity);
-//        }
-
-//        return null;
-//    }
 }
