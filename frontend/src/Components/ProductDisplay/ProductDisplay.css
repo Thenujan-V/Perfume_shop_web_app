@@ -1,0 +1,32 @@
+.ProductDisplay{
+    background-color: rgb(33, 173, 173);
+    padding: 25px;
+    margin: 0 3%;
+}
+.ProductDisplay .ProductDisplayLeft{
+    border-right: 2px solid black;
+}
+.ProductDisplay .ProductDisplayLeft img{
+    width: 350px;
+    height: 400px;
+}
+.ProductDisplay .ProductDisplayRight{
+   padding-left: 30px;
+ }
+@media screen and (max-width: 992px) {
+   
+    .ProductDisplay .ProductDisplayRight{
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+     }
+     .ProductDisplay .ProductDisplayLeft{
+        border-right:  none;
+    }
+    }
+@media screen and (max-width: 400px) {
+    .ProductDisplay .ProductDisplayLeft img{
+        width: 250px;
+        height: 300px;
+    }}
