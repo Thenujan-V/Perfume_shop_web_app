@@ -1,5 +1,6 @@
 package com.project.perfumes.service;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.project.perfumes.dto.CartDto;
 import com.project.perfumes.entity.OrderEntity;
 import com.project.perfumes.repository.OrderRepo;
@@ -16,11 +17,20 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<OrderEntity> createOrderList(CartDto CartDto) {
         OrderEntity orderEntity = new OrderEntity();
-        System.out.println(CartDto.getuId());
-            orderEntity.setUId(CartDto.getuId());
-            orderEntity.setProductDetails(CartDto.getProductDetails());
+        orderEntity.setUId(CartDto.getuId());
+            orderEntity.setProductDetails(CartDto.getProductDetails().toString());
         orderRepo.save(orderEntity);
         return null;
+    }
+
+    @Override
+    public String amountDetails(Long uId) {
+        OrderEntity orderEntity = new OrderEntity();
+        String orderEntities = orderRepo.findProductDetails(uId);
+        System.out.println("pId "+orderEntities.split("=")[0]);
+        System.out.println("Quantity "+orderEntities.split("=")[1]);
+
+        return orderEntities;
     }
 //    @Autowired
 //    private CartRepo cartRepo;
