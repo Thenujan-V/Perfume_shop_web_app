@@ -2,6 +2,8 @@ package com.project.perfumes.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +12,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -19,6 +23,8 @@ public class User implements UserDetails {
     private String firstName;
     private String secondName;
     private String email;
+    private String address;
+    private String phoneno;
     private String password;
     private Role role;
 

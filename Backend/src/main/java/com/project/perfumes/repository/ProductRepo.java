@@ -17,9 +17,6 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     @Query("SELECT DISTINCT p.brand FROM ProductEntity p")
     List<String> findAllBrands();
 
-    @Query("SELECT DISTINCT p.type FROM ProductEntity p")
-    List<String> findAllType();
-
     @Query("SELECT DISTINCT p.category FROM ProductEntity p")
     List<String> findAllCategory();
     @Query("SELECT DISTINCT p.gender FROM ProductEntity p")
@@ -28,15 +25,16 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     List<String> findAllSize();
     @Query("SELECT p FROM ProductEntity p WHERE p.discount = 0")
     List<ProductEntity> discountProducts();
-   // @Query("SELECT p FROM ProductEntity p WHERE p.category = :category")
+    @Query("SELECT p FROM ProductEntity p WHERE p.category = :category")
     List<ProductEntity> findAllByCategory(@Param("category") String category);
-
-    @Query("SELECT p FROM ProductEntity p WHERE p.type = :type")
-    List<ProductEntity> findByType(@Param("type") String type);
-
     @Query("SELECT p FROM ProductEntity p WHERE p.brand = :brand")
     List<ProductEntity> findByBrand(@Param("brand") String brand);
     @Query("SELECT p FROM ProductEntity p WHERE p.size = :size")
     List<ProductEntity> findBySize(@Param("size") String size);
+    @Query("SELECT p FROM ProductEntity p ORDER BY p.buycount  DESC")
+    List<ProductEntity> getbestSelles();
+
+    @Query("SELECT p FROM ProductEntity p ORDER BY p.created_at  DESC")
+    List<ProductEntity> newArrivals();
 
 }
