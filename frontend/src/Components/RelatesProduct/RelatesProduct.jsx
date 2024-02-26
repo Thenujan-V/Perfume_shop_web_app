@@ -3,7 +3,7 @@ import './RelatesProduct.css'
 
 const RelatesProduct = () => {
   return (
-    // <div className='relatesProduct'></div>
+    <div className='relatesProduct'></div>
   )
 }
 
