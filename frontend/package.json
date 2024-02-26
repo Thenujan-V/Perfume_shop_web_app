@@ -3,13 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@emailjs/browser": "^3.4.0",
+=======
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+    "@mui/icons-material": "^5.15.11",
+    "@mui/material": "^5.15.11",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+>>>>>>> b6da63db0fc92249c15cf86f932aa4c15ae540f1
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "framer": "^2.4.1",
+    "heroicons": "^2.1.1",
     "mdb-react-ui-kit": "^7.2.0",
     "process": "^0.11.10",
     "react": "^18.2.0",
@@ -43,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }

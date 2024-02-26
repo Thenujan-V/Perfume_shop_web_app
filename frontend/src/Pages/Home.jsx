@@ -1,4 +1,5 @@
 import React from 'react'
+import Nav from '../Components/Nav/Nav'
 import HomeDp from '../Components/HomeDp/HomeDp'
 import NewArrivals from '../Components/NewArrivals/NewArrivals'
 import ExclusiveOffers from '../Components/ExclusiveOffers/ExclusiveOffers'
@@ -6,15 +7,20 @@ import BestSales from '../Components/BestSales/BestSales'
 import FreeCharge from '../Components/FreeCharge/FreeCharge'
 
 
+
 const Home = () => {
   return (
     <div className='home'>
+        <Nav />
+    <div className='home'>   
+
         <HomeDp />
         <NewArrivals />
         <ExclusiveOffers />
         <BestSales />
         <FreeCharge />
 
+    </div>
     </div>
   )
 }
