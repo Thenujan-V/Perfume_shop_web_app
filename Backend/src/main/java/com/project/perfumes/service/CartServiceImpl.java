@@ -23,6 +23,7 @@ public class CartServiceImpl implements CartService {
         CartEntity cartEntity = new CartEntity();
             cartEntity.setPId(pId);
             cartEntity.setUId(uId);
+            cartEntity.setQuantity(1);
         cartRepo.save(cartEntity);
         return null;
     }

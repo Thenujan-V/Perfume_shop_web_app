@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './ExclusiveOffers.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+
 
 
 const ExclusiveOffers = () => {
@@ -8,35 +10,35 @@ const ExclusiveOffers = () => {
     useEffect(() =>{
     
     
-        // const fetchExclusiveOffersData = async () => {
-        //     try {
-        //       const response = await axios.get('/exclusiveOfferss'); 
-        //       setExclusiveOffers(response.data);
-        //     } catch (error) {
-        //       console.error('Error fetching ExclusiveOffers:', error);
-        //     }
-        //   };
+        const fetchExclusiveOffersData = async () => {
+            try {
+              const response = await axios.get("http://localhost:8080/api/v1/products/discounts"); 
+              setExclusiveOffers(response.data);
+            } catch (error) {
+              console.error('Error fetching ExclusiveOffers:', error);
+            }
+          };
       
-        //   fetchExclusiveOffersData();
+          fetchExclusiveOffersData();
       
     
-        const simulatedExclusiveOffers = [
-            {id : '10' , image: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',gender : 'C' , discount : '0' , deliveryCharge : '200' },
-            {id : '11' , image: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg', gender: 'B', discount : '0' , deliveryCharge : '200' },
-            {id : '13' , image: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg', gender: 'A', discount : '0' , deliveryCharge : '200' },
-            {id : '15' , image: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=1024x1024&w=is&k=20&c=iGtRKCTRSvPVl3eOIpzzse5SvQFfImkV0TZuFh-74ps=', gender: 'B' , discount : '0' , deliveryCharge : '200'},
-            {id : '19' , image: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500', gender: 'A' , discount : '0' , deliveryCharge : '200'},
-            {id : '21' , image: 'https://e1.pxfuel.com/desktop-wallpaper/903/679/desktop-wallpaper-97-aesthetic-best-profile-pic-for-instagram-for-boy-instagram-dp-boys.jpg', gender: 'B' , discount : '0' , deliveryCharge : '200'},
-            {id : '31' , image: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500', gender: 'A' , discount : '0' , deliveryCharge : '200'},
-            {id : '16' , image: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500', gender: 'C' , discount : '0' , deliveryCharge : '200'},
-            {id : '22' , image: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg', gender: 'A' , discount : '0' , deliveryCharge : '200'},
-            {id : '30' , image: 'https://e1.pxfuel.com/desktop-wallpaper/903/679/desktop-wallpaper-97-aesthetic-best-profile-pic-for-instagram-for-boy-instagram-dp-boys.jpg', gender: 'B' , discount : '0' , deliveryCharge : '200'},
-            {id : '23' , image: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=1024x1024&w=is&k=20&c=iGtRKCTRSvPVl3eOIpzzse5SvQFfImkV0TZuFh-74ps=', gender: 'A' , discount : '0' , deliveryCharge : '200'},
-            {id : '8' , image: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg', gender: 'C' , discount : '0' , deliveryCharge : '200'},
-          ];
+        // const simulatedExclusiveOffers = [
+        //     {id : '10' , image: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',gender : 'C' , discount : '0' , deliveryCharge : '200' },
+        //     {id : '11' , image: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg', gender: 'B', discount : '0' , deliveryCharge : '200' },
+        //     {id : '13' , image: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg', gender: 'A', discount : '0' , deliveryCharge : '200' },
+        //     {id : '15' , image: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=1024x1024&w=is&k=20&c=iGtRKCTRSvPVl3eOIpzzse5SvQFfImkV0TZuFh-74ps=', gender: 'B' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '19' , image: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500', gender: 'A' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '21' , image: 'https://e1.pxfuel.com/desktop-wallpaper/903/679/desktop-wallpaper-97-aesthetic-best-profile-pic-for-instagram-for-boy-instagram-dp-boys.jpg', gender: 'B' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '31' , image: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500', gender: 'A' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '16' , image: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500', gender: 'C' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '22' , image: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg', gender: 'A' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '30' , image: 'https://e1.pxfuel.com/desktop-wallpaper/903/679/desktop-wallpaper-97-aesthetic-best-profile-pic-for-instagram-for-boy-instagram-dp-boys.jpg', gender: 'B' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '23' , image: 'https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=1024x1024&w=is&k=20&c=iGtRKCTRSvPVl3eOIpzzse5SvQFfImkV0TZuFh-74ps=', gender: 'A' , discount : '0' , deliveryCharge : '200'},
+        //     {id : '8' , image: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg', gender: 'C' , discount : '0' , deliveryCharge : '200'},
+        //   ];
       
           
-          setExclusiveOffers(simulatedExclusiveOffers);
+          // setExclusiveOffers(simulatedExclusiveOffers);
     },[])
     
 

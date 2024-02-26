@@ -17,14 +17,10 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-
-    @PostMapping("/create")
-    public List<OrderEntity> createOrderList(@RequestBody CartDto cartDto){
-        return orderService.createOrderList(cartDto);
-    }
-
-    @GetMapping("/amountdetails/{uId}")
-    public String paymentAmount(@PathVariable Long uId, @RequestBody CartDto cartDto){
-        return orderService.amountDetails(uId);
+    @PostMapping("/create/{uId}")
+    private List<OrderEntity> createOrderList(@PathVariable Long uId,@RequestBody CartDto cartDto){
+        orderService.createOrderList(uId, cartDto);
+        orderService.createOrderProducts(uId,cartDto);
+        return null;
     }
 }
