@@ -3,7 +3,7 @@ import CartTable from '../Components/CartTable/CartTable'
 
 const Cart = () => {
   return (
-    <div className='cart'>Cart
+    <div className='cart'>
 
     
     <CartTable />
