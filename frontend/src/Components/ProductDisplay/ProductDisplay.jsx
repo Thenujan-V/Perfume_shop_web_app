@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import './ProductDisplay.css'
 import { ShopContext } from '../../Context/ShopContext'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 const ProductDisplay = (props) => {
   const {product} = props
 //   const {addToCart} = useContext(ShopContext);

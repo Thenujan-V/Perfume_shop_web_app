@@ -1,5 +1,6 @@
-import React from 'react'
-import '../CartTable.css'
+import React, { useState } from 'react'
+import './CartTable.css'
+
 const CartTable = ({cartTable,setCartTable}) => {
     const{price, setPrice}= useState(0);
   return (
@@ -24,8 +25,9 @@ const CartTable = ({cartTable,setCartTable}) => {
             ))
           }
         <div>
-            <span>Total price of your cart </span>  
-            <span>Rs - {price}</span>  
+            <span> SubTotal </span>
+            <span> Total </span>  
+            <span>LKR- {price}</span>  
         </div>  
         
     </article>
