@@ -8,7 +8,7 @@ import FreeCharge from '../Components/FreeCharge/FreeCharge'
 
 const Home = () => {
   return (
-    <div className='home'>
+    <div className='home'>   
         <HomeDp />
         <NewArrivals />
         <ExclusiveOffers />
