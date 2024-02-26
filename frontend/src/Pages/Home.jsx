@@ -10,18 +10,17 @@ import FreeCharge from '../Components/FreeCharge/FreeCharge'
 
 const Home = () => {
   return (
-<<<<<<< HEAD
     <div className='home'>
         <Nav />
-=======
     <div className='home'>   
->>>>>>> 8516fec5d190a75ec7e7cbad82d89b58347846ce
+
         <HomeDp />
         <NewArrivals />
         <ExclusiveOffers />
         <BestSales />
         <FreeCharge />
 
+    </div>
     </div>
   )
 }

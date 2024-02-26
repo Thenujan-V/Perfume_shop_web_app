@@ -1,5 +1,6 @@
 import React from 'react'
 import './Register.css';
+// import "../../js/FormValidation"
 
 const Login = () => {
   return (
@@ -12,7 +13,7 @@ const Login = () => {
                         <a href="login.php" class="text-decoration-none">already have an account</a>
                     </div>
                     <h1>Register</h1>
-                    <form action="register.php" method="post">
+                    <form action="" method="post">
                         <div class="form-group">
                             <input type="text" id="fullname" data-name="Full Name" name="FullName" placeholder="Full Name" class="form-control" />
                             <p></p>
