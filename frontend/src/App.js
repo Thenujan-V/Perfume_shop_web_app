@@ -1,27 +1,26 @@
 import { BrowserRouter,  Route,  Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Product from "./Pages/Product";
-<<<<<<< HEAD
 import Cart from "./Pages/Cart";
-
-=======
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
->>>>>>> f5503d6bbb841c05be5aba730095bc2fec309261
+// import Nav from '../Components/Nav/Nav'
+import ShopCategory from "./Pages/ShopCategory/ShopCategory";
+
+
 
 function App() {
   return (
-    
     <div className="App">
       <BrowserRouter>
+      {/* <Nav /> */}
         <Routes>
-<<<<<<< HEAD
-          {/* <Route path="/" element = {<Home />}/> */}
-          <Route path="/" element = {<Cart />}/>
-         
-=======
           <Route path="/" element = {<Home />}/>
-          {/* <Route path="/product" element={<Product />}>
+          {/* <Route path="/cart" element = {<Cart />}/> */}
+          {/* <Route path="/shop" element={<ShopCategory />}>
+            <Route path=":productGender" element={<ShopCategory banner={}/>}></Route>
+          </Route> */}
+          <Route path="/product" element={<Product />}>
           <Route path=":productId" element={<Product />}/>
           </Route>
         </Routes>
