@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+  }
+  
+  .image {
+    margin-right: 1rem; /* Add spacing between image and paragraph */
+  }

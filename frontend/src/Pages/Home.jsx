@@ -12,11 +12,17 @@ const Home = () => {
   return (
     <div className='home'>
         <Nav />
+<<<<<<< HEAD
+=======
+    <div className='home'>   
+
+>>>>>>> 1646534b8e9deca1638b91c5f332f6995405045b
         <HomeDp />
         <NewArrivals />
         <ExclusiveOffers />
         <BestSales />
         <FreeCharge />
+    </div>
     </div>
   )
 }

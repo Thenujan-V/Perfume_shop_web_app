@@ -20,11 +20,6 @@ public interface ProductService {
     List<ProductDto> getDiscounts();
 
     List<ProductDto> getCategoryWishProducts(String category);
-
-    List<ProductDto> getTypeWishProducts(String type);
-
-    List<String> getTypes();
-
     List<String> getCategories();
 
     List<String> getGender();
@@ -36,4 +31,8 @@ public interface ProductService {
     List<ProductDto> getSizeWishProducts(String size);
 
     List<ProductEntity> getDetails(Long pId);
+
+    List<ProductEntity> getBestSellesProducts();
+
+    List<ProductEntity> newArrivals();
 }
