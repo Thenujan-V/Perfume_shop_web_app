@@ -39,6 +39,29 @@ nav .wrapper{
   list-style: none;
 
 }
+
+
+.search {
+  position: relative;
+}
+
+.search input[type="text"] {
+  width: 20vw;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #555; /* Adjust the color as needed */
+  cursor: pointer;
+}
+
 /* .nav-links li:nth-child(1){
   order: 1;
   background-color: red;

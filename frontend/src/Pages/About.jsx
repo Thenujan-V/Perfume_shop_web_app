@@ -10,7 +10,6 @@ const About = () => {
       <ImageWithParagraph/>
       {/* <About/> */}
       
-
     </div>
   )
 }

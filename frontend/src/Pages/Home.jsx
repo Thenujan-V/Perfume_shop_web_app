@@ -11,16 +11,13 @@ import Nav from '../Components/Nav/Nav'
 const Home = () => {
   return (
     <div className='home'>
-        <Nav />
-
-    <div className='home'>   
+        <Nav /> 
 
         <HomeDp />
         <NewArrivals />
         <ExclusiveOffers />
         <BestSales />
         <FreeCharge />
-    </div>
     </div>
   )
 }
