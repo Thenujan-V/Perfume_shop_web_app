@@ -21,7 +21,7 @@ public class CartController {
         if(cartService.checkCart(uId,pId)){
             return ResponseEntity.status(HttpStatus.OK).body("Cart already exists.");
         }
-        else{   
+        else{
             CartDto createdCart = cartService.createCart(uId, pId);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCart.toString());}
     }
