@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -19,13 +20,31 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public boolean checkCart(Long uId, Long pId) {
+       Optional<CartEntity> cartEntityOptional = cartRepo.findSameItems(uId,pId);
+       if(cartEntityOptional.isPresent()){
+           System.out.println("true");
+           return true;
+       }
+       else{
+           System.out.println("false");
+           return false;
+       }
+    }
+    @Override
     public CartDto createCart(Long uId, Long pId) {
         CartEntity cartEntity = new CartEntity();
             cartEntity.setPId(pId);
             cartEntity.setUId(uId);
             cartEntity.setQuantity(1);
         cartRepo.save(cartEntity);
-        return null;
+
+        CartDto cartDto = new CartDto();
+        cartDto.setPId(cartEntity.getPId());
+        cartDto.setuId(cartEntity.getUId());
+        cartDto.setQuantity(cartEntity.getQuantity());
+
+        return cartDto;
     }
 
     @Override
@@ -48,5 +67,7 @@ public class CartServiceImpl implements CartService {
         cartRepo.delete(cartEntity);
         return true;
     }
+
+
 
 }
