@@ -9,4 +9,6 @@ public interface WiseListService {
     WiseListDto createWiseList(Long uId, Long pId);
 
     List<ProductEntity> getAllWiseList(Long uId);
+
+    boolean checkWiselist(Long uId, Long pId);
 }
