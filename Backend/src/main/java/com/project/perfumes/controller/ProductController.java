@@ -59,7 +59,7 @@ public class ProductController{
     }
 
     @GetMapping("/discounts")
-    public List<ProductDto> getDiscounts() {
+    public List<ProductEntity> getDiscounts() {
         return productService.getDiscounts();
     }
 

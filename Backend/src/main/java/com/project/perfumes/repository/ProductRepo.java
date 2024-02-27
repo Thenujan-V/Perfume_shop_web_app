@@ -23,7 +23,7 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     List<String> findAllGender();
     @Query("SELECT DISTINCT p.size FROM ProductEntity p")
     List<String> findAllSize();
-    @Query("SELECT p FROM ProductEntity p WHERE p.discount = 0")
+    @Query("SELECT p FROM ProductEntity p WHERE p.discount > 0")
     List<ProductEntity> discountProducts();
     @Query("SELECT p FROM ProductEntity p WHERE p.category = :category")
     List<ProductEntity> findAllByCategory(@Param("category") String category);

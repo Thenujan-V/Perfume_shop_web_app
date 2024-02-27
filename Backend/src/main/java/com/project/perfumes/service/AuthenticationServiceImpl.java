@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -39,7 +39,6 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     }
 
     public JwtAutenticationResponse signin(SigninRequest signinRequest){
-        System.out.println("1");
         Authentication auth=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signinRequest.getEmail(),
                 signinRequest.getPassword()));
         System.out.println(auth.isAuthenticated());
@@ -55,5 +54,31 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         jwtAutenticationResponse.setRefreshToken(refreshToken);
 
         return jwtAutenticationResponse;
+    }
+
+    @Override
+    public boolean verifyUniqueEmail(SignUpRequest signUpRequest) {
+        String userEmail = signUpRequest.getEmail();
+        boolean emailExists = userRepository.existsByEmail(userEmail);
+
+        return emailExists;
+    }
+
+    @Override
+    public boolean signinVerify(SigninRequest signinRequest) {
+        String userEmail = signinRequest.getEmail();
+        Optional<User> userOptional = userRepository.findByEmail(userEmail);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            return passwordEncoder.matches(signinRequest.getPassword(),user.getPassword());
+        }
+        else{
+            return false;
+        }
+
+
+
     }
 }

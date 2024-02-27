@@ -2,13 +2,13 @@ import React from 'react';
 import ImageWithParagraph from '../Components/Paragraph/Paragraph';
 
 
-const Aboutus = () => {
+const About = () => {
 
 
   return (
     <div class className='about'>
       <ImageWithParagraph/>
-      <About/>
+      {/* <About/> */}
       
 
     </div>
