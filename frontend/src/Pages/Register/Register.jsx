@@ -29,8 +29,15 @@ const Register = () => {
         try {
             const response = await axios.post("http://localhost:8080/api/v1/auth/signup", formData);
             console.log('Form submitted successfully:', response.data);
-
-            navigate("/login")
+            if(response.data){
+              alert("Registration successful")
+              navigate("/login")
+            }
+            else{
+              alert("Email already exists")
+              navigate("/register")
+            }
+            
 
           } catch (error) {
             console.error('Error while submitting form:', error);

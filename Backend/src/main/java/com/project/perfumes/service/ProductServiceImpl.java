@@ -89,29 +89,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getDiscounts() {
-        List<ProductEntity> productEntities = productRepo.discountProducts();
-        List<ProductDto> discounts = (List<ProductDto>) productEntities
-                .stream()
-                .map(discount -> new ProductDto(
-                        discount.getPId(),
-                        discount.getPName(),
-//                        discount.getType(),
-                        discount.getCategory(),
-                        discount.getGender(),
-                        discount.getStatus(),
-                        discount.getBrand(),
-                        discount.getDescription(),
-                        discount.getImageURL(),
-                        discount.getPrice(),
-                        discount.getDiscount(),
-                        discount.getDeliveryCharge(),
-                        discount.getProductQuantity(),
-                        discount.getSize()
-//                        discount.getCreated_at(),
-//                        discount.getUpdated_at()
-                )).collect(Collectors.toList());
-        return discounts;
+    public List<ProductEntity> getDiscounts() {
+//        List<ProductEntity> productEntities = productRepo.discountProducts();
+//        List<ProductDto> discounts = (List<ProductDto>) productEntities
+//                .stream()
+//                .map(discount -> new ProductDto(
+//                        discount.getPId(),
+//                        discount.getPName(),
+////                        discount.getType(),
+//                        discount.getCategory(),
+//                        discount.getGender(),
+//                        discount.getStatus(),
+//                        discount.getBrand(),
+//                        discount.getDescription(),
+//                        discount.getImageURL(),
+//                        discount.getPrice(),
+//                        discount.getDiscount(),
+//                        discount.getDeliveryCharge(),
+//                        discount.getProductQuantity(),
+//                        discount.getSize()
+////                        discount.getCreated_at(),
+////                        discount.getUpdated_at()
+//                )).collect(Collectors.toList());
+        return productRepo.discountProducts();
     }
 
 

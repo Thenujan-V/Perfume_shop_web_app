@@ -17,7 +17,7 @@ public interface ProductService {
 
     List<String> getBrands();
 
-    List<ProductDto> getDiscounts();
+    List<ProductEntity> getDiscounts();
 
     List<ProductDto> getCategoryWishProducts(String category);
     List<String> getCategories();

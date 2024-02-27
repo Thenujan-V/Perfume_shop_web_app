@@ -20,18 +20,21 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 	try{
-		await axios.post("http://localhost:8080/api/v1/auth/signin",{email:email,password:password});
-		
+		const response = await axios.post("http://localhost:8080/api/v1/auth/signin",{email:email,password:password});
+
+		const token = response.data.token;
+
+    localStorage.setItem('token', token);
+    
+    console.log("token  :"+token)
 		navigate("/")
 	}
 	catch(err){
+    alert("Password does not match or user not found")
+      navigate("/login")
+
 		console.log("error   :"+ err);
 	}
-	
-	
-    // Add your login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
   };
 
 

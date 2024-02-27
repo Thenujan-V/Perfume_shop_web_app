@@ -33,12 +33,23 @@ function App() {
           {/* <Route path="/showProducts" element={<ShowProducts />}/>
           <Route path="/" element = {<Home />}/>
           <Route path="/cart" element = {<Cart />}/>
+<<<<<<< HEAD
           
           <Route path="/login" element = {<Login />}/>
           <Route path="/register" element = {<Register />}/>
           <Route path="/about" element = {<About />}/> */}
 
       {/* <Route path="/product" element={<Product />}>
+=======
+         
+          <Route path="/login" element = {<Login />}/>
+          <Route path="/register" element = {<Register />}/>
+          <Route path="/" element = {<Home />}/>
+          <Route path="/about" element = {<About />}/>
+
+          {/* <Route path="/product" element={<Product />}>
+>>>>>>> 1646534b8e9deca1638b91c5f332f6995405045b
+>>>>>>> f4389a20d8b3ea8cd5dad6b7e247c1b719ce695c
           <Route path=":productId" element={<Product />}/>
 
           </Route> */}
@@ -50,6 +61,3 @@ function App() {
 
 export default App;
 
-
-// background #630229
-// F07EAF
