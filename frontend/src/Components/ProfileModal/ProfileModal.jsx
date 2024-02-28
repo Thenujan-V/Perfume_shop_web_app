@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-// import './ProfileModal.css'
-const ProfileModal = () => {
-  const [showModal, setShowModal] = useState(false);
+// import React, { useEffect, useState } from 'react';
+// import { faHeart, faShoppingCart, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { useNavigate } from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import './Profile.css';
+// import Nav from '../Nav/Nav';
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+// const ProfileModal = () => {
+//   const [showProfilePopup, setShowProfilePopup] = useState(false);
+//   const navigate = useNavigate();
 
-  return (
-    <div>
-      <div className="nav-link" onClick={toggleModal}><FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} /></div>
+//   const toggleProfilePopup = () => {
+//     setShowProfilePopup(!showProfilePopup);
+//   };
 
-      {showModal && (
-        <div className="profile-modal">
-          <div className="modal-content">
-            <span className="close-button" onClick={toggleModal}>&times;</span>
-            <h2>User Profile</h2>
-            <form>
-              <label>Email address:</label>
-              <input type="email" placeholder="Enter email" />
-              {/* Add more input fields as needed */}
-            </form>
-            {/* <button onClick={toggleModal}>Close</button>
-            <button onClick={handleLogout}>Logout</button> */}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+//   const closeProfilePopup = () => {
+//     console.log('Close button clicked');
+//     console.log('Before closing:', showProfilePopup);
+//   setShowProfilePopup(false);
+//   console.log('After closing:', showProfilePopup);
+//   };
 
-export default ProfileModal;
+//   return (
+//     <div className={`popup ${showProfilePopup ? 'show' : ''}`}>
+//       <div className="popup-content">
+//         <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
+//         <div className="icon d-flex justify-content-center align-items-center">
+//           <FontAwesomeIcon icon={faUser} style={{ fontSize: '35px' }} />
+//         </div>
+//         <h2>User Profile</h2>
+//         <form>
+//           <label>Email address:</label>
+//           <input type="email" placeholder="Enter email" />
+//           {/* Add more input fields as needed */}
+//         </form>
+//         <button onClick={closeProfilePopup}>Close</button>
+//         <button>Logout</button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProfileModal;
