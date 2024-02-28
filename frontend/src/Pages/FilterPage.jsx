@@ -1,8 +1,10 @@
 
-  import React, { useState, useEffect } from 'react';
-  import ItemCard from '../Components/ItemCard/ItemCard';
-  import './Register/Register.css'
-  import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import _debounce from 'lodash/debounce';
+import ItemCard from '../Components/ItemCard/ItemCard';
+import './Register/Register.css';
+import { useLocation } from 'react-router-dom';
+import { FixedSizeList as List } from 'react-window';
   const simulatedData = [
       {
         p_id: 1,
@@ -177,66 +179,53 @@
       const [selectedType, setSelectedType] = useState('');
       const [selectedSize, setSelectedSize] = useState('');
       const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
-      const [select, setSelect] = useState([...simulatedData]); // Initialize with simulatedData
+      const [select] = useState([...simulatedData]);
     
       const location = useLocation();
-  const selectedFilter = new URLSearchParams(location.search).get('query');
-
-  
-
-    useEffect(() => {
-      // const fetchFiter = async () => {
-      //   try {
-      //     const response = await axios.get('http://localhost:8080/api/v1/products/newarrivals'); 
-      //     select(response.data);
-      //     console.log("free :"+response.data)
-      //     console.log(response.data)
-      //   } catch (error) {
-      //     console.error('Error fetching Filter:', error);
-      //   }
-      // };
-
-      // fetchFiter();
-
-      setFilteredData(select);
-      filterData();
-    }, [selectedGender, selectedBrand, selectedType, selectedSize, priceRange]);
-
-    const filterData = () => {
-      let filtered = [...select];
-
-      
-      if (selectedGender) {
-        filtered = filtered.filter(product => product.gender === selectedGender);
-      }
-
-      
-      if (selectedBrand) {
-        filtered = filtered.filter(product => product.brand === selectedBrand);
-      }
-
+      const selectedFilter = new URLSearchParams(location.search).get('query');
     
-      if (selectedType) {
-        filtered = filtered.filter(product => product.type === selectedType);
-      }
-
+      // Debounce the filter function
+      const debouncedFilterData = _debounce(() => {
+        filterData();
+      }, 500);
+    
+      // useEffect(() => {
+      //   const filterAsync = async () => {
+      //     await debouncedFilterData();
+      //   };
+      //   filterAsync();
+      // }, [selectedGender, selectedBrand, selectedType, selectedSize, priceRange]);
       
-      if (selectedSize) {
-        filtered = filtered.filter(product => product.size === selectedSize);
-      }
-
+    
+      const filterData = () => {
+        let filtered = [...simulatedData]; // Use the original data as the starting point
       
-      filtered = filtered.filter(
-        product => product.price >= priceRange.min && product.price <= priceRange.max
-      );
-      if (filtered.length === 0) {
-        // Handle the case where no filters are applied, show all products
-        setFilteredData(select);
-      } else {
+        if (selectedGender) {
+          filtered = filtered.filter((product) => product.gender === selectedGender);
+        }
+      
+        if (selectedBrand) {
+          filtered = filtered.filter((product) => product.brand === selectedBrand);
+        }
+      
+        if (selectedType) {
+          filtered = filtered.filter((product) => product.type === selectedType);
+        }
+      
+        if (selectedSize) {
+          filtered = filtered.filter((product) => product.size === selectedSize);
+        }
+      
+        filtered = filtered.filter(
+          (product) => product.price >= priceRange.min && product.price <= priceRange.max
+        );
+      
         setFilteredData(filtered);
-      }
-    };
-
+      };
+      
+      useEffect(() => {
+        debouncedFilterData();
+      }, [selectedGender, selectedBrand, selectedType, selectedSize, priceRange]);
     return (
       <div className='filterPage'>
         <div className="row m-0">
@@ -287,16 +276,25 @@
 
           </div>
           <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>
-            <div className="row">
-            {filteredData.map(product => (
-              <div key={product.p_id} className='col-lg-4 col-md-6 col-sm-6 col-12 d-flex f-row justify-content-center align-items-center flex-column filter'>
-              <ItemCard p_id={product.p_id} p_name={product.p_name} imageurl={product.imageurl} price={product.price} discount={product.discount} />
-          </div>
-            ))}
-            </div>
+        {/* Use virtualization to render the filtered product list */}
+        <div className='row your-custom-class'>
+  {filteredData.map((item, index) => (
+    <div key={index} className='col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center your-item-class'>
+      <ItemCard
+        p_id={item.p_id}
+        p_name={item.p_name}
+        imageurl={item.imageurl}
+        price={item.price}
+        discount={item.discount}
+      />
+    </div>
+  ))}
+</div>
+
+      </div>
           </div>
         </div>
-      </div>
+      
     );
   };
 

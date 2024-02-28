@@ -308,12 +308,15 @@ const navigate = useNavigate();
   <button className="btn btn-outline-success" type="submit">
     <FontAwesomeIcon icon={faSearch} />
   </button>
+
 </form>
           {/* Icons */}
           <div className="navbar-nav">
+            <input type="text" />
             <Link className="nav-link" to="/favorites"><FontAwesomeIcon icon={faHeart} style={{color:"#ffffff" , fontSize: "24px"}}/></Link>
             <Link className="nav-link" to="/cart"><FontAwesomeIcon icon={faShoppingCart} style={{color:"#ffffff", fontSize: "24px"}}/></Link>
             <div className="nav-link" onClick={toggleProfilePopup}><FontAwesomeIcon icon={faUser} style={{color:"#ffffff", fontSize: "24px"}}/></div>
+
          {/* Profile Popup */}
       {showProfilePopup && (
         <div className="popup">
@@ -322,9 +325,22 @@ const navigate = useNavigate();
             <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
             <h2>User Profile</h2>
             <form>
-              <label>Email address:</label>
-              <input type="email" placeholder="Enter email" />
-              {/* Add more input fields as needed */}
+              <div>
+                <label>User Name:</label>
+                <input type="text" />
+              </div>
+              <div>
+                <label>Email address:</label>
+                <input type="email" placeholder="Enter email" />
+              </div>
+              <div>
+                <label>Phone Number:</label>
+                <input type="tel" placeholder="Phone Number" />
+              </div>
+              <div>
+                <label>Adderss:</label>
+                <input type="text" placeholder="Enter email" />
+              </div>
             </form>
             <button onClick={closeProfilePopup}>Close</button>
             <button>Logout</button>
