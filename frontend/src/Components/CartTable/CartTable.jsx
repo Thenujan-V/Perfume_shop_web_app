@@ -99,17 +99,34 @@ const CartTable = ({ cartTable, setCartTable }) => {
     { id: 2, name: 'Product 2', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 15, quantity: 1 },
     { id: 3, name: 'Product 3', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 20, quantity: 3 },
   ]);
-
-  const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
-
   const handleQuantityChange = (itemId, newQuantity) => {
     const updatedCart = cartItems.map(item =>
       item.id === itemId ? { ...item, quantity: newQuantity } : item
     );
     setCartItems(updatedCart);
   };
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((Subtotal, item) => Subtotal + item.price * item.quantity, 0);
+  };
+
+  
+
+  // const calculateFinalTotalPrice = () => {
+    
+  //   return cartItems.reduce((total, item) => (total + item.price * item.quantity) , 0)
+  // }
+  const deliveryFee = 17;
+  const discount = 10;
+const calculateFinalTotalPrice = () => {
+
+    const subtotal = cartItems.reduce((total, item) => (total + item.price * item.quantity), 0);
+    const totalPrice = subtotal + deliveryFee - discount;
+    return totalPrice;
+}
+
+  
+
+  
 
   return (
     <div>
@@ -145,7 +162,12 @@ const CartTable = ({ cartTable, setCartTable }) => {
         </tbody>
       </table>
       <div>
-        <h3>Total Price: ${calculateTotalPrice()}</h3>
+        
+        <h3>SubTotal Price: ${calculateTotalPrice()}</h3>
+        <h3>Delivery fee: ${deliveryFee}</h3>
+        <h3>-Discount: ${discount}</h3>
+        <h3>Total Price:${calculateFinalTotalPrice()} </h3>
+        
       </div>
     </div>
   );
