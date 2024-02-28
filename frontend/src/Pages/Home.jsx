@@ -4,6 +4,7 @@ import NewArrivals from '../Components/NewArrivals/NewArrivals'
 import ExclusiveOffers from '../Components/ExclusiveOffers/ExclusiveOffers'
 import BestSales from '../Components/BestSales/BestSales'
 import FreeCharge from '../Components/FreeCharge/FreeCharge'
+import Footer from '../Components/Footer/Footer'
 
 
 const Home = () => {
@@ -14,7 +15,8 @@ const Home = () => {
         <ExclusiveOffers />
         <BestSales />
         <FreeCharge />
-    </div>
+        <Footer />
+            </div>
   )
 }
 
