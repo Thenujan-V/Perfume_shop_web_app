@@ -24,11 +24,14 @@ function App() {
           <Route path="/shop" element={<Shop />}/>
           <Route path="/cart" element = {<Cart />}/>
           <Route path="/about" element = {<About />}/>
-
-
           <Route path="/product" element={<Product />}/>  
           <Route path=":productId" element={<Product />}/>
           <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/product" element={<Product />}/>  
+          <Route path="/product" element={<Product />}/>  
+          <Route path=":productId" element={<Product />}/>
+          <Route path="/checkout" element={<Checkout/>}/>
+
 
         </Routes>
         <Footer />

@@ -4,14 +4,14 @@ import NewArrivals from '../Components/NewArrivals/NewArrivals'
 import ExclusiveOffers from '../Components/ExclusiveOffers/ExclusiveOffers'
 import BestSales from '../Components/BestSales/BestSales'
 import FreeCharge from '../Components/FreeCharge/FreeCharge'
-<<<<<<< HEAD
+
+
+import Nav from '../Components/Nav/Nav'
+import Footer from '../Components/Footer/Footer'
+
+
 import Footer from '../Components/Footer/Footer'
 import Nav from '../Components/Nav/Nav'
-
-
-
-=======
->>>>>>> 3a286b1859fde0c636d4fdbcf150e00a82b2680c
 
 
 const Home = () => {
@@ -22,11 +22,11 @@ const Home = () => {
         <ExclusiveOffers />
         <BestSales />
         <FreeCharge />
-<<<<<<< HEAD
+
         <Footer />
 
-=======
->>>>>>> 3a286b1859fde0c636d4fdbcf150e00a82b2680c
+
+
     </div>
 
   )

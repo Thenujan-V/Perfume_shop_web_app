@@ -30,31 +30,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProducts() {
-        List<ProductEntity> productEntities = productRepo.findAll();
-
-        List<ProductDto> products = productEntities
-                .stream()
-                .<ProductDto>map(product -> new ProductDto(
-                        product.getPId(),
-                        product.getPName(),
-//                        product.getType(),
-                        product.getCategory(),
-                        product.getGender(),
-                        product.getStatus(),
-                        product.getBrand(),
-                        product.getDescription(),
-                        product.getImageURL(),
-                        product.getPrice(),
-                        product.getDiscount(),
-                        product.getDeliveryCharge(),
-                        product.getProductQuantity(),
-                        product.getSize()
-//                        product.getCreated_at(),
-//                        product.getUpdated_at()
-                        ))
-                .collect(Collectors.toList());
-        return products;
+    public List<ProductEntity> getProducts() {
+//        List<ProductEntity> productEntities = productRepo.findAll();
+//
+//        List<ProductDto> products = productEntities
+//                .stream()
+//                .<ProductDto>map(product -> new ProductDto(
+//                        product.getPId(),
+//                        product.getPName(),
+////                        product.getType(),
+//                        product.getCategory(),
+//                        product.getGender(),
+//                        product.getStatus(),
+//                        product.getBrand(),
+//                        product.getDescription(),
+//                        product.getImageURL(),
+//                        product.getPrice(),
+//                        product.getDiscount(),
+//                        product.getDeliveryCharge(),
+//                        product.getProductQuantity(),
+//                        product.getSize()
+////                        product.getCreated_at(),
+////                        product.getUpdated_at()
+//                        ))
+//                .collect(Collectors.toList());
+        return productRepo.findAll();
     }
 
     @Override
