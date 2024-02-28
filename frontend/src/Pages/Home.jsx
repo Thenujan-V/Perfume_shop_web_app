@@ -21,8 +21,6 @@ const Home = () => {
         <FreeCharge />
         <Footer />
 
-            </div>
-
     </div>
 
   )
