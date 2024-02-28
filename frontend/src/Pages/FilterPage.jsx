@@ -2,6 +2,7 @@
   import React, { useState, useEffect } from 'react';
   import ItemCard from '../Components/ItemCard/ItemCard';
   import './Register/Register.css'
+  import { useLocation } from 'react-router-dom';
   const simulatedData = [
       {
         p_id: 1,
@@ -178,6 +179,8 @@
       const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
       const [select, setSelect] = useState([...simulatedData]); // Initialize with simulatedData
     
+      const location = useLocation();
+  const selectedFilter = new URLSearchParams(location.search).get('query');
 
   
 

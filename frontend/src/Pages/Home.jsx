@@ -4,16 +4,17 @@ import NewArrivals from '../Components/NewArrivals/NewArrivals'
 import ExclusiveOffers from '../Components/ExclusiveOffers/ExclusiveOffers'
 import BestSales from '../Components/BestSales/BestSales'
 import FreeCharge from '../Components/FreeCharge/FreeCharge'
+<<<<<<< HEAD
 import Nav from '../Components/Nav/Nav'
 import Footer from '../Components/Footer/Footer'
 
+=======
+>>>>>>> 145128b888bc43860d9231d062c688211edbfc2f
 
 
 const Home = () => {
   return (
     <div className='home'>
-        <Nav /> 
-
         <HomeDp />
         <NewArrivals />
         <ExclusiveOffers />
