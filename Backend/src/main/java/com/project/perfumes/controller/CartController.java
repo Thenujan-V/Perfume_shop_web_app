@@ -28,6 +28,7 @@ public class CartController {
 
     @GetMapping("/getcart/{uId}")
     public List<ProductEntity> getCartProduct(@PathVariable Long uId){
+        System.out.println(cartService.getCartDetails(uId));
         return cartService.getCartDetails(uId);
     }
 

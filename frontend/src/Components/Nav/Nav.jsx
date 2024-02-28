@@ -342,7 +342,6 @@ const Nav = () => {
          {/* Profile Popup */}
       {showProfilePopup && (
         <div className="popup">
-<<<<<<< HEAD
   <div className="popup-content">
     <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
     <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
@@ -394,34 +393,6 @@ const Nav = () => {
 </div>
 
       
-=======
-          <div className="popup-content">
-            <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
-            <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
-            <h2>User Profile</h2>
-            <form>
-              <div>
-                <label>User Name:</label>
-                <input type="text" />
-              </div>
-              <div>
-                <label>Email address:</label>
-                <input type="email" placeholder="Enter email" />
-              </div>
-              <div>
-                <label>Phone Number:</label>
-                <input type="tel" placeholder="Phone Number" />
-              </div>
-              <div>
-                <label>Adderss:</label>
-                <input type="text" placeholder="Enter email" />
-              </div>
-            </form>
-            <button onClick={closeProfilePopup}>Close</button>
-            <button>Logout</button>
-          </div>
-        </div>
->>>>>>> e01c88f28ce3af09b7a8935073c9490fde69c61b
       )}
           </div>
         </div>

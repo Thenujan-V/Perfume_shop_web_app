@@ -1,15 +1,30 @@
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CartTable.css';
 import Product from '../../Pages/Product';
+import axios from 'axios';
 
 const CartTable = ({ cartTable, setCartTable }) => {
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Product 1', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 10, quantity: 2 },
-    { id: 2, name: 'Product 2', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 15, quantity: 1 },
-    { id: 3, name: 'Product 3', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 20, quantity: 3 },
+    // { id: 1, name: 'Product 1', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 10, quantity: 2 },
+    // { id: 2, name: 'Product 2', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 15, quantity: 1 },
+    // { id: 3, name: 'Product 3', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 20, quantity: 3 },
   ]);
+
+    useEffect(() =>{
+        const cart = async (uId) => {
+            try {
+              const response = await axios.get("http://localhost:8080/api/v1/cart/getcart/3"); 
+              setCartItems(response.data);
+            } catch (error) {
+              console.error('Error fetching cart:', error);
+            }
+          };
+      
+          cart();
+    },[])
+
   const handleQuantityChange = (itemId, newQuantity) => {
     const updatedCart = cartItems.map(item =>
       item.id === itemId ? { ...item, quantity: newQuantity } : item
@@ -95,8 +110,8 @@ const handleCheckout=()=>
     {cartItems.map(item => (
       <tr key={item.id}>
         <td>{item.id}</td>
-        <td><img src={item.image} alt={item.name} style={{ width: '100px' }} /></td>
-        <td>{item.name}</td>
+        <td><img src={item.imageURL} alt={item.pName} style={{ width: '100px' }} /></td>
+        <td>{item.pName}</td>
         <td>${item.price}</td>
         <td>
           <input
