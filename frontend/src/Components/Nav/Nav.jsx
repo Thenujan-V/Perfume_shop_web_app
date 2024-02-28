@@ -195,14 +195,15 @@ const Nav = () => {
 
   const navigate = useNavigate();
 
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await axios.get('http://your-api-url/user-profile'); // Replace with your API endpoint
-  //     setUserData(response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching user data:', error);
-  //   }
-  // };  
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/v1/user/3'); // Replace with your API endpoint
+      setUserData(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };  
 
   const handleProfileUpdate = async () => {
     try {
@@ -345,14 +346,14 @@ const Nav = () => {
   <div className="popup-content">
     <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
     <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
-    <h2>Hi, {userData.userName}</h2>
+    <h2>Hi, {userData.firstname}</h2>
     <form>
       <div className="mb-3">
         <label className="form-label">User Name:</label>
         <input
           className="form-control"
           type="text"
-          value={userData.userName}
+          value={userData.firstName}
           onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
                     
         />
@@ -371,7 +372,7 @@ const Nav = () => {
         <input
           className="form-control"
           type="text"
-          value={userData.phoneNumber}
+          value={userData.phoneno}
           onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
         />
       </div>

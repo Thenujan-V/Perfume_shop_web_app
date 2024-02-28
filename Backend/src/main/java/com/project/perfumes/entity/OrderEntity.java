@@ -22,4 +22,10 @@ public class OrderEntity {
     private Date createdAt;
     private String userAddress;
     private String status = "pending";
+    private String firstName;
+    private String lastName;
+    private Integer phoneNo;
+    private String email;
+
+
 }
