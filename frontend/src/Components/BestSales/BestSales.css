@@ -1,20 +1,20 @@
-.BestSale h4 , h2{
+.bestSale h4 , h2{
     text-align: center;
 }
-.BestSale h4{
+.bestSale h4{
     font-size: 15px;
     font-weight: 800;
     margin-top: 30px;
     padding-top: 20px;
 }
-.BestSale h2{
+.bestSale h2{
     font-size: 35px;
     padding-bottom: 40px;
     font-weight: 800;
     letter-spacing: 5px;
     word-spacing: 3px;
 }
-.BestSaleImg img{
+.bestSaleImg img{
     width: 300px;
     height: 350px;
 }
@@ -26,44 +26,3 @@
     background-color: rgb(85, 75, 75);
     padding-bottom: 40px;
 }
-
-.card{
-    border-bottom-left-radius: 30px;
-    border-end-end-radius: 30px;
-}
-.cardBody {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 991px) {
-    .best :nth-child(3){
-        margin-top:30px;
-    }
-  
-    .BestSaleImg img{
-        width: 300px;
-        height: 350px;
-    }
-    /* .card{
-        width: 400px;
-    } */
-}
-@media screen and (max-width: 768px) {
-    .best :nth-child(2){
-        margin-top:30px;
-    }
-    .BestSaleImg img{
-        width: 300px;
-        height: 300px;
-    }
-    .card{
-        width: 300px;
-    }
-}
-@media screen and (max-width: 400px) {
-    .BestSaleImg img{
-        height: 300px;
-    }}

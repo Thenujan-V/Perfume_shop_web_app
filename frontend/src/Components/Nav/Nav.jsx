@@ -9,6 +9,7 @@ import { Button, Dropdown, DropdownButton, Navbar, NavDropdown, Form } from 'rea
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ProfileModal from '../ProfileModal/ProfileModal';
+import axios from 'axios';
 
 
 const Nav = () => {
@@ -181,13 +182,37 @@ const Nav = () => {
     },
   ];
 
-
+  const [userData, setUserData] = useState({
+    userName: '',
+    email: '',
+    phoneNumber: '',
+    address: ''
+  });
   const [nav, setNav] = useState([]);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  // const fetchUserData = async () => {
+  //   try {
+  //     const response = await axios.get('http://your-api-url/user-profile'); // Replace with your API endpoint
+  //     setUserData(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching user data:', error);
+  //   }
+  // };  
+
+  const handleProfileUpdate = async () => {
+    try {
+      const response = await axios.put('http://your-api-url/update-profile', userData); // Replace with your API endpoint
+      console.log('Profile updated successfully:', response.data);
+      
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
+  };
 
   const toggleProfilePopup = () => {
     setShowProfilePopup(!showProfilePopup);
@@ -198,7 +223,6 @@ const navigate = useNavigate();
   const handleSearch = (e) => {
     e.preventDefault();
 
-    // Filter brands, types, and p_names based on the search query
     const filteredBrands = simulatedImages
       .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
       .map((item) => item.brand);
@@ -211,11 +235,9 @@ const navigate = useNavigate();
       .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
       .map((item) => item.p_name);
 
-    // Combine and set the search results
     const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
 
     if (searchResults.length > 0) {
-      // Navigate to the filter page with the selected filter
       navigate(`/shop?query=${searchResults[0]}`);
     }
   };
@@ -296,7 +318,7 @@ const navigate = useNavigate();
           </div>
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
-  <input
+          <input
     className="form-control me-2"
     type="search"
     placeholder="Search"
@@ -317,19 +339,57 @@ const navigate = useNavigate();
          {/* Profile Popup */}
       {showProfilePopup && (
         <div className="popup">
-          <div className="popup-content">
-            <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
-            <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
-            <h2>User Profile</h2>
-            <form>
-              <label>Email address:</label>
-              <input type="email" placeholder="Enter email" />
-              {/* Add more input fields as needed */}
-            </form>
-            <button onClick={closeProfilePopup}>Close</button>
-            <button>Logout</button>
-          </div>
-        </div>
+  <div className="popup-content">
+    <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
+    <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
+    <h2>Hi, {userData.userName}</h2>
+    <form>
+      <div className="mb-3">
+        <label className="form-label">User Name:</label>
+        <input
+          className="form-control"
+          type="text"
+          value={userData.userName}
+          onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
+                    
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Email address:</label>
+        <input
+          className="form-control"
+          type="text"
+          value={userData.email}
+          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Phone Number:</label>
+        <input
+          className="form-control"
+          type="text"
+          value={userData.phoneNumber}
+          onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Address:</label>
+        <input
+          className="form-control"
+          type="text"
+          value={userData.address}
+          onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+        />
+      </div>
+    </form>
+    <div className="d-flex justify-content-between">
+      <button className='btn btn-primary' onClick={closeProfilePopup}>Close</button>
+      <button className='btn btn-danger'>Logout</button>
+    </div>
+  </div>
+</div>
+
+      
       )}
           </div>
         </div>

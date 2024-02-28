@@ -203,9 +203,15 @@ nav .wrapper{
 }
 
 .popup-content {
-  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+  width: 30vw;
+  height: 35vw;
 }
 
 .close-button {
