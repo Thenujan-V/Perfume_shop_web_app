@@ -37,12 +37,6 @@ public class ProductController{
         return productService.getDetails(pId);
     }
 
-    @GetMapping("/getwishtype/{type}")
-    public List<ProductDto> getTypeWishProducts(@PathVariable String type) {
-        System.out.println(type);
-        return productService.getTypeWishProducts(type);
-    }
-
     @GetMapping("/getwisebrand/{brand}")
     public List<ProductDto> getBrandWishProducts(@PathVariable String brand) {
         return productService.getBrandWishProducts(brand);
@@ -51,14 +45,21 @@ public class ProductController{
     public List<ProductDto> getBrandWishSize(@PathVariable String size) {
         return productService.getSizeWishProducts(size);
     }
-
+    @GetMapping("/bestselles")
+    public List<ProductEntity> getBestSelles() {
+        return productService.getBestSellesProducts();
+    }
+    @GetMapping("/newarrivals")
+    public List<ProductEntity> newArrivals() {
+        return productService.newArrivals();
+    }
     @GetMapping("/freedelivery")
     public List<ProductDto> getFreeDelivery() {
         return productService.getFreeDelivery();
     }
 
     @GetMapping("/discounts")
-    public List<ProductDto> getDiscounts() {
+    public List<ProductEntity> getDiscounts() {
         return productService.getDiscounts();
     }
 
@@ -67,10 +68,7 @@ public class ProductController{
         return productService.getBrands();
     }
 
-    @GetMapping("/gettypes")
-    public List<String> getTypes() {
-        return productService.getTypes();
-    }
+
 
     @GetMapping("/getcategory")
     public List<String> getCategories() {

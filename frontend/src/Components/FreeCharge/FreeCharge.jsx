@@ -15,10 +15,7 @@ const FreeDelivery = () => {
     const fetchImages = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/v1/products/freedelivery");
-        // console.log("okry")
         setfreeDeliveryes(response.data);
-  console.log(response.data);
-
       } catch (error) {
         console.error('Error fetching images:', error);
       }

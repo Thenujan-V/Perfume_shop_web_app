@@ -2,8 +2,6 @@ h1
 {
     text-align: center;
 }
-h3
-{
-    text-align: right;
-    padding-right: 10%;
+.row{
+width: 100%;
 }

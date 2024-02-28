@@ -13,4 +13,6 @@ public interface CartService{
     CartDto updateQuantityValue(Long pId, CartDto cartDto);
 
     boolean deleteCartProduct(Long pId);
+
+    boolean checkCart(Long uId, Long pId);
 }

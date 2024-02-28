@@ -9,3 +9,9 @@
     height: 100%;
     font-family: 'Numans', sans-serif;
 }
+
+
+.filterLeft{
+    border-right: solid 3px black;
+    /* padding: 20px; */
+}

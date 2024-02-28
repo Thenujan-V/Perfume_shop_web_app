@@ -36,9 +36,9 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> products = productEntities
                 .stream()
                 .<ProductDto>map(product -> new ProductDto(
-                        product.getpId(),
-                        product.getpName(),
-                        product.getType(),
+                        product.getPId(),
+                        product.getPName(),
+//                        product.getType(),
                         product.getCategory(),
                         product.getGender(),
                         product.getStatus(),
@@ -63,9 +63,9 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> brnads = productEntities
                 .stream()
                 .map(freeDeleivery -> new ProductDto(
-                        freeDeleivery.getpId(),
-                        freeDeleivery.getpName(),
-                        freeDeleivery.getType(),
+                        freeDeleivery.getPId(),
+                        freeDeleivery.getPName(),
+//                        freeDeleivery.getType(),
                         freeDeleivery.getCategory(),
                         freeDeleivery.getGender(),
                         freeDeleivery.getStatus(),
@@ -89,29 +89,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getDiscounts() {
-        List<ProductEntity> productEntities = productRepo.discountProducts();
-        List<ProductDto> discounts = (List<ProductDto>) productEntities
-                .stream()
-                .map(discount -> new ProductDto(
-                        discount.getpId(),
-                        discount.getpName(),
-                        discount.getType(),
-                        discount.getCategory(),
-                        discount.getGender(),
-                        discount.getStatus(),
-                        discount.getBrand(),
-                        discount.getDescription(),
-                        discount.getImageURL(),
-                        discount.getPrice(),
-                        discount.getDiscount(),
-                        discount.getDeliveryCharge(),
-                        discount.getProductQuantity(),
-                        discount.getSize()
-//                        discount.getCreated_at(),
-//                        discount.getUpdated_at()
-                )).collect(Collectors.toList());
-        return discounts;
+    public List<ProductEntity> getDiscounts() {
+//        List<ProductEntity> productEntities = productRepo.discountProducts();
+//        List<ProductDto> discounts = (List<ProductDto>) productEntities
+//                .stream()
+//                .map(discount -> new ProductDto(
+//                        discount.getPId(),
+//                        discount.getPName(),
+////                        discount.getType(),
+//                        discount.getCategory(),
+//                        discount.getGender(),
+//                        discount.getStatus(),
+//                        discount.getBrand(),
+//                        discount.getDescription(),
+//                        discount.getImageURL(),
+//                        discount.getPrice(),
+//                        discount.getDiscount(),
+//                        discount.getDeliveryCharge(),
+//                        discount.getProductQuantity(),
+//                        discount.getSize()
+////                        discount.getCreated_at(),
+////                        discount.getUpdated_at()
+//                )).collect(Collectors.toList());
+        return productRepo.discountProducts();
     }
 
 
@@ -122,9 +122,9 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> categoryProducts = (List<ProductDto>) productEntities
                 .stream()
                 .map(product -> new ProductDto(
-                        product.getpId(),
-                        product.getpName(),
-                        product.getType(),
+                        product.getPId(),
+                        product.getPName(),
+//                        product.getType(),
                         product.getCategory(),
                         product.getGender(),
                         product.getStatus(),
@@ -143,41 +143,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getTypeWishProducts(String type) {
-        List<ProductEntity> productEntities = productRepo.findByType(type);
-
-        List<ProductDto> typeProducts = (List<ProductDto>) productEntities
-                .stream()
-                .map(product -> new ProductDto(
-                        product.getpId(),
-                        product.getpName(),
-                        product.getType(),
-                        product.getCategory(),
-                        product.getGender(),
-                        product.getStatus(),
-                        product.getBrand(),
-                        product.getDescription(),
-                        product.getImageURL(),
-                        product.getPrice(),
-                        product.getDiscount(),
-                        product.getDeliveryCharge(),
-                        product.getProductQuantity(),
-                        product.getSize()
-//                        product.getCreated_at(),
-//                        product.getUpdated_at()
-                )).collect(Collectors.toList());
-        return typeProducts;
-    }
-    @Override
     public List<ProductDto> getBrandWishProducts(String brand) {
         List<ProductEntity> productEntities = productRepo.findByBrand(brand);
 
         List<ProductDto> brandProducts = (List<ProductDto>) productEntities
                 .stream()
                 .map(product -> new ProductDto(
-                        product.getpId(),
-                        product.getpName(),
-                        product.getType(),
+                        product.getPId(),
+                        product.getPName(),
+//                        product.getType(),
                         product.getCategory(),
                         product.getGender(),
                         product.getStatus(),
@@ -202,9 +176,9 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> sizeProducts = (List<ProductDto>) productEntities
                 .stream()
                 .map(product -> new ProductDto(
-                        product.getpId(),
-                        product.getpName(),
-                        product.getType(),
+                        product.getPId(),
+                        product.getPName(),
+//                        product.getType(),
                         product.getCategory(),
                         product.getGender(),
                         product.getStatus(),
@@ -228,9 +202,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<String> getTypes() {
-        return productRepo.findAllType();
+    public List<ProductEntity> getBestSellesProducts() {
+        return productRepo.getbestSelles();
     }
+
+    @Override
+    public List<ProductEntity> newArrivals() {
+        return productRepo.newArrivals();
+    }
+
 
     @Override
     public List<String> getCategories() {

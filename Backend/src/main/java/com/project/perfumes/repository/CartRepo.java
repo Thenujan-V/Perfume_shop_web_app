@@ -7,9 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CartRepo extends JpaRepository<CartEntity, Long> {
+    @Query("SELECT c FROM CartEntity c WHERE c.uId = :uId and c.pId = :pId")
+    Optional<CartEntity> findSameItems(Long uId, Long pId);
     @Query("SELECT p FROM ProductEntity p JOIN CartEntity c ON p.pId = c.pId WHERE c.uId = :uId")
     List<ProductEntity> findAllProducts(Long uId);
 

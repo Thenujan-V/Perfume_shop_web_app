@@ -4,6 +4,8 @@ import com.project.perfumes.dto.CartDto;
 import com.project.perfumes.entity.ProductEntity;
 import com.project.perfumes.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,13 @@ public class CartController {
     @Autowired
     private CartService cartService;
     @PostMapping("/createcart/{uId}/{pId}")
-    public CartDto createCart(@PathVariable Long uId, @PathVariable Long pId){
-        return cartService.createCart(uId,pId);
+    public ResponseEntity<String> createCart(@PathVariable Long uId, @PathVariable Long pId){
+        if(cartService.checkCart(uId,pId)){
+            return ResponseEntity.status(HttpStatus.OK).body("Cart already exists.");
+        }
+        else{
+            CartDto createdCart = cartService.createCart(uId, pId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdCart.toString());}
     }
 
     @GetMapping("/getcart/{uId}")

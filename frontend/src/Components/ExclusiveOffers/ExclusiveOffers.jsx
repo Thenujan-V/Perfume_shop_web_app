@@ -14,6 +14,7 @@ const ExclusiveOffers = () => {
             try {
               const response = await axios.get("http://localhost:8080/api/v1/products/discounts"); 
               setExclusiveOffers(response.data);
+              
             } catch (error) {
               console.error('Error fetching ExclusiveOffers:', error);
             }
@@ -61,7 +62,7 @@ const ExclusiveOffers = () => {
                   .map((exclusiveOffer, index) => (
                     <div className="col-lg-6 col-6  d-flex justify-content-center align-items-center exclusiveOffersRightItem" key={index}>
                       {/* Replace the empty src attributes with actual image URLs */}
-                      <Link to={`/product/${exclusiveOffer.id}`}><img src={exclusiveOffer.image} alt="" className='img-fluid' /></Link>
+                      <Link to={`/product/${exclusiveOffer.id}`}><img src={exclusiveOffer.imageURL} alt="" className='img-fluid' /></Link>
                     </div>
                   ))}
               </div>
