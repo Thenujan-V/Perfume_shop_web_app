@@ -5,17 +5,16 @@ import Cart from "./Pages/Cart";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import About from "./Pages/About";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Shop from "./Pages/FilterPage";
+import Nav from "./Components/Nav/Nav";
 
-
-import Shop from "./Pages/shop";
 
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      {/* <Nav /> */}
+      <Nav />
         <Routes>
           
 
@@ -25,8 +24,16 @@ function App() {
           <Route path="/shop" element={<Shop />}/>
           <Route path="/cart" element = {<Cart />}/>
           <Route path="/about" element = {<About />}/>
+<<<<<<< HEAD
           <Route path="/product" element={<Product />}/>  
           
+=======
+          <Route path="/product" element={<Product />}>
+            <Route path=":productId" element={<Product />}/>
+          </Route>
+
+
+>>>>>>> e116d40bb8e104b04ff2a66cb7d7ef2714f530fe
   
         </Routes>
       </BrowserRouter>

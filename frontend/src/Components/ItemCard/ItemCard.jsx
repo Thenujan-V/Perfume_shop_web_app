@@ -5,15 +5,17 @@ import { Link } from 'react-router-dom'
 const ItemCard = (props) => {
   return (
     <div className='itemCard text-center'>
-         <Link to={`/product/${props.id}`}>        <img src={props.image} onClick={window.scrollTo(0,0)} alt="" className='img-fluid rounded m-2'  width= "60%" height= "auto"/></Link>
-        <p>{props.name}</p>
+        <div className="itemCareView">
+        <Link to={`/product/${props.p_id}`}><img src={props.imageurl} onClick={window.scrollTo(0,0)} alt="" className='img-fluid rounded m-2' /></Link>
+        <p>{props.p_name}</p>
         <div className="itemPrices">
             <div className="itemNewPrice">
-                ${props.new_price}
+                ${props.price}
             </div>
             <div className="itemOldPrice text-decoration-line-through">
-                ${props.old_price}
+                ${props.discount}
             </div>
+        </div>
         </div>
     </div>
   )
