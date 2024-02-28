@@ -10,8 +10,6 @@ const Product = () => {
       const {productId} = useParams();
       const product = allProducts.find((e) =>
           e.p_id === Number(productId))
-          // console.log("fff"+allProducts)
-          // console.log("dddd"+productId)
           console.log(product)
     return (
       <div className='Product'>
@@ -20,7 +18,6 @@ const Product = () => {
       <>
         <Breadcrum product={product} />
         <ProductDisplay product={product} />
-        {/* <RelatesProduct product={product}/> */}
       </>
     ) : (
       <p>Product not found</p>

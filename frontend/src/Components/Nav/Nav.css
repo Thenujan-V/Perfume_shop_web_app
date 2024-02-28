@@ -190,7 +190,7 @@ nav .wrapper{
 
 
 
-.popup {
+.navbar-nav .popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -202,13 +202,30 @@ nav .wrapper{
   align-items: center;
 }
 
+<<<<<<< HEAD
 .popup-content {
-  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+  width: 30vw;
+  height: 35vw;
+=======
+.navbar-nav  .popup-content {
+  background: #e02e2e;
+  width: 30vw;
+  height:50vh ;
+  padding: 20px;
+  border-radius: 8px;
+}                               
+.navbar-nav .popup-content input{
+ background-color:white;
+>>>>>>> e01c88f28ce3af09b7a8935073c9490fde69c61b
 }
-
-.close-button {
+.navbar-nav .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -216,7 +233,7 @@ nav .wrapper{
 }
 
 
-.profile-popup {
+.navbar-nav .profile-popup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -228,7 +245,7 @@ nav .wrapper{
   z-index: 1000;
 }
 
-.close-button {
+.navbar-nav .close-button {
   position: absolute;
   top: 10px;
   right: 10px;

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProductService {
     ProductDto createProducts(ProductDto productDto);
 
-    List<ProductDto> getProducts();
+    List<ProductEntity> getProducts();
 
     List<ProductDto> getFreeDelivery();
 

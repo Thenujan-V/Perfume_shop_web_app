@@ -7,8 +7,8 @@ import Register from "./Pages/Register/Register";
 import About from "./Pages/About";
 import Shop from "./Pages/FilterPage";
 import Checkout from "./Pages/Checkout";
-// import Nav from "./Components/Nav/Nav";
-
+import Nav from "./Components/Nav/Nav";
+import Footer from "./Components/Footer/Footer";
 
 
 
@@ -19,17 +19,16 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      {/* <Nav /> */}
+      <Nav />
         <Routes>
 
 
           {/* <Route path="/" element = {<Home />}/> */}
-          <Route path="/" element = {<Cart />}/>
+          {/* <Route path="/" element = {<Cart />}/> */}
          
 
           <Route path="/" element = {<Home />}/>
 
-          
 
 
           <Route path="/" element = {<Home />}/>
@@ -41,6 +40,14 @@ function App() {
 
           <Route path="/product" element={<Product />}/>  
           
+
+
+
+          <Route path="/product" element={<Product />}/>  
+          
+
+
+
           <Route path="/product" element={<Product />}>
             <Route path=":productId" element={<Product />}/>
 
@@ -51,9 +58,15 @@ function App() {
 
 
 
+
+
+
+
   
 
+
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
