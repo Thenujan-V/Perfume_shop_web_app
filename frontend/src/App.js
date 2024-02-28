@@ -24,7 +24,7 @@ function App() {
 
 
           {/* <Route path="/" element = {<Home />}/> */}
-          <Route path="/" element = {<Cart />}/>
+          {/* <Route path="/" element = {<Cart />}/> */}
          
 
           <Route path="/" element = {<Home />}/>
@@ -38,10 +38,10 @@ function App() {
           <Route path="/shop" element={<Shop />}/>
           <Route path="/cart" element = {<Cart />}/>
           <Route path="/about" element = {<About />}/>
-<<<<<<< HEAD
+
           <Route path="/product" element={<Product />}/>  
           
-=======
+
           <Route path="/product" element={<Product />}>
             <Route path=":productId" element={<Product />}/>
 
@@ -51,7 +51,7 @@ function App() {
 
 
 
->>>>>>> e116d40bb8e104b04ff2a66cb7d7ef2714f530fe
+
   
 
         </Routes>
