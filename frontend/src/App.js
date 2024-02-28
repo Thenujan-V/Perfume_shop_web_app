@@ -11,10 +11,6 @@ import Nav from "./Components/Nav/Nav";
 import Footer from "./Components/Footer/Footer";
 
 
-
-
-
-
 function App() {
   return (
     <div className="App">
@@ -22,47 +18,18 @@ function App() {
       <Nav />
         <Routes>
 
-<<<<<<< HEAD
-
-          {/* <Route path="/" element = {<Home />}/> */}
-          {/* <Route path="/" element = {<Cart />}/> */}
-         
-
-          <Route path="/" element = {<Home />}/>
-
-=======
->>>>>>> 3a286b1859fde0c636d4fdbcf150e00a82b2680c
-          
-
-
           <Route path="/" element = {<Home />}/>
           <Route path="/login" element = {<Login />}/>
           <Route path="/register" element = {<Register />}/>
           <Route path="/shop" element={<Shop />}/>
           <Route path="/cart" element = {<Cart />}/>
           <Route path="/about" element = {<About />}/>
-<<<<<<< HEAD
+
 
           <Route path="/product" element={<Product />}/>  
-          
-
-=======
->>>>>>> 3a286b1859fde0c636d4fdbcf150e00a82b2680c
-          <Route path="/product" element={<Product />}>
-            <Route path=":productId" element={<Product />}/>
-
-          </Route>
+          <Route path=":productId" element={<Product />}/>
           <Route path="/checkout" element={<Checkout/>}/>
-<<<<<<< HEAD
 
-
-
-
-
-  
-
-=======
->>>>>>> 3a286b1859fde0c636d4fdbcf150e00a82b2680c
         </Routes>
         <Footer />
       </BrowserRouter>
