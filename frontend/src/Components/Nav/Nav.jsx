@@ -191,23 +191,25 @@ const Nav = () => {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-<<<<<<< HEAD
   const [selectedBrand, setSelectedBrand] = useState('');
+
   const location = useLocation(); 
   const navigate = useNavigate();
-=======
 
-  const navigate = useNavigate();
-
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/v1/user/3'); // Replace with your API endpoint
-      setUserData(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };  
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/user/1");
+        setUserData(response.data);
+        console.log("ooooo")
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };  
+    fetchUserData()
+  }, []);
+  
 
   const handleProfileUpdate = async () => {
     try {
@@ -218,7 +220,6 @@ const Nav = () => {
       console.error('Error updating profile:', error);
     }
   };
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
 
   const toggleProfilePopup = () => {
     setShowProfilePopup(!showProfilePopup);
@@ -230,11 +231,9 @@ const Nav = () => {
 
   const handleSearch = (e, selectedBrand) => {
     e.preventDefault();
-<<<<<<< HEAD
     setSelectedBrand(selectedBrand);
     const queryParams = selectedBrand ? `brand=${selectedBrand}` : '';
     navigate(`/shop?${queryParams}`);
-=======
 
     const filteredBrands = simulatedImages
       .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -253,7 +252,6 @@ const Nav = () => {
     if (searchResults.length > 0) {
       navigate(`/shop?query=${searchResults[0]}`);
     }
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
   };
     // else {
     //   // Filter brands, types, and p_names based on the search query
@@ -343,19 +341,6 @@ const Nav = () => {
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
           <input
-<<<<<<< HEAD
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            style={{ maxWidth: '250px' }}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button className="btn btn-outline-success" type="submit">
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-=======
     className="form-control me-2"
     type="search"
     placeholder="Search"
@@ -367,7 +352,6 @@ const Nav = () => {
   <button className="btn btn-outline-success" type="submit">
     <FontAwesomeIcon icon={faSearch} />
   </button>
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
 
         </form>
           {/* Icons */}
