@@ -1,7 +1,10 @@
 // import React, { useState, useEffect } from 'react';
 // import ItemCard from '../Components/ItemCard/ItemCard';
 // import './Register/Register.css';
+<<<<<<< HEAD
+=======
 // <<<<<<< HEAD
+>>>>>>> f20edc407c1e1cf1638fde77461f501d6be066ff
 // import { useLocation } from 'react-router-dom';
 // import axios from 'axios';
 
@@ -77,16 +80,25 @@
 //           </select>
 
 //           <label className='mt-3'>Price Range:</label>
+<<<<<<< HEAD
+
+=======
 // =======
+>>>>>>> f20edc407c1e1cf1638fde77461f501d6be066ff
 // import React, { useState, useEffect } from 'react';
 // import _debounce from 'lodash/debounce';
 // import ItemCard from '../Components/ItemCard/ItemCard';
 // import './Register/Register.css';
 // import { useLocation } from 'react-router-dom';
+<<<<<<< HEAD
+
+// import { useLocation ,useNavigate} from 'react-router-dom';
+=======
 // =======
 // <<<<<<< HEAD
 // import { useLocation ,useNavigate} from 'react-router-dom';
 // >>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
+>>>>>>> f20edc407c1e1cf1638fde77461f501d6be066ff
 // import { FixedSizeList as List } from 'react-window';
 //   const simulatedData = [
 //       {

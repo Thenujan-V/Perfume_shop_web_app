@@ -10,11 +10,11 @@ const Footer = () => {
       <div className="row">
         <div className="col-md-3">
           <Link className="Footer_logo" to="/">
-            <img src={Flogo} alt="Logo" className="img-fluid" style={{ maxHeight: '250px' }} />
+            <img src={Flogo} alt="Logo" className="img-fluid" style={{ maxHeight: '200px' }} />
           </Link>
         </div>
         <div className="col-md-3 mt-4">
-          <p>
+          <p class="small">
           Thank you for visiting Fragrance Finesse. We are dedicated to providing high-quality fragrances that captivate your senses and elevate your experience. Explore our range of scents, each crafted with care to evoke emotions and memories.
           </p>
         </div>
@@ -40,9 +40,9 @@ const Footer = () => {
         </div>
         <div className="col-md-3 mt-4 ml-md-3" >
           <h4>Informations</h4>
-          <Link to="/about" className="text-light d-block">About</Link> 
-          <Link to="/contact" className="text-light d-block">Contact</Link>
-          <Link to="/terms-and-conditions" className="text-light d-block">Terms & Conditions</Link>
+          <Link to="/about" className="text-light d-block">About Us</Link> 
+          <Link to="/contact" className="text-light d-block">Contact Us</Link>
+          <Link to="/terms and condition" className="text-light d-block">Terms & Conditions</Link>
           <Link to="/privacy-policy" className="text-light d-block">Privacy Policy</Link>
         </div>
       </div>
