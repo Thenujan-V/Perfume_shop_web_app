@@ -13,8 +13,8 @@ const ItemCard = (props) => {
             <div className="itemNewPrice">
                 ${props.price}
             </div>
-            <div className="itemOldPrice text-decoration-line-through">
-                ${props.discount}
+            <div className="itemOldPrice ">
+                {props.discount}%
             </div>
         </div>
         </div>

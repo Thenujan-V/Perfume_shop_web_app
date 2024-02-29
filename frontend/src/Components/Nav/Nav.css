@@ -9,6 +9,7 @@ nav{
   position: fixed;
   z-index: 99;
   width: 100%;
+  min-height: 60px;
   background: #630229;
 }
 nav .wrapper{
@@ -52,7 +53,13 @@ nav .wrapper{
   border-radius: 5px;
   font-size: 14px;
 }
-
+.dropdownmenu :hover{
+  background:#630229;
+  
+}
+.dropdown-item :hover{
+  color: white;
+}
 .search-icon {
   position: absolute;
   top: 50%;
@@ -263,7 +270,15 @@ nav .wrapper{
 
 
 
-
+@media screen and (max-width: 991px) {
+  .icon{
+    display: flex;
+    flex-direction: row;
+  }
+  .icon .icons{
+    padding: 10px;
+  }
+}
 
 
 

@@ -6,7 +6,7 @@ const ProductDisplay = (props) => {
   const {product} = props
 //   const {addToCart} = useContext(ShopContext);
   return (
-    <div className='row ProductDisplay '>
+    <div className='row ProductDisplay m-0'>
         <div className="col-lg-6 col-12 d-flex flex-column justify-content-center align-items-center  ProductDisplayLeft">
           <img src={product.imageurl} className='image-fluid' alt="" />
         </div>
