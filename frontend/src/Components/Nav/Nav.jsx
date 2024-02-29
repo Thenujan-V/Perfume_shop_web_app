@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ProfileModal from '../ProfileModal/ProfileModal';
 import axios from 'axios';
+import { getUserData } from '../storage/GetUserData';
+import { jwtDecode } from 'jwt-decode';
 
 
 const Nav = () => {
@@ -196,10 +198,17 @@ const Nav = () => {
   const location = useLocation(); 
   const navigate = useNavigate();
 
+
+  const jwt_decode = require('jwt-decode');
+  const userToken = getUserData();
+  const decodeToken = jwtDecode(userToken)
+  
+  const uId = decodeToken.uId;
+
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async (uId) => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/user/1");
+        const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
         setUserData(response.data);
         console.log("ooooo")
         console.log(response.data)
@@ -207,7 +216,7 @@ const Nav = () => {
         console.error('Error fetching user data:', error);
       }
     };  
-    fetchUserData()
+    fetchUserData(uId)
   }, []);
   
 

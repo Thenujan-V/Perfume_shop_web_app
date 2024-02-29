@@ -1,7 +1,7 @@
 package com.project.perfumes.service;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.project.perfumes.dto.CartDto;
+import com.project.perfumes.dto.OrderDto;
 import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.entity.OrderEntity;
 import com.project.perfumes.entity.OrderproductsEntity;
@@ -11,7 +11,6 @@ import com.project.perfumes.repository.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -68,5 +67,16 @@ public class OrderServiceImpl implements OrderService{
         List<Integer> OrderId =  orderRepo.findOid(uId);
         System.out.println(OrderId.get(0));
         return orderRepo.getAllOrderdItems(OrderId.get(0));
+    }
+
+    @Override
+    public List<OrderDto> setUserDetails(Long uId, Long oId, OrderDto orderDto) {
+        String firstName = orderDto.getFirstName();
+//        String lastName = orderDto.getLastName();
+        String address = orderDto.getUserAddress();
+        String mail = orderDto.getEmail();
+        Integer phoneNo = orderDto.getPhoneNo();
+
+        return orderRepo.setUserDetails(uId, oId, firstName, address, mail, phoneNo);
     }
 }

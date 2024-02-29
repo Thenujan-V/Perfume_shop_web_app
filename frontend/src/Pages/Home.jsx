@@ -19,8 +19,7 @@ const Home = () => {
       <BestSales />
       <FreeCharge />
 
-      <Footer />
-
+]
 
 
 
