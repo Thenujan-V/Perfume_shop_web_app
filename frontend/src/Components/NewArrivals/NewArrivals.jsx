@@ -40,7 +40,7 @@ const NewArrivals = () => {
                         <h2>FOR HIM</h2>
                         <div className="row d-flex justify-content-center align-items-center m-0">
                         {shuffledHimNewArrivals
-                            .slice(0, 3)
+                            .slice(0, 4)
                             .map((newArrival, index) => (
                             <div key={index} className="col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center newArrivalImg">
                                 <Link to={`/product/${newArrival.pId}`}><img src={newArrival.imageURL} className="img-fluid m-2" alt="" /></Link>

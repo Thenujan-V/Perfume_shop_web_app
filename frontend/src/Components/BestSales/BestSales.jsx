@@ -42,7 +42,7 @@ const BestSales = () => {
                         <h2>FOR HIM</h2>
                         <div className="row d-flex justify-content-center align-items-center m-0">
                         {shuffledHimBestSales
-                            .slice(0, 3)
+                            .slice(0, 4)
                             .map((bestSales, index) => (
                             <div key={index} className="col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center bestSaleImg">
                                 <Link to={`/product/${bestSales.pId}`}><img src={bestSales.imageURL} className="img-fluid m-2" alt="" /></Link>
