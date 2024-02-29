@@ -1,48 +1,49 @@
 // 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './OrderDetails.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const orderId = "ORD123456789";
 
 const OrderDetails = () => {
-    const products = [
-        { id: 1, name: 'Product 1', price: 10, imageUrl: 'https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg', quantity: 5 },
-        { id: 2, name: 'Product 2', price: 20, imageUrl: 'https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg', quantity: 10 },
-        { id: 3, name: 'Product 3', price: 30, imageUrl: 'https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg', quantity: 3 }
-    ];
 
-    // Calculate total price
-    const totalPrice = products.reduce((acc, product) => {
-        return acc + (product.price * product.quantity);
-    }, 0);
+    // const [products, setProducts] = useState([]);
+    // const deliveryCharge = 42
+    // const totalPrice = () => {
+
+    //     const subtotal = products.reduce((total, product) => total + product[1].price, 0);
+    //     const totalDiscount = products.reduce((total, product) => total + product[1].discount, 0);
+    //     const finalSubtotal = subtotal - totalDiscount;
+
+    //     return finalSubtotal + deliveryCharge;
+    // };
 
     return (
         <div>
             <Container>
                 <Row>
                     <Col>
-                    <h5> <i>Order Details</i></h5>
-                        <h5>Order ID: {orderId}</h5>
+                        <h5> <i>Order Details</i></h5>
+                        <p>Order ID: {orderId}</p>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <h5>Order Placed on: </h5>
+                        <p>Order Placed on: </p>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <h5>
-                            Estimated Delivery period:
-                        </h5>
+                        <p>Estimated Delivery period:</p>
+
                     </Col>
                 </Row>
                 <br />
                 <Row>
                     <Col>
-                        <div className='ProductDetails'>
-                            <h5><i>Order Details</i></h5>
+                       
+                        {/* <div className='ProductDetails'>
+                            
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -67,27 +68,67 @@ const OrderDetails = () => {
                                     ))}
                                 </tbody>
                             </table>
-                        </div>
-                    </Col>
-                    <Col>
-                        <h5>Total Price- ${totalPrice}</h5>
+                        </div> */}
+                        {/* <div className="col-md-5">
+                            <div className="row">
+                                <div className="col-md-12">
+
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Subtotal</th>
+                                                <th>Discount</th>
+                                                <th>Discounted Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {products.map((product, index) => (
+                                                <tr key={index}>
+                                                    <td>{product[1].pname}</td>
+                                                    <td>({product[1].price}*{product[0].quantity}) <br></br> = ${product[1].price * product[0].quantity}</td>
+                                                    <td style={{ color: "red" }}>{product[1].discount}%</td>
+                                                    <td>${(product[1].price - (product[1].discount * product[1].price / 100)) * product[0].quantity}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colSpan="3" style={{ color: "green" }}>Subtotal:</td>
+                                                <td style={{ color: "green" }}></td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="3" style={{ color: "red" }}>Delivery Charge:</td>
+                                                <td style={{ color: "red" }}>${deliveryCharge}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan="3" style={{ color: "green" }}>Total Price:</td>
+                                                <td style={{ color: "green" }}>${totalPrice()}</td>
+                                            </tr>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> */}
 
                     </Col>
+
                 </Row>
-                <Row>
+                {/* <Row>
                     <Col>
-                        <h5>Delivery Address</h5>
-                        {/* Delivery address component */}
+                        <h5><i>Delivery detials</i></h5>
+
                     </Col>
-                  
+
                 </Row>
                 <br />
                 <Row>
                     <Col>
                         <h5><i>Tracking Process</i></h5>
                         {/* Tracking process component */}
-                    </Col>
-                </Row>
+                    {/* </Col>
+                </Row> */} 
             </Container>
         </div>
     );

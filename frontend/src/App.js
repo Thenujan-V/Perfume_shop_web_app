@@ -34,6 +34,7 @@ function App() {
           </Route>
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/order" element={<Order/>}/>
+          
         </Routes>
         <Footer />
       </BrowserRouter>
