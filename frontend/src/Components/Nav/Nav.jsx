@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Nav.css';
 import logo from '../Assets/logo.png';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShoppingCart, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Button, Dropdown, DropdownButton, Navbar, NavDropdown, Form } from 'react-bootstrap';
@@ -192,17 +191,23 @@ const Nav = () => {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+<<<<<<< HEAD
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const location = useLocation(); 
+  const navigate = useNavigate();
+=======
 
   const navigate = useNavigate();
 
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await axios.get('http://your-api-url/user-profile'); // Replace with your API endpoint
-  //     setUserData(response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching user data:', error);
-  //   }
-  // };  
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/v1/user/3'); // Replace with your API endpoint
+      setUserData(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };  
 
   const handleProfileUpdate = async () => {
     try {
@@ -213,6 +218,7 @@ const Nav = () => {
       console.error('Error updating profile:', error);
     }
   };
+>>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
 
   const toggleProfilePopup = () => {
     setShowProfilePopup(!showProfilePopup);
@@ -220,8 +226,15 @@ const Nav = () => {
   const closeProfilePopup = () => {
     setShowProfilePopup(false);
   };
-  const handleSearch = (e) => {
+
+
+  const handleSearch = (e, selectedBrand) => {
     e.preventDefault();
+<<<<<<< HEAD
+    setSelectedBrand(selectedBrand);
+    const queryParams = selectedBrand ? `brand=${selectedBrand}` : '';
+    navigate(`/shop?${queryParams}`);
+=======
 
     const filteredBrands = simulatedImages
       .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -240,12 +253,33 @@ const Nav = () => {
     if (searchResults.length > 0) {
       navigate(`/shop?query=${searchResults[0]}`);
     }
+>>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
   };
+    // else {
+    //   // Filter brands, types, and p_names based on the search query
+    //   const filteredBrands = simulatedImages
+    //     .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
+    //     .map((item) => item.brand);
 
+    //   const filteredTypes = simulatedImages
+    //     .filter((item) => item.type.toLowerCase().includes(searchQuery.toLowerCase()))
+    //     .map((item) => item.type);
 
+    //   const filteredPNames = simulatedImages
+    //     .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
+    //     .map((item) => item.p_name);
+
+    //   // Combine and set the search results
+    //   const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
+
+    //   if (searchResults.length > 0) {
+    //     // Navigate to the filter page with the selected filter
+    //     navigate(`/shop?query=${searchResults[0]}`);
+    //   }
+    // }
+  
 
   useEffect(() => {
-   
     setNav(simulatedImages);
   }, []);
 
@@ -253,7 +287,6 @@ const Nav = () => {
   const typesByGender = {};
   const brandsByGender = {};
 
-  // Group types and brands by gender
   genders.forEach(gender => {
     typesByGender[gender] = [...new Set(nav.filter(item => item.gender === gender).map(item => item.type))];
     brandsByGender[gender] = [...new Set(nav.filter(item => item.gender === gender).map(item => item.brand))];
@@ -283,19 +316,10 @@ const Nav = () => {
                 Brands
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                {genders.map(gender => (
-                  <Dropdown key={gender}>
-                    <Dropdown.Toggle variant="secondary" id={`brandsDropdown-${gender}`} className="nested-dropdown-toggle">
-                      {gender}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      {brandsByGender[gender].map(brand => (
-                        <Dropdown.Item key={brand}>
-                          <span className="dropdown-item">{brand}</span>
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                  </Dropdown>
+              {simulatedImages.map((item) => (
+                  <Dropdown.Item key={item.brand} onClick={(e) => handleSearch(e, item.brand)}>
+                  <span className="dropdown-item">{item.brand}</span>
+                </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>
@@ -319,6 +343,19 @@ const Nav = () => {
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
           <input
+<<<<<<< HEAD
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            style={{ maxWidth: '250px' }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="btn btn-outline-success" type="submit">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+=======
     className="form-control me-2"
     type="search"
     placeholder="Search"
@@ -330,8 +367,9 @@ const Nav = () => {
   <button className="btn btn-outline-success" type="submit">
     <FontAwesomeIcon icon={faSearch} />
   </button>
+>>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
 
-</form>
+        </form>
           {/* Icons */}
           <div className="navbar-nav">
             <input type="text" />
@@ -345,14 +383,14 @@ const Nav = () => {
   <div className="popup-content">
     <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
     <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
-    <h2>Hi, {userData.userName}</h2>
+    <h2>Hi, {userData.firstname}</h2>
     <form>
       <div className="mb-3">
         <label className="form-label">User Name:</label>
         <input
           className="form-control"
           type="text"
-          value={userData.userName}
+          value={userData.firstName}
           onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
                     
         />
@@ -371,7 +409,7 @@ const Nav = () => {
         <input
           className="form-control"
           type="text"
-          value={userData.phoneNumber}
+          value={userData.phoneno}
           onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
         />
       </div>
@@ -393,6 +431,7 @@ const Nav = () => {
 </div>
 
       
+<<<<<<< HEAD
           <div className="popup-content">
             <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
             <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
@@ -419,12 +458,14 @@ const Nav = () => {
             <button>Logout</button>
           </div>
         </div>
+=======
+>>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
       )}
           </div>
         </div>
       </div>
     </nav>
   );  
-}
+      }
 
 export default Nav;

@@ -12,7 +12,6 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartDto {
-    private Long wId;
     private Long pId;
     private Long uId;
 
@@ -25,6 +24,4 @@ public class CartDto {
     }
 
     private Integer quantity;
-    private Map<String,String> productDetails;
-
 }

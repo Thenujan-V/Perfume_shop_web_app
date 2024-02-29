@@ -2,7 +2,6 @@ package com.project.perfumes.service;
 
 import com.project.perfumes.dto.CartDto;
 import com.project.perfumes.entity.CartEntity;
-import com.project.perfumes.entity.ProductEntity;
 import com.project.perfumes.repository.CartRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +30,12 @@ public class CartServiceImpl implements CartService {
            return false;
        }
     }
+
+    @Override
+    public List<Integer> getQuantity(Long uId) {
+        return cartRepo.findQuantity(uId);
+    }
+
     @Override
     public CartDto createCart(Long uId, Long pId) {
         CartEntity cartEntity = new CartEntity();
@@ -48,7 +53,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<ProductEntity> getCartDetails(Long uId) {
+    public List<Object[]> getCartDetails(Long uId) {
         return cartRepo.findAllProducts(uId);
     }
 
@@ -62,10 +67,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public boolean deleteCartProduct(Long pId){
-        CartEntity cartEntity = cartRepo.findById(pId).get();
-        cartRepo.delete(cartEntity);
-        return true;
+    public void deleteCartProduct(Long uId, Long pId){
+//        CartEntity cartEntity = cartRepo.findById(pId).get();
+        cartRepo.deleteCartItem(uId,pId);
     }
 
 

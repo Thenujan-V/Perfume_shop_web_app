@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ItemCard from '../Components/ItemCard/ItemCard';
 import './Register/Register.css';
+<<<<<<< HEAD
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -82,6 +83,10 @@ import _debounce from 'lodash/debounce';
 import ItemCard from '../Components/ItemCard/ItemCard';
 import './Register/Register.css';
 import { useLocation } from 'react-router-dom';
+=======
+<<<<<<< HEAD
+import { useLocation ,useNavigate} from 'react-router-dom';
+>>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
 import { FixedSizeList as List } from 'react-window';
   const simulatedData = [
       {
@@ -250,60 +255,74 @@ import { FixedSizeList as List } from 'react-window';
         size: "75ml",
       },
     ];
-    const FilterPage = () => {
-      const [filteredData, setFilteredData] = useState([]);
-      const [selectedGender, setSelectedGender] = useState('');
-      const [selectedBrand, setSelectedBrand] = useState('');
-      const [selectedType, setSelectedType] = useState('');
-      const [selectedSize, setSelectedSize] = useState('');
-      const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
-      const [select] = useState([...simulatedData]);
-    
-      const location = useLocation();
-      const selectedFilter = new URLSearchParams(location.search).get('query');
-    
-      // Debounce the filter function
-      const debouncedFilterData = _debounce(() => {
-        filterData();
-      }, 500);
-    
-      // useEffect(() => {
-      //   const filterAsync = async () => {
-      //     await debouncedFilterData();
-      //   };
-      //   filterAsync();
-      // }, [selectedGender, selectedBrand, selectedType, selectedSize, priceRange]);
-      
-    
-      const filterData = () => {
-        let filtered = [...simulatedData]; // Use the original data as the starting point
-      
-        if (selectedGender) {
-          filtered = filtered.filter((product) => product.gender === selectedGender);
-        }
-      
-        if (selectedBrand) {
-          filtered = filtered.filter((product) => product.brand === selectedBrand);
-        }
-      
-        if (selectedType) {
-          filtered = filtered.filter((product) => product.type === selectedType);
-        }
-      
-        if (selectedSize) {
-          filtered = filtered.filter((product) => product.size === selectedSize);
-        }
-      
-        filtered = filtered.filter(
-          (product) => product.price >= priceRange.min && product.price <= priceRange.max
-        );
-      
-        setFilteredData(filtered);
-      };
-      
-      useEffect(() => {
-        debouncedFilterData();
-      }, [selectedGender, selectedBrand, selectedType, selectedSize, priceRange]);
+   
+const FilterPage = () => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const selectedFilter = new URLSearchParams(location.search).get('query');
+  const selectedBrandFromUrl = new URLSearchParams(location.search).get('brand'); 
+
+  useEffect(() => {
+    if (selectedBrandFromUrl) {
+      setSelectedBrand(selectedBrandFromUrl);
+    }
+  }, [selectedBrandFromUrl]);
+
+
+  const debouncedFilterData = _debounce(() => {
+    filterData();
+  }, 500);
+
+  const filterData = () => {
+    let filtered = [...simulatedData]; 
+  
+    if (selectedGender) {
+      filtered = filtered.filter((product) => product.gender === selectedGender);
+    }
+  
+    if (selectedBrand) {
+      filtered = filtered.filter((product) => product.brand === selectedBrand);
+    }
+  
+    if (selectedType) {
+      filtered = filtered.filter((product) => product.type === selectedType);
+    }
+  
+    if (selectedSize) {
+      filtered = filtered.filter((product) => product.size === selectedSize);
+    }
+  
+    filtered = filtered.filter(
+      (product) => product.price >= priceRange.min && product.price <= priceRange.max
+    );
+  
+    setFilteredData(filtered);
+  };
+
+  useEffect(() => {
+    if (selectedFilter) {
+      const params = new URLSearchParams(selectedFilter);
+      setSelectedGender(params.get('gender') || '');
+      setSelectedBrand(params.get('brand') || '');
+      setSelectedType(params.get('type') || '');
+      setSelectedSize(params.get('size') || '');
+    }
+    debouncedFilterData(); 
+  }, [location.search, selectedFilter]);
+
+  useEffect(() => {
+    const queryParams = `brand=${selectedBrand || ''}&gender=${selectedGender || ''}&type=${selectedType || ''}&size=${selectedSize || ''}&min=${priceRange.min}&max=${priceRange.max}`;
+    navigate(`/shop?${queryParams}`);
+  }, [selectedBrand, selectedGender, selectedType, selectedSize, priceRange]);
+
     return (
       <div className='filterPage'>
         <div className="row m-0">
@@ -316,7 +335,6 @@ import { FixedSizeList as List } from 'react-window';
           <option value="Unisex">Unisex</option>
         </select>
 
-      
         <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)} className='mt-4'>
           <option value="">All Brands</option>
         
@@ -331,6 +349,7 @@ import { FixedSizeList as List } from 'react-window';
             <option key={index} value={type}>{type}</option>
           ))}
         </select>
+
         <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)} className='mt-4'>
           <option value="">All Sizes</option>
           {Array.from(new Set(simulatedData.map(product => product.size))).map((size, index) => (
@@ -339,9 +358,131 @@ import { FixedSizeList as List } from 'react-window';
         </select>
 
       
+<<<<<<< HEAD
         <label className='mt-4'>
           Price Range:
 
+=======
+              <label className='mt-4'>
+        Price Range:
+        <input
+          type="range"
+          min={0}
+          max={200}
+          step={1}
+          value={priceRange.min}
+          onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) })}
+        />
+        <span>${priceRange.min} - ${priceRange.max}</span>
+      </label>
+
+      <label className='mt-4'>
+        Max Price:
+        <input
+          type="range"
+          min={priceRange.min}
+          max={200}
+          step={1}
+          value={priceRange.max}
+          onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) })}
+        />
+        <span>${priceRange.max}</span>
+      </label>
+
+          </div>
+          <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>
+        {/* Use virtualization to render the filtered product list */}
+        <div className='row your-custom-class'>
+        {filteredData.map((item, index) => (
+          <div key={index} className='col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center your-item-class'>
+            <ItemCard
+              p_id={item.p_id}
+              p_name={item.p_name}
+              imageurl={item.imageurl}
+              price={item.price}
+              discount={item.discount}
+              />
+            </div>
+          ))}
+        </div>
+
+      </div>
+=======
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+
+const FilterPage = () => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
+  const [data, setData] = useState([]);
+  const location = useLocation();
+  const selectedFilter = new URLSearchParams(location.search).get('query');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    filterData();
+  }, [selectedGender, selectedBrand, selectedType, priceRange, data]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/v1/products/');
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const filterData = () => {
+    let filtered = [...data];
+
+    if (selectedGender) {
+      filtered = filtered.filter(product => product.gender === selectedGender);
+    }
+    if (selectedBrand) {
+      filtered = filtered.filter(product => product.brand === selectedBrand);
+    }
+    if (selectedType) {
+      filtered = filtered.filter(product => product.type === selectedType);
+    }
+    filtered = filtered.filter(product => product.price >= priceRange.min && product.price <= priceRange.max);
+
+    setFilteredData(filtered);
+  };
+
+  return (
+    <div className='filterPage'>
+      <div className="row m-0">
+        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-5 p-3 filterLeft">
+          <h2>FILTER</h2>
+          <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-3'>
+            <option value="">All Genders</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Unisex">Unisex</option>
+          </select>
+
+          <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)} className='mt-3'>
+            <option value="">All Brands</option>
+            {Array.from(new Set(data.map(product => product.brand))).map((brand, index) => (
+              <option key={index} value={brand}>{brand}</option>
+            ))}
+          </select>
+
+          <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} className='mt-3'>
+            <option value="">All Types</option>
+            {Array.from(new Set(data.map(product => product.type))).map((type, index) => (
+              <option key={index} value={type}>{type}</option>
+            ))}
+          </select>
+
+          <label className='mt-3'>Price Range:</label>
+>>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
           <input
             type="range"
             min={0}
@@ -354,7 +495,10 @@ import { FixedSizeList as List } from 'react-window';
           <div>Max Price: ${priceRange.max}</div>
         </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
         <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>
           <div className="row">
             {filteredData.map(product => (
@@ -362,6 +506,7 @@ import { FixedSizeList as List } from 'react-window';
                 <ItemCard p_id={product.p_id} p_name={product.p_name} imageurl={product.imageurl} price={product.price} discount={product.discount} />
               </div>
             ))}
+>>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
           </div>
         </div>
       </div>
@@ -369,6 +514,7 @@ import { FixedSizeList as List } from 'react-window';
   );
 };
 
+<<<<<<< HEAD
           </div>
           <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>
         {/* Use virtualization to render the filtered product list */}
@@ -394,4 +540,10 @@ import { FixedSizeList as List } from 'react-window';
   };
 
 
+=======
+<<<<<<< HEAD
+  export default FilterPage;
+=======
+>>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
 export default FilterPage;
+>>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
