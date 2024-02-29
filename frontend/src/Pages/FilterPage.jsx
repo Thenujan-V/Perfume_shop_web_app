@@ -4,7 +4,7 @@ import './Register/Register.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-<<<<<<< HEAD
+
 const FilterPage = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
@@ -341,7 +341,7 @@ import { FixedSizeList as List } from 'react-window';
       
         <label className='mt-4'>
           Price Range:
->>>>>>> e01c88f28ce3af09b7a8935073c9490fde69c61b
+
           <input
             type="range"
             min={0}
@@ -354,7 +354,7 @@ import { FixedSizeList as List } from 'react-window';
           <div>Max Price: ${priceRange.max}</div>
         </div>
 
-<<<<<<< HEAD
+
         <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>
           <div className="row">
             {filteredData.map(product => (
@@ -368,7 +368,7 @@ import { FixedSizeList as List } from 'react-window';
     </div>
   );
 };
-=======
+
           </div>
           <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>
         {/* Use virtualization to render the filtered product list */}
@@ -392,6 +392,6 @@ import { FixedSizeList as List } from 'react-window';
       
     );
   };
->>>>>>> e01c88f28ce3af09b7a8935073c9490fde69c61b
+
 
 export default FilterPage;

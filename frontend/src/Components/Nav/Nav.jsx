@@ -342,7 +342,6 @@ const Nav = () => {
          {/* Profile Popup */}
       {showProfilePopup && (
         <div className="popup">
-<<<<<<< HEAD
   <div className="popup-content">
     <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
     <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
@@ -394,7 +393,6 @@ const Nav = () => {
 </div>
 
       
-=======
           <div className="popup-content">
             <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
             <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
@@ -421,7 +419,6 @@ const Nav = () => {
             <button>Logout</button>
           </div>
         </div>
->>>>>>> e01c88f28ce3af09b7a8935073c9490fde69c61b
       )}
           </div>
         </div>
