@@ -191,11 +191,6 @@ const Nav = () => {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-<<<<<<< HEAD
-  const [selectedBrand, setSelectedBrand] = useState('');
-  const location = useLocation(); 
-  const navigate = useNavigate();
-=======
 
   const navigate = useNavigate();
 
@@ -218,7 +213,6 @@ const Nav = () => {
       console.error('Error updating profile:', error);
     }
   };
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
 
   const toggleProfilePopup = () => {
     setShowProfilePopup(!showProfilePopup);
@@ -230,11 +224,6 @@ const Nav = () => {
 
   const handleSearch = (e, selectedBrand) => {
     e.preventDefault();
-<<<<<<< HEAD
-    setSelectedBrand(selectedBrand);
-    const queryParams = selectedBrand ? `brand=${selectedBrand}` : '';
-    navigate(`/shop?${queryParams}`);
-=======
 
     const filteredBrands = simulatedImages
       .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -253,7 +242,6 @@ const Nav = () => {
     if (searchResults.length > 0) {
       navigate(`/shop?query=${searchResults[0]}`);
     }
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
   };
     // else {
     //   // Filter brands, types, and p_names based on the search query
@@ -343,19 +331,6 @@ const Nav = () => {
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
           <input
-<<<<<<< HEAD
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            style={{ maxWidth: '250px' }}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button className="btn btn-outline-success" type="submit">
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-=======
     className="form-control me-2"
     type="search"
     placeholder="Search"
@@ -367,7 +342,6 @@ const Nav = () => {
   <button className="btn btn-outline-success" type="submit">
     <FontAwesomeIcon icon={faSearch} />
   </button>
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
 
         </form>
           {/* Icons */}
@@ -431,35 +405,6 @@ const Nav = () => {
 </div>
 
       
-<<<<<<< HEAD
-          <div className="popup-content">
-            <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
-            <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
-            <h2>User Profile</h2>
-            <form>
-              <div>
-                <label>User Name:</label>
-                <input type="text" />
-              </div>
-              <div>
-                <label>Email address:</label>
-                <input type="email" placeholder="Enter email" />
-              </div>
-              <div>
-                <label>Phone Number:</label>
-                <input type="tel" placeholder="Phone Number" />
-              </div>
-              <div>
-                <label>Adderss:</label>
-                <input type="text" placeholder="Enter email" />
-              </div>
-            </form>
-            <button onClick={closeProfilePopup}>Close</button>
-            <button>Logout</button>
-          </div>
-        </div>
-=======
->>>>>>> fb4ceacca1b3bad78edfe8b3af076180577059cc
       )}
           </div>
         </div>

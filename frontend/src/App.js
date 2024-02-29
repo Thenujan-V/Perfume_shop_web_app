@@ -9,6 +9,10 @@ import Shop from "./Pages/FilterPage";
 import Checkout from "./Pages/Checkout";
 import Nav from "./Components/Nav/Nav";
 import Footer from "./Components/Footer/Footer";
+import TermsAndCondition from "./Pages/Terms and Condition";
+import Contact from "./Pages/Contact";
+
+
 
 
 function App() {
@@ -17,30 +21,22 @@ function App() {
       <BrowserRouter>
       <Nav />
         <Routes>
-<<<<<<< HEAD
-
-          
-
-
-=======
         
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
           <Route path="/" element = {<Home />}/>
           <Route path="/login" element = {<Login />}/>
           <Route path="/register" element = {<Register />}/>
           <Route path="/shop" element={<Shop />}/>
           <Route path="/cart" element = {<Cart />}/>
           <Route path="/about" element = {<About />}/>
-<<<<<<< HEAD
-          <Route path="/product" element={<Product />}>
-            <Route path=":productId" element={<Product />}/>
-
-          </Route>
-=======
           <Route path="/product" element={<Product />}/>  
-        
->>>>>>> 82fef0964c46b232679fcb321dc8e0835d07ad9d
+          
           <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/terms and condition" element={<TermsAndCondition />}/>
+          <Route path="/contact" element={<Contact />}/>
+
+        
+       
+
         </Routes>
         <Footer />
       </BrowserRouter>
