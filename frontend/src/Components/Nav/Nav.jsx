@@ -191,28 +191,9 @@ const Nav = () => {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const location = useLocation(); 
   const navigate = useNavigate();
-
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/v1/user/3'); // Replace with your API endpoint
-      setUserData(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };  
-
-  const handleProfileUpdate = async () => {
-    try {
-      const response = await axios.put('http://your-api-url/update-profile', userData); // Replace with your API endpoint
-      console.log('Profile updated successfully:', response.data);
-      
-    } catch (error) {
-      console.error('Error updating profile:', error);
-    }
-  };
 
   const toggleProfilePopup = () => {
     setShowProfilePopup(!showProfilePopup);
@@ -224,24 +205,9 @@ const Nav = () => {
 
   const handleSearch = (e, selectedBrand) => {
     e.preventDefault();
-
-    const filteredBrands = simulatedImages
-      .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.brand);
-
-    const filteredTypes = simulatedImages
-      .filter((item) => item.type.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.type);
-
-    const filteredPNames = simulatedImages
-      .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.p_name);
-
-    const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
-
-    if (searchResults.length > 0) {
-      navigate(`/shop?query=${searchResults[0]}`);
-    }
+    setSelectedBrand(selectedBrand);
+    const queryParams = selectedBrand ? `brand=${selectedBrand}` : '';
+    navigate(`/shop?${queryParams}`);
   };
     // else {
     //   // Filter brands, types, and p_names based on the search query
@@ -331,17 +297,17 @@ const Nav = () => {
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
           <input
-    className="form-control me-2"
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-    style={{ maxWidth: '250px' }}
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-  />
-  <button className="btn btn-outline-success" type="submit">
-    <FontAwesomeIcon icon={faSearch} />
-  </button>
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            style={{ maxWidth: '250px' }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="btn btn-outline-success" type="submit">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
 
         </form>
           {/* Icons */}
@@ -404,6 +370,8 @@ const Nav = () => {
   </div>
 </div>
 
+      
+         
       
       )}
           </div>

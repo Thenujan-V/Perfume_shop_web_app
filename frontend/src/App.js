@@ -13,6 +13,7 @@ import TermsAndCondition from "./Pages/Terms and Condition";
 import Contact from "./Pages/Contact";
 
 
+import Order from "./Pages/Order";
 
 
 function App() {
@@ -22,15 +23,24 @@ function App() {
       <Nav />
         <Routes>
         
+
+          
+
+
           <Route path="/" element = {<Home />}/>
           <Route path="/login" element = {<Login />}/>
           <Route path="/register" element = {<Register />}/>
           <Route path="/shop" element={<Shop />}/>
           <Route path="/cart" element = {<Cart />}/>
           <Route path="/about" element = {<About />}/>
+          <Route path="/product" element={<Product />}>
+            <Route path=":productId" element={<Product />}/>
+
+          </Route>
           <Route path="/product" element={<Product />}/>  
           
           <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/order" element={<Order/>}/>
           <Route path="/terms and condition" element={<TermsAndCondition />}/>
           <Route path="/contact" element={<Contact />}/>
 
