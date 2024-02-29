@@ -202,8 +202,8 @@ nav .wrapper{
   align-items: center;
 }
 
-<<<<<<< HEAD
-.popup-content {
+
+.navbar-nav .popup .popup-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,9 +213,8 @@ nav .wrapper{
   border-radius: 8px;
   width: 30vw;
   height: 35vw;
-=======
+}
 .navbar-nav  .popup-content {
-  background: #e02e2e;
   width: 30vw;
   height:50vh ;
   padding: 20px;
@@ -223,7 +222,6 @@ nav .wrapper{
 }                               
 .navbar-nav .popup-content input{
  background-color:white;
->>>>>>> e01c88f28ce3af09b7a8935073c9490fde69c61b
 }
 .navbar-nav .close-button {
   position: absolute;

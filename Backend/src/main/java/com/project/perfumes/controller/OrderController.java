@@ -6,6 +6,7 @@ import com.project.perfumes.entity.OrderEntity;
 import com.project.perfumes.entity.ProductEntity;
 import com.project.perfumes.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,5 +23,9 @@ public class OrderController {
         orderService.createOrderList(uId, cartDto);
         orderService.createOrderProducts(uId,cartDto);
         return null;
+    }
+    @GetMapping("/orderitems/{uId}")
+    private List<Object[]> getCheckOutList(@PathVariable Long uId){
+        return orderService.getItems(uId);
     }
 }

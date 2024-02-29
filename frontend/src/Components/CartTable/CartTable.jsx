@@ -1,107 +1,28 @@
 
 
-// import React, { useState } from 'react';
-// import './CartTable.css';
-// import Product from '../../Pages/Product';
-
-// const CartTable = ({ cartTable, setCartTable }) => {
-//   const [cartItems, setCartItems] = useState([
-//     { id: 1, name: 'Product 1', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 10, quantity: 2 },
-//     { id: 2, name: 'Product 2', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 15, quantity: 1 },
-//     { id: 3, name: 'Product 3', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 20, quantity: 3 },
-//   ]);
-//   const handleQuantityChange = (itemId, newQuantity) => {
-//     const updatedCart = cartItems.map(item =>
-//       item.id === itemId ? { ...item, quantity: newQuantity } : item
-//     );
-//     setCartItems(updatedCart);
-//   };
-//   const calculateTotalPrice = () => {
-//     return cartItems.reduce((Subtotal, item) => Subtotal + item.price * item.quantity, 0);
-//   };
-
-
-
-//   // const deliveryFee = 17;
-//   // const discount = 10;
-//   // const calculateFinalTotalPrice = () => {
-
-//   //   const subtotal = cartItems.reduce((total, item) => (total + item.price * item.quantity), 0);
-//   //   const totalPrice = subtotal + deliveryFee - discount;
-//   //   return totalPrice;
-//   // }
-//   const handleDelete = () => {
-
-//   }
-
-//   const handleCheckout = () => {
-
-//   }
-
-  
-
-
-//   return (
-//     <div>
-//       <h1>Shopping Cart</h1>
-//       <div className="container">
-//         <div className="row">
-//           <div className="col-lg-8">
-//             <table className="table">
-//               <thead>
-//                 <tr>
-//                   <th>ID</th>
-//                   <th>Image</th>
-//                   <th>Name</th>
-//                   <th>Price</th>
-//                   <th>Quantity</th>
-//                   <th>Total Price</th>
-//                   <th>Action</th> {/* Add this table header for the delete button */}
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {cartItems.map(item => (
-//                   <tr key={item.id}>
-//                     <td>{item.id}</td>
-//                     <td><img src={item.image} alt={item.name} style={{ width: '100px' }} /></td>
-//                     <td>{item.name}</td>
-//                     <td>${item.price}</td>
-//                     <td>
-//                       <input
-//                         type="number"
-//                         value={item.quantity}
-//                         onChange={e => handleQuantityChange(item.id, parseInt(e.target.value))}
-//                       />
-//                     </td>
-//                     <td>${item.price * item.quantity}</td>
-//                     <td>
-//                       <button type="button" class="btn btn-secondary" onClick={() => handleDelete(item.id)}>Delete</button> {/* Delete button */}
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-
-//           </div>
-         
-//         </div>
-//       </div>
-//     </div>
-
-//   );
-// }
-
-// export default CartTable;
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CartTable.css';
 import Product from '../../Pages/Product';
+import axios from 'axios';
 
 const CartTable = ({ cartTable, setCartTable }) => {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Product 1', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 10, quantity: 2, discount: 5 },
-    { id: 2, name: 'Product 2', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 15, quantity: 1, discount: 0 },
-    { id: 3, name: 'Product 3', image: 'https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg?auto=compress&cs=tinysrgb&w=800', price: 20, quantity: 3, discount: 0 },
-  ]);
+  const count=1
+  const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() =>{
+        const cart = async (uId) => {
+            try {
+              const response = await axios.get("http://localhost:8080/api/v1/cart/getcart/3"); 
+              setCartItems(response.data);
+              console.log(response.data)
+              
+            } catch (error) {
+              console.error('Error fetching cart:', error);
+            }
+          };
+      
+          cart();
+    },[])
 
   const handleQuantityChange = (itemId, newQuantity) => {
     const updatedCart = cartItems.map(item =>
@@ -111,10 +32,18 @@ const CartTable = ({ cartTable, setCartTable }) => {
   };
 
   const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + ((item.price - item.discount) * item.quantity), 0);
+    return cartItems.reduce((total, item) => total + ((item[0].price - item[0].discount) * item[1].quantity), 0);
   };
 
-  const handleDelete = (itemId) => {
+  const handleDelete = async (itemId) => {
+    try {
+      const response = await axios.delete("http://localhost:8080/api/v1/cart/deletecartitem/3/2"); 
+      console.log(response)
+      // setCartItems(response.data);
+    } catch (error) {
+      console.error('Error deleting cart:', error);
+    }
+
     const updatedCart = cartItems.filter(item => item.id !== itemId);
     setCartItems(updatedCart);
   };
@@ -144,18 +73,18 @@ const CartTable = ({ cartTable, setCartTable }) => {
               <tbody>
                 {cartItems.map(item => (
                   <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td><img src={item.image} alt={item.name} style={{ width: '100px' }} /></td>
-                    <td>{item.name}</td>
-                    <td>${item.price - item.discount}</td>
+                    <td>{count}</td>
+                    <td><img src={item[0].imageURL} alt={item[0].pname} style={{ width: '100px' }} /></td>
+                    <td>{item[0].pname}</td>
+                    <td>${item[0].price - item[0].discount}</td>
                     <td>
                       <input
                         type="number"
-                        value={item.quantity}
+                        value={item[1].quantity}
                         onChange={e => handleQuantityChange(item.id, parseInt(e.target.value))}
                       />
                     </td>
-                    <td>${(item.price - item.discount) * item.quantity}</td>
+                    <td>${(item[0].price - item[0].discount) * item[1].quantity}</td>
                     <td>
                       <button type="button" className="btn btn-secondary" onClick={() => handleDelete(item.id)}>Delete</button>
                     </td>
