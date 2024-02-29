@@ -3,6 +3,7 @@ import './ItemCard.css'
 import { Link } from 'react-router-dom'
 
 const ItemCard = (props) => {
+  console.log("1")
   return (
     <div className='itemCard text-center'>
         <div className="itemCareView">

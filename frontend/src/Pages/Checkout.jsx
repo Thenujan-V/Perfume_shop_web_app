@@ -3,7 +3,7 @@ import UserDetails from '../Components/UserDetails/UserDetails'
 
 const Checkout = () => {
   return (
-    <div>Checkout
+    <div>
 
 
 <UserDetails/>

@@ -10,4 +10,6 @@ public interface OrderService{
     List<OrderEntity> createOrderList(Long uId, CartDto cartDto);
 
     List<OrderEntity> createOrderProducts(Long uId, CartDto cartDto);
+
+    List<Object[]> getItems(Long uId);
 }

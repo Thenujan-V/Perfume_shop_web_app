@@ -27,8 +27,12 @@ public class CartController {
     }
 
     @GetMapping("/getcart/{uId}")
-    public List<ProductEntity> getCartProduct(@PathVariable Long uId){
-        return cartService.getCartDetails(uId);
+    public List<Object[]> getCartProduct(@PathVariable Long uId){
+       return cartService.getCartDetails(uId);
+    }
+    @GetMapping("/getquantity/{uId}")
+    public List<Integer> getCartQuantity(@PathVariable Long uId){
+        return cartService.getQuantity(uId);
     }
 
     @PutMapping("/updatequantity/{pId}")
@@ -36,8 +40,8 @@ public class CartController {
         return cartService.updateQuantityValue(pId, cartDto);
     }
 
-    @DeleteMapping("deletecartitem/{pId}")
-    public boolean deleteProduct(@PathVariable Long pId){
-        return cartService.deleteCartProduct(pId);
+    @DeleteMapping("deletecartitem/{uId}/{pId}")
+    public void deleteProduct(@PathVariable Long uId, @PathVariable Long pId){
+        cartService.deleteCartProduct(uId, pId);
     }
 }

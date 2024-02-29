@@ -29,11 +29,13 @@ public class OrderServiceImpl implements OrderService{
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setUId(uId);
         orderRepo.save(orderEntity);
+
         return null;
     }
 
     @Override
     public List<OrderEntity> createOrderProducts(Long uId, CartDto cartDto) {
+        System.out.println("1");
         OrderproductsEntity orderproductsEntity = new OrderproductsEntity();
         OrderEntity orderEntity = new OrderEntity();
 
@@ -42,11 +44,6 @@ public class OrderServiceImpl implements OrderService{
         List <Integer> pID = cartRepo.findPid(uId);
         List <Integer> quantity = cartRepo.findQuantity(uId);
 
-//        System.out.println("cart  :"+cartItems);
-
-//        System.out.println("piddd  :"+pID);
-//        System.out.println("oiddd  :"+oID);
-//        System.out.println("qqq  :"+quantity);
 
         for(int i=0;i < pID.toArray().length; i++){
             OrderproductsEntity orderproductsEntity1 = new OrderproductsEntity();
@@ -64,5 +61,12 @@ public class OrderServiceImpl implements OrderService{
 
 
         return null;
+    }
+
+    @Override
+    public List<Object[]> getItems(Long uId) {
+        List<Integer> OrderId =  orderRepo.findOid(uId);
+        System.out.println(OrderId.get(0));
+        return orderRepo.getAllOrderdItems(OrderId.get(0));
     }
 }
