@@ -341,17 +341,17 @@ const Nav = () => {
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
           <input
-    className="form-control me-2"
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-    style={{ maxWidth: '250px' }}
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-  />
-  <button className="btn btn-outline-success" type="submit">
-    <FontAwesomeIcon icon={faSearch} />
-  </button>
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            style={{ maxWidth: '250px' }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="btn btn-outline-success" type="submit">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
 
         </form>
           {/* Icons */}
@@ -414,6 +414,8 @@ const Nav = () => {
   </div>
 </div>
 
+      
+         
       
       )}
           </div>

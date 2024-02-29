@@ -9,6 +9,11 @@ import Shop from "./Pages/FilterPage";
 import Checkout from "./Pages/Checkout";
 import Nav from "./Components/Nav/Nav";
 import Footer from "./Components/Footer/Footer";
+import TermsAndCondition from "./Pages/Terms and Condition";
+import Contact from "./Pages/Contact";
+
+
+import Order from "./Pages/Order";
 
 
 function App() {
@@ -17,6 +22,7 @@ function App() {
       <BrowserRouter>
       <Nav />
         <Routes>
+        
 
           
 
@@ -32,8 +38,15 @@ function App() {
 
           </Route>
           <Route path="/product" element={<Product />}/>  
-        
+          
           <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/order" element={<Order/>}/>
+          <Route path="/terms and condition" element={<TermsAndCondition />}/>
+          <Route path="/contact" element={<Contact />}/>
+
+        
+       
+
         </Routes>
         <Footer />
       </BrowserRouter>
