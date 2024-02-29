@@ -253,7 +253,24 @@ const Nav = () => {
       navigate(`/shop?${queryParams}`);
       // Handle type search
       // You may want to customize this part based on your specific requirements
-      console.log(`Searching for type: ${selectedValue}`);
+   
+
+    const filteredBrands = simulatedImages
+      .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.brand);
+
+    const filteredTypes = simulatedImages
+      .filter((item) => item.type.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.type);
+
+    const filteredPNames = simulatedImages
+      .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.p_name);
+
+    const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
+
+    if (searchResults.length > 0) {
+      navigate(`/shop?query=${searchResults[0]}`);
     }
   };
   const getAutoSuggestions = (query) => {
@@ -410,6 +427,8 @@ const Nav = () => {
         </div>
       </div>
 
+      
+         
       
       )}
           </div>

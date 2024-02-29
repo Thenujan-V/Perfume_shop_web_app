@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/order/**").permitAll()
                         .requestMatchers("/api/v1/wishlist/**").permitAll()
                         .requestMatchers("/api/v1/user/**").permitAll()
+                        .requestMatchers("/api/v1/email/**").permitAll()
                         .requestMatchers("/api/v1/admin").hasAnyAuthority(Role.ADMIN.name())
 //                        .requestMatchers("/api/v1/user").hasAnyAuthority(Role.USER.name())
                         .anyRequest().authenticated())

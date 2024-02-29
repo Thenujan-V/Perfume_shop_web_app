@@ -9,6 +9,11 @@ import Shop from "./Pages/FilterPage";
 import Checkout from "./Pages/Checkout";
 import Nav from "./Components/Nav/Nav";
 import Footer from "./Components/Footer/Footer";
+import TermsAndCondition from "./Pages/Terms and Condition";
+import Contact from "./Pages/Contact";
+
+
+import Order from "./Pages/Order";
 
 
 function App() {
@@ -17,6 +22,10 @@ function App() {
       <BrowserRouter>
       <Nav />
         <Routes>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 7a17260e4eddbdcc81cd257ea654489cda7dbdd7
 
           
 
@@ -31,7 +40,19 @@ function App() {
             <Route path=":productId" element={<Product />}/>
 
           </Route>
+<<<<<<< HEAD
+=======
+          <Route path="/product" element={<Product />}/>  
+          
+>>>>>>> 7a17260e4eddbdcc81cd257ea654489cda7dbdd7
           <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/order" element={<Order/>}/>
+          <Route path="/terms and condition" element={<TermsAndCondition />}/>
+          <Route path="/contact" element={<Contact />}/>
+
+        
+       
+
         </Routes>
         <Footer />
       </BrowserRouter>
