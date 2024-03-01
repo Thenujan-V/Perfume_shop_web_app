@@ -17,6 +17,6 @@ public interface OrderRepo extends JpaRepository<OrderEntity, Long> {
 
     @Modifying
     @Query("UPDATE OrderEntity SET firstName = :firstName, userAddress = :address, email = :mail, phoneNo = :phoneNo WHERE uId = :uId AND oId = :oId")
-    List<OrderDto> setUserDetails(Long uId, Long oId, String firstName, String address,  String mail, Integer phoneNo);
+    void setUserDetails(Long uId, Long oId, String firstName, String address,  String mail, Integer phoneNo);
 }
 

@@ -29,8 +29,8 @@ public class OrderController {
     private List<Object[]> getCheckOutList(@PathVariable Long uId){
         return orderService.getItems(uId);
     }
-//    @PutMapping("/userdetail/{uId}/{oId}")
-//    private List<OrderDto> userDetails(@PathVariable Long uId, @PathVariable Long oId, @RequestBody OrderDto orderDto){
-//        return orderService.setUserDetails(uId, oId, orderDto);
-//    }
+    @PutMapping("/userdetail/{uId}/{oId}")
+    private List<OrderDto> userDetails(@PathVariable Long uId, @PathVariable Long oId, @RequestBody OrderDto orderDto){
+        return orderService.setUserDetails(uId, oId, orderDto);
+    }
 }

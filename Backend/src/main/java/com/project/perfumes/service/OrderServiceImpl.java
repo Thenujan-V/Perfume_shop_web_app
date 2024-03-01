@@ -8,12 +8,14 @@ import com.project.perfumes.entity.OrderproductsEntity;
 import com.project.perfumes.repository.CartRepo;
 import com.project.perfumes.repository.OrderProductsRepo;
 import com.project.perfumes.repository.OrderRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderRepo orderRepo;
@@ -76,7 +78,9 @@ public class OrderServiceImpl implements OrderService{
         String address = orderDto.getUserAddress();
         String mail = orderDto.getEmail();
         Integer phoneNo = orderDto.getPhoneNo();
+        System.out.println("111111");
+        orderRepo.setUserDetails(uId, oId, firstName, address, mail, phoneNo);
 
-        return orderRepo.setUserDetails(uId, oId, firstName, address, mail, phoneNo);
+        return null;
     }
 }
