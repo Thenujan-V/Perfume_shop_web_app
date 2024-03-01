@@ -1,89 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ItemCard from '../Components/ItemCard/ItemCard';
 import './Register/Register.css';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
-
-
-// const FilterPage = () => {
-//   const [filteredData, setFilteredData] = useState([]);
-//   const [selectedGender, setSelectedGender] = useState('');
-//   const [selectedBrand, setSelectedBrand] = useState('');
-//   const [selectedType, setSelectedType] = useState('');
-//   const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
-//   const [data, setData] = useState([]);
-//   const location = useLocation();
-//   const selectedFilter = new URLSearchParams(location.search).get('query');
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-
-//   useEffect(() => {
-//     filterData();
-//   }, [selectedGender, selectedBrand, selectedType, priceRange, data]);
-
-//   const fetchData = async () => {
-//     try {
-//       const response = await axios.get('http://localhost:8080/api/v1/products/');
-//       setData(response.data);
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//   };
-
-//   const filterData = () => {
-//     let filtered = [...data];
-
-//     if (selectedGender) {
-//       filtered = filtered.filter(product => product.gender === selectedGender);
-//     }
-//     if (selectedBrand) {
-//       filtered = filtered.filter(product => product.brand === selectedBrand);
-//     }
-//     if (selectedType) {
-//       filtered = filtered.filter(product => product.type === selectedType);
-//     }
-//     filtered = filtered.filter(product => product.price >= priceRange.min && product.price <= priceRange.max);
-
-//     setFilteredData(filtered);
-//   };
-
-//   return (
-//     <div className='filterPage'>
-//       <div className="row m-0">
-//         <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-5 p-3 filterLeft">
-//           <h2>FILTER</h2>
-//           <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-3'>
-//             <option value="">All Genders</option>
-//             <option value="Male">Male</option>
-//             <option value="Female">Female</option>
-//             <option value="Unisex">Unisex</option>
-//           </select>
-
-//           <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)} className='mt-3'>
-//             <option value="">All Brands</option>
-//             {Array.from(new Set(data.map(product => product.brand))).map((brand, index) => (
-//               <option key={index} value={brand}>{brand}</option>
-//             ))}
-//           </select>
-
-//           <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} className='mt-3'>
-//             <option value="">All Types</option>
-//             {Array.from(new Set(data.map(product => product.type))).map((type, index) => (
-//               <option key={index} value={type}>{type}</option>
-//             ))}
-//           </select>
-
-//           <label className='mt-3'>Price Range:</label>
-// import React, { useState, useEffect } from 'react';
- import _debounce from 'lodash/debounce';
-// import ItemCard from '../Components/ItemCard/ItemCard';
-// import './Register/Register.css';
-// import { useLocation } from 'react-router-dom';
-
-import { useNavigate} from 'react-router-dom';
+import { useLocation ,useNavigate} from 'react-router-dom';
 // import { FixedSizeList as List } from 'react-window';
+import _debounce from 'lodash/debounce';
+
   const simulatedData = [
       {
         p_id: 1,
@@ -251,34 +172,6 @@ import { useNavigate} from 'react-router-dom';
         size: "75ml",
       },
     ];
-   
-// const FilterPage = () => {
-//   const [filteredData, setFilteredData] = useState([]);
-//   const [selectedGender, setSelectedGender] = useState('');
-//   const [selectedBrand, setSelectedBrand] = useState('');
-//   const [selectedType, setSelectedType] = useState('');
-//   const [selectedSize, setSelectedSize] = useState('');
-//   const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
-
-//   const location = useLocation();
-//   const navigate = useNavigate();
-
-//   const selectedFilter = new URLSearchParams(location.search).get('query');
-//   const selectedBrandFromUrl = new URLSearchParams(location.search).get('brand'); 
-
-//   useEffect(() => {
-//     if (selectedBrandFromUrl) {
-//       setSelectedBrand(selectedBrandFromUrl);
-//     }
-//   }, [selectedBrandFromUrl]);
-
-
-//   const debouncedFilterData = _debounce(() => {
-//     filterData();
-//   }, 500);
-
-//   const filterData = () => {
-//     let filtered = [...simulatedData]; 
   
 
 const FilterPage = () => {
@@ -303,7 +196,6 @@ const FilterPage = () => {
       setSelectedType(selectedTypeFromUrl)
      }
   }, [selectedBrandFromUrl],[selectedTypeFromUrl]);
-
 
 
   const debouncedFilterData = _debounce(() => {
@@ -353,9 +245,9 @@ const FilterPage = () => {
   }, [selectedBrand, selectedGender, selectedType, selectedSize, priceRange]);
 
     return (
-      <div className='filterPage'>
+      <div className='row m-0filterPage'>
         <div className="row m-0">
-        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-5 p-3 filterLeft " >
+        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-5 p-3 filterLeft ">
         <h2>FILTER</h2>
           <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-5'>
           <option value="">ALL PERFUM</option>
@@ -435,6 +327,6 @@ const FilterPage = () => {
   };
 
 
-
   export default FilterPage;
+
 

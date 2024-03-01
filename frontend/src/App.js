@@ -38,11 +38,15 @@ function App() {
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/order" element={<Order/>}/>
 
+          
+
           <Route path="/terms and condition" element={<TermsAndCondition />}/>
           <Route path="/contact" element={<Contact />}/>
 
         
-      
+       
+
+
         </Routes>
         <Footer />
       </BrowserRouter>
