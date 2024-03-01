@@ -7,9 +7,7 @@ import { faHeart, faShoppingCart, faUser, faSearch } from '@fortawesome/free-sol
 import { Button, Dropdown, DropdownButton, Navbar, NavDropdown, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import ProfileModal from '../ProfileModal/ProfileModal';
 import axios from 'axios';
-
 
 const Nav = () => {
  
@@ -244,7 +242,6 @@ const Nav = () => {
     setShowProfilePopup(false);
   };
 
-
   const handleSelect = (e, selectedValue, searchType) => {
     e.preventDefault();
     if (searchType === 'brand') {
@@ -284,7 +281,7 @@ const Nav = () => {
     <nav className="navbar navbar-expand-lg navbar-light ">
       <div className="container-fluid" >
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="" style={{ width: '140px', height: '50px', marginTopb:'10px' , paddingRight:'20px'}} />
+          <img src={logo} alt="" style={{ width: '140px', height: '45px',marginLeft:'20px' , paddingRight:'20px'}} />
         </Link>
         <button
           className="navbar-toggler"
@@ -313,7 +310,7 @@ const Nav = () => {
   </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
-            <Dropdown.Toggle variant="secondary" id="typesDropdown" style={{background:' #630229'}}>
+            <Dropdown.Toggle variant="secondary" id="typesDropdown" style={{background:' #630229',marginRight:'155px'}}>
               Types
             </Dropdown.Toggle>
             <Dropdown.Menu className='dropdownmenu' style={{background:' #630229'}}>
@@ -366,11 +363,11 @@ const Nav = () => {
 
          {/* Profile Popup */}
       {showProfilePopup && (
-        <div className="popup">
-        <div className="popup-content">
+        <div className="popup" >
+        <div className="popup-content popupbox" style={{background:"#630229", fontSize: "15px"}}>
           <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
-          <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "35px"}}/></div>
-          <h2>Hi, {userData.firstname}</h2>
+          <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{fontSize: "55px"}}/></div>
+          <h4>Hi, {userData.firstname}</h4>
           <form>
             <div className="mb-3">
               <label className="form-label">User Name:</label>
@@ -411,8 +408,8 @@ const Nav = () => {
             </div>
           </form>
           <div className="d-flex justify-content-between">
-            <button className='btn btn-primary' onClick={closeProfilePopup}>Close</button>
-            <button className='btn btn-danger'>Logout</button>
+            <button className='btn m-2 border border-light' style={{background:"##630229", fontSize: "15px" ,color:"#ffffff"}} onClick={closeProfilePopup}>Close</button>
+            <button className='btn m-2 border border-light' style={{background:"##630229", fontSize: "15px",color:"#ffffff",border:"2px"}}>Logout</button>
           </div>
         </div>
       </div>
@@ -427,3 +424,4 @@ const Nav = () => {
       }
 
 export default Nav;
+
