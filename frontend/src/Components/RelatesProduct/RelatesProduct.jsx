@@ -32,11 +32,11 @@ const RelatesProduct = (props) => {
 
   return (
     <div className='relatedProduct'>
-      <h1>Related Product</h1>
+      <h1 className='mt-5'>Related Product</h1>
       <div className='category-buttons d-flex justify-content-around'>
-        <button onClick={() => setSelectedCategory('gender')}>Gender</button>
-        <button onClick={() => setSelectedCategory('brand')}>Brand</button>
-        <button onClick={() => setSelectedCategory('type')}>Type</button>
+        <button onClick={() => setSelectedCategory('gender')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Gender</button>
+        <button onClick={() => setSelectedCategory('brand')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Brand</button>
+        <button onClick={() => setSelectedCategory('type')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Type</button>
       </div>
       <hr />
       <div className='row relatedProduct-item'>

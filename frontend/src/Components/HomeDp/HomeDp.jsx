@@ -7,9 +7,9 @@ const HomeDp = () => {
     <div>
     <Carousel>
     <Carousel.Item>
-      <img style={{height:'100vh'}}
+      <img style={{height:'60vh'}}
         className="d-block w-100"
-        src="https://wallup.net/wp-content/uploads/2017/11/23/524292-landscape-nature-Italy-trees-mountains-house-reflection-lake.jpg"
+        src="https://png.pngtree.com/background/20230527/original/pngtree-the-perfume-bottles-have-pink-flowers-picture-image_2757863.jpg"
         alt="First slide"
       />
       <Carousel.Caption>
@@ -18,9 +18,9 @@ const HomeDp = () => {
       </Carousel.Caption>
     </Carousel.Item>
     <Carousel.Item>
-      <img style={{height:'100vh'}}
+      <img style={{height:'60vh'}}
         className="d-block w-100"
-        src="https://c4.wallpaperflare.com/wallpaper/261/349/79/landscape-mountains-nature-lake-boats-hd-wallpaper-preview.jpg"
+        src="https://us.123rf.com/450wm/dashtik/dashtik2312/dashtik231201456/219977421-beautiful-blank-bottle-of-luxury-perfume-in-pink-soft-pastel-color.jpg?ver=6"
         alt="Second slide"
       />
 
@@ -30,9 +30,9 @@ const HomeDp = () => {
       </Carousel.Caption>
     </Carousel.Item>
     <Carousel.Item>
-      <img style={{height:'100vh'}} 
+      <img style={{height:'60vh'}} 
         className="d-block w-100"
-        src="https://switzerland-tour.com/storage/media/4-ForArticles/swiss-mountains.jpg"
+        src="https://mobirise.com/extensions/tastem4/assets/images/mbr-23.jpg"
         alt="Third slide"
       />
 
