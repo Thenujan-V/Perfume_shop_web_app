@@ -35,11 +35,18 @@ function App() {
             <Route path=":productId" element={<Product />}/>
 
           </Route>
-          <Route path="/product" element={<Product />}/>  
-          
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/order" element={<Order/>}/>
+<<<<<<< HEAD
           
+=======
+          <Route path="/terms and condition" element={<TermsAndCondition />}/>
+          <Route path="/contact" element={<Contact />}/>
+
+        
+       
+
+>>>>>>> 7f4e72bb5808b384c8e5c98bfa50fdfbc6e33557
         </Routes>
         <Footer />
       </BrowserRouter>
