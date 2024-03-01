@@ -5,6 +5,9 @@ import ExclusiveOffers from '../Components/ExclusiveOffers/ExclusiveOffers'
 import BestSales from '../Components/BestSales/BestSales'
 import FreeCharge from '../Components/FreeCharge/FreeCharge'
 
+
+
+
 const Home = () => {
   return (
     <div className='home'>
@@ -15,7 +18,6 @@ const Home = () => {
       <BestSales />
       <FreeCharge />
 
-]
 
 
 

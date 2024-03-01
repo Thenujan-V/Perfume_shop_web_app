@@ -3,7 +3,7 @@ import { ShopContext } from '../Context/ShopContext'
 import { useParams } from 'react-router-dom'
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay'
 import Breadcrum from '../Components/Breadcrum/Breadcrum'
-// import RelatesProduct from '../Components/RelatesProduct/RelatesProduct'
+import RelatesProduct from '../Components/RelatesProduct/RelatesProduct'
 const Product = () => {
      
       const {allProducts} = useContext(ShopContext)
@@ -19,6 +19,7 @@ const Product = () => {
       <>
         <Breadcrum product={product} />
         <ProductDisplay product={product} />
+        <RelatesProduct product={product}/>
       </>
     ) : (
       <p>Product not found</p>
