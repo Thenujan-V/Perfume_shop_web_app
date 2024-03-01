@@ -35,9 +35,9 @@ public class CartController {
         return cartService.getQuantity(uId);
     }
 
-    @PutMapping("/updatequantity/{pId}")
-    public CartDto updateQuantity(@PathVariable Long pId, @RequestBody CartDto cartDto){
-        return cartService.updateQuantityValue(pId, cartDto);
+    @PutMapping("/updatequantity/{uId}/{pId}")
+    public CartDto updateQuantity(@PathVariable Long uId, @PathVariable Long pId, @RequestBody CartDto cartDto){
+        return cartService.updateQuantityValue(uId, pId, cartDto);
     }
 
     @DeleteMapping("deletecartitem/{uId}/{pId}")
