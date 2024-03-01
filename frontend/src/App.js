@@ -10,7 +10,7 @@ import Checkout from "./Pages/Checkout";
 import Nav from "./Components/Nav/Nav";
 import Footer from "./Components/Footer/Footer";
 import TermsAndCondition from "./Pages/Terms and Condition";
-import Contact from "./Pages/Contact";
+import Contact from "./Pages/contact/Contact";
 import Order from "./Pages/Order";
 
 
@@ -37,16 +37,12 @@ function App() {
           </Route>
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/order" element={<Order/>}/>
-<<<<<<< HEAD
-          
-=======
+
           <Route path="/terms and condition" element={<TermsAndCondition />}/>
           <Route path="/contact" element={<Contact />}/>
 
         
-       
-
->>>>>>> 7f4e72bb5808b384c8e5c98bfa50fdfbc6e33557
+      
         </Routes>
         <Footer />
       </BrowserRouter>
