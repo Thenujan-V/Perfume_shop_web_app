@@ -3,7 +3,7 @@ import './Nav.css';
 import logo from '../Assets/logo.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faShoppingCart, faUser, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faShoppingCart, faUser, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Button, Dropdown, DropdownButton, Navbar, NavDropdown, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -284,7 +284,31 @@ const Nav = () => {
 
   const uniqueTypes = [...new Set(simulatedImages.map(item => item.type))];
   const uniqueBrands = [...new Set(simulatedImages.map(item => item.brand))];
-
+  //////////////////////////////////////////////////////
+  const [wishListProducts, setWishListProducts] = useState([
+    // Sample initial products data
+    { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+    { id: 2, name: "Product 2", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" },
+    { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+   { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+    { id: 2, name: "Product 2", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" },
+    { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+    { id: 2, name: "Product 2", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" }
+    
+  ]);
+  const redirectToProductDetail = (productId) => {
+    // Implement redirectToProductDetail function logic here
+  };
+  const deleteProduct = (productId) => {
+    // Filter out the product with the given id
+    const updatedProducts = wishListProducts.filter(product => product.id !== productId);
+    // Update the state with the filtered products
+    setWishListProducts(updatedProducts);
+  };
+  const addToCart = (productId) => {
+    // Implement addToCart function logic here
+  };
+  ////////////////////////////////////////////
   return (
     <nav className="navbar navbar-expand-lg navbar-light ">
       <div className="container-fluid" >
@@ -376,20 +400,69 @@ const Nav = () => {
 
             {/* Favorites Popup */}
             {showFavoritesPopup && (
-              <div className="popup" >
 
-                <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px" }}>
+              // <div className="popup">
+              //   <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
+              //     <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
+              //     <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
+              //       <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
+              //     </div>
+              //     <h4>Wishlist</h4>
+
+              //     <table className="table table-bordered">
+              //       <tbody>
+
+              //         {wishListProducts.map(product => (
+              //           <tr key={product.id}>
+
+              //             <td><img src={product.image} alt={product.name} onClick={() => redirectToProductDetail(product.id)} /></td>
+              //             <td>{product.name}</td>
+              //             <td><FontAwesomeIcon icon={faTrash} onClick={() => deleteProduct(product.id)} /></td>
+              //             <td><FontAwesomeIcon icon={faShoppingCart} onClick={() => addToCart(product.id)} /></td>
+              //           </tr>
+              //         ))}
+              //       </tbody>
+              //     </table>
+
+              //     <div className="d-flex justify-content-between">
+              //       <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
+              //     </div>
+              //   </div>
+              // </div>
+              <div className="popup">
+                <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
                   <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
                   <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
-                    <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
+                    {/* Assuming FontAwesomeIcon is imported properly */}
+                    {/* <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} /> */}
+                    <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
+  <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
+</div>
                   </div>
                   <h4>Wishlist</h4>
+                  {/* Table */}
+                  <table className="table table-bordered ">
+                    
+                    <tbody>
+                      {/* Table rows */}
+                      {wishListProducts.map(product => (
+                        <tr key={product.id}>
+                          <td><img src={product.image} alt={product.name} className="img-fluid"
+                            style={{ width: "40px", height: "40px" }} onClick={() => redirectToProductDetail(product.id)} /></td>
+                          <td>{product.name}</td>
+                          <td><FontAwesomeIcon icon={faTrash} onClick={() => deleteProduct(product.id)} /></td>
+                          <td><FontAwesomeIcon icon={faShoppingCart} onClick={() => addToCart(product.id)} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                   {/* Popup content */}
                   <div className="d-flex justify-content-between">
-                    <button className='btn m-2 border border-light' style={{ background: "##630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
+                    <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
                   </div>
                 </div>
               </div>
+
             )}
             {/* Profile Popup */}
             {showProfilePopup && (
