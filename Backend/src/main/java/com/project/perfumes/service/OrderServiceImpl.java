@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderRepo orderRepo;
 
-    @Autowired
+
     private CartRepo cartRepo;
     @Autowired
     private OrderProductsRepo orderProductsRepo;
@@ -36,7 +36,6 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public List<OrderEntity> createOrderProducts(Long uId, CartDto cartDto) {
-        System.out.println("1");
         OrderproductsEntity orderproductsEntity = new OrderproductsEntity();
         OrderEntity orderEntity = new OrderEntity();
 
@@ -67,7 +66,6 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<Object[]> getItems(Long uId) {
         List<Integer> OrderId =  orderRepo.findOid(uId);
-        System.out.println(OrderId.get(0));
         return orderRepo.getAllOrderdItems(OrderId.get(0));
     }
 
@@ -80,6 +78,16 @@ public class OrderServiceImpl implements OrderService{
         Integer phoneNo = orderDto.getPhoneNo();
         System.out.println("111111");
         orderRepo.setUserDetails(uId, oId, firstName, address, mail, phoneNo);
+
+        return null;
+    }
+
+    @Override
+    public List<Object[]> getOrdersDetails(Long uId) {
+        OrderproductsEntity orderproductsEntity = new OrderproductsEntity();
+        OrderEntity orderEntity = new OrderEntity();
+
+
 
         return null;
     }

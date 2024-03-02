@@ -36,8 +36,9 @@ const CartTable = ({ cartTable, setCartTable }) => {
   };
 
   const handleDelete = async (itemId) => {
+    console.log(itemId )
     try {
-      const response = await axios.delete("http://localhost:8080/api/v1/cart/deletecartitem/3/2"); 
+      const response = await axios.delete("http://localhost:8080/api/v1/cart/deletecartitem/3/${itemId}"); 
       console.log(response)
       // setCartItems(response.data);
     } catch (error) {

@@ -72,7 +72,7 @@ const UserDetails = () => {
     
       const fetchOrderDats = async () => {
           try {
-            const response = await axios.get("http://localhost:8080/api/v1/order/orderitems/3"); 
+            const response = await axios.get("http://localhost:8080/api/v1/order/orderitems/"); 
             setProducts(response.data);
             
           } catch (error) {
