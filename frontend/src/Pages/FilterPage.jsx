@@ -4,8 +4,9 @@ import './Register/Register.css';
 import { useLocation ,useNavigate} from 'react-router-dom';
 // import { FixedSizeList as List } from 'react-window';
 import _debounce from 'lodash/debounce';
+import axios from 'axios';
 
-  const simulatedData = [
+  const productData = [
       {
         p_id: 1,
         brand: "Chanel",
@@ -176,19 +177,21 @@ import _debounce from 'lodash/debounce';
 
 const FilterPage = () => {
   const [filteredData, setFilteredData] = useState([]);
+  const[productData, setProductData] = useState([])
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
 
   const location = useLocation();
   const navigate = useNavigate();
 
   const selectedFilter = new URLSearchParams(location.search).get('query');
   const selectedBrandFromUrl = new URLSearchParams(location.search).get('brand'); 
-  const selectedTypeFromUrl = new URLSearchParams(location.search).get('type'); 
-  useEffect(() => {
+  const selectedTypeFromUrl = new URLSearchParams(location.search).get('category'); 
+  const selectedSizeFromUrl = new URLSearchParams(location.search).get('size'); 
+  useEffect(() => { 
     if (selectedBrandFromUrl) {
       setSelectedBrand(selectedBrandFromUrl);
     }
@@ -198,12 +201,27 @@ const FilterPage = () => {
   }, [selectedBrandFromUrl],[selectedTypeFromUrl]);
 
 
+  useEffect(() =>{
+    const fetchProducts = async () => {
+        try {
+          const response = await axios.get('http://localhost:8080/api/v1/products/'); 
+          setProductData(response.data);
+          console.log(response.data)
+        } catch (error) {
+          console.error('Error fetching NewArrivals:', error);
+        }
+      };
+      fetchProducts();
+},[])
+
+
+
   const debouncedFilterData = _debounce(() => {
     filterData();
   }, 500);
 
   const filterData = () => {
-    let filtered = [...simulatedData]; 
+    let filtered = [...productData]; 
   
     if (selectedGender) {
       filtered = filtered.filter((product) => product.gender === selectedGender);
@@ -212,9 +230,9 @@ const FilterPage = () => {
     if (selectedBrand) {
       filtered = filtered.filter((product) => product.brand === selectedBrand);
     }
-  
+    
     if (selectedType) {
-      filtered = filtered.filter((product) => product.type === selectedType);
+      filtered = filtered.filter((product) => product.category === selectedType);
     }
   
     if (selectedSize) {
@@ -249,31 +267,39 @@ const FilterPage = () => {
         <div className="row m-0">
         <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-1 mb-1 p-3 filterLeft "style={{background:' #630229'}}>
         <h2>FILTER</h2>
+<<<<<<< HEAD
+          <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-5'>
+          <option value="">All Gender</option>
+          <option value="Men">Him</option>
+          <option value="Women">Her</option>
+          <option value="Unisex">Unisex</option>
+=======
           <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-4 rounded' >
           <option value="" style={{background:' #630229'}}>ALL PERFUM</option>
           <option value="Male" style={{background:' #630229',color:"#ffffff"}}>MALE</option>
           <option value="Female" style={{background:' #630229',color:"#ffffff"}}>Female</option>
           <option value="Unisex" style={{background:' #630229',color:"#ffffff"}}>Unisex</option>
+>>>>>>> cb87bc06c3f9b381f2ba94ae6cd39c88cf766397
         </select>
 
         <select value={selectedBrand}  onChange={(e) => setSelectedBrand(e.target.value)} className='mt-4 rounded'>
           <option value="">All Brands</option>
         
-          {Array.from(new Set(simulatedData.map(product => product.brand))).map((brand, index) => (
+          {Array.from(new Set(productData.map(product => product.brand))).map((brand, index) => (
             <option key={index} value={brand}>{brand}</option>
           ))}
         </select>
 
         <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} className='mt-4 rounded'>
           <option value="">All Types</option>
-          {Array.from(new Set(simulatedData.map(product => product.type))).map((type, index) => (
+          {Array.from(new Set(productData.map(product => product.category))).map((type, index) => (
             <option key={index} value={type}>{type}</option>
           ))}
         </select>
 
         <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)} className='mt-4 rounded'>
           <option value="">All Sizes</option>
-          {Array.from(new Set(simulatedData.map(product => product.size))).map((size, index) => (
+          {Array.from(new Set(productData.map(product => product.size))).map((size, index) => (
             <option key={index} value={size}>{size}</option>
           ))}
         </select>
@@ -284,7 +310,7 @@ const FilterPage = () => {
         <input
           type="range"
           min={0}
-          max={200}
+          max={100000}
           step={1}
           value={priceRange.min}
           onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) })} 
@@ -296,7 +322,7 @@ const FilterPage = () => {
         <input
           type="range"
           min={priceRange.min}
-          max={200}
+          max={100000}
           step={1}
           value={priceRange.max}
           onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) })}
@@ -309,9 +335,9 @@ const FilterPage = () => {
         {filteredData.map((item, index) => (
           <div key={index} className='col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center your-item-class'>
             <ItemCard
-              p_id={item.p_id}
-              p_name={item.p_name}
-              imageurl={item.imageurl}
+              p_id={item.pid}
+              p_name={item.pname}
+              imageurl={item.imageURL}
               price={item.price}
               discount={item.discount}
               />

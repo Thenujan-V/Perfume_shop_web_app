@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const NewArrivals = () => {
     const [newArrivals , setnewArrivals] = useState([]);
+
+
     useEffect(() =>{
-
-
         const fetchNewArrivalsData = async () => {
             try {
               const response = await axios.get('http://localhost:8080/api/v1/products/newarrivals'); 
@@ -17,10 +17,9 @@ const NewArrivals = () => {
               console.error('Error fetching NewArrivals:', error);
             }
           };
-      
           fetchNewArrivalsData();
-      
     },[])
+    
     const genders = [...new Set(newArrivals.map(newArrival => newArrivals.gender))];
     console.log("gender : "+genders)
     return (
