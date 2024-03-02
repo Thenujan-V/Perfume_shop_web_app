@@ -20,4 +20,8 @@ public class OrderDto {
     private Date createdAt;
     private String userAddress;
     private String status;
+    private String firstName;
+    private String lastName;
+    private Integer phoneNo;
+    private String email;
 }

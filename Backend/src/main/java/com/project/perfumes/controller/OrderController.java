@@ -1,6 +1,7 @@
 package com.project.perfumes.controller;
 
 import com.project.perfumes.dto.CartDto;
+import com.project.perfumes.dto.OrderDto;
 import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.entity.OrderEntity;
 import com.project.perfumes.entity.ProductEntity;
@@ -27,5 +28,9 @@ public class OrderController {
     @GetMapping("/orderitems/{uId}")
     private List<Object[]> getCheckOutList(@PathVariable Long uId){
         return orderService.getItems(uId);
+    }
+    @PutMapping("/userdetail/{uId}/{oId}")
+    private List<OrderDto> userDetails(@PathVariable Long uId, @PathVariable Long oId, @RequestBody OrderDto orderDto){
+        return orderService.setUserDetails(uId, oId, orderDto);
     }
 }

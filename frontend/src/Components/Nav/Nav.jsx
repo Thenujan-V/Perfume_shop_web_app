@@ -10,6 +10,8 @@ import { Button, Dropdown, DropdownButton, Navbar, NavDropdown, Form } from 'rea
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios';
+import { getUserData } from '../storage/GetUserData';
+import { jwtDecode } from 'jwt-decode';
 
 const Nav = () => {
 
@@ -202,6 +204,26 @@ const Nav = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+
+  const jwt_decode = require('jwt-decode');
+  const userToken = getUserData();
+  const decodeToken = jwtDecode(userToken)
+  
+  const uId = decodeToken.uId;
+
+  useEffect(() => {
+    const fetchUserData = async (uId) => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
+        setUserData(response.data);
+        console.log("ooooo")
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };  
+    fetchUserData(uId)
+  }, []);
   const handleSearch = (e) => {
     e.preventDefault();
 
@@ -262,7 +284,26 @@ const Nav = () => {
       setSelectedType(selectedValue);
       const queryParams = selectedValue ? `type=${selectedValue}` : '';
       navigate(`/shop?${queryParams}`);
-      console.log(`Searching for type: ${selectedValue}`);
+      // Handle type search
+      // You may want to customize this part based on your specific requirements
+   
+    }
+    const filteredBrands = simulatedImages
+      .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.brand);
+
+    const filteredTypes = simulatedImages
+      .filter((item) => item.type.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.type);
+
+    const filteredPNames = simulatedImages
+      .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.p_name);
+
+    const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
+
+    if (searchResults.length > 0) {
+      navigate(`/shop?query=${searchResults[0]}`);
     }
   };
   const getAutoSuggestions = (query) => {

@@ -9,7 +9,7 @@ public interface CartService{
 
     List<Object[]> getCartDetails(Long uId);
 
-    CartDto updateQuantityValue(Long pId, CartDto cartDto);
+    CartDto updateQuantityValue(Long pId, Long id, CartDto cartDto);
 
     void deleteCartProduct(Long pId, Long id);
 

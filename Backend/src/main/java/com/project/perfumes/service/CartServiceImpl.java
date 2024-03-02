@@ -3,12 +3,13 @@ package com.project.perfumes.service;
 import com.project.perfumes.dto.CartDto;
 import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.repository.CartRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 @Service
 public class CartServiceImpl implements CartService {
     @Autowired
@@ -58,12 +59,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto updateQuantityValue(Long pId, CartDto cartDto) {
-        CartEntity cartEntity = cartRepo.findById(pId).get();
-        cartEntity.setQuantity(cartDto.getQuantity());
-
-        cartRepo.save(cartEntity);
-        return cartDto;
+    public CartDto updateQuantityValue(Long pId, Long id, CartDto cartDto) {
+        Integer newQuantity = cartDto.getQuantity();
+        cartRepo.updateQuantity(pId,id,newQuantity);
+        return null;
     }
 
     @Override
