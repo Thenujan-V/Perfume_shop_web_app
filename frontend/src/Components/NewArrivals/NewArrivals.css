@@ -1,6 +1,10 @@
 .newArrival h4 , h2{
     text-align: center;
 }
+.new{
+    border: 4px solid #630229;
+    border-radius: 20px;
+}
 .newArrival h4{
     font-size: 15px;
     font-weight: 800;

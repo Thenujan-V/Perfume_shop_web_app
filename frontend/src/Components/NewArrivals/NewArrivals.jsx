@@ -43,12 +43,13 @@ const NewArrivals = () => {
                             .slice(0, 4)
                             .map((newArrival, index) => (
                             <div key={index} className="col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center newArrivalImg">
-                                <Link to={`/product/${newArrival.pId}`}><img src={newArrival.imageURL} className="img-fluid m-2" alt="" /></Link>
+                                <Link to={`/product/${newArrival.pid}`}><img src={newArrival.imageURL} className="img-fluid m-2 new" alt="" /></Link>
                             </div>
                             ))}
                         </div>
                     </div>
                 </div>
+                <hr />
                 <div className="herNewArrivals">
                     <div key={gender} className='newArrival'>
                         <h4>NEW ARRIVALS</h4>
@@ -58,7 +59,7 @@ const NewArrivals = () => {
                             .slice(0, 4)
                             .map((newArrival, index) => (
                             <div key={index} className="col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center newArrivalImg">
-                                <Link to={`/product/${newArrival.pId}`}><img src={newArrival.imageURL} className="img-fluid m-2" alt="" /></Link>
+                                <Link to={`/product/${newArrival.pid}`}><img src={newArrival.imageURL} className="img-fluid m-2 new" alt="" /></Link>
                             </div>
                             ))}
                         </div>

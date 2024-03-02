@@ -14,14 +14,14 @@ const Product = () => {
       //  console.log("oooooooo",productId)
       const product = allProducts.find((e) =>
           e.pid === Number(productId))
-          // console.log(product)
+           console.log("product"+product)
     return (
       <div className='Product'>
     {product ? (
       <>
         <Breadcrum product={product} />
         <ProductDisplay product={product} />
-        <RelatesProduct product={product}/>
+        <RelatesProduct product={product} />
       </>
     ) : (
       <p>Product not found</p>

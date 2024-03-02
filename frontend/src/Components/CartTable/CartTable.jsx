@@ -4,24 +4,37 @@ import React, { useEffect, useState } from 'react';
 import './CartTable.css';
 import Product from '../../Pages/Product';
 import axios from 'axios';
-
+import { getUserData } from '../storage/GetUserData';
+import { jwtDecode } from 'jwt-decode';
 const CartTable = ({ cartTable, setCartTable }) => {
   const count=1
   const [cartItems, setCartItems] = useState([]);
+  const [userData, setUserData] = useState({
+    userName: '',
+    email: '',
+    phoneNumber: '',
+    address: ''
+  });
 
+  const jwt_decode = require('jwt-decode');
+  const userToken = getUserData();
+  const decodeToken = jwtDecode(userToken)
+  
+  const uId = decodeToken.uId;
     useEffect(() =>{
         const cart = async (uId) => {
             try {
-              const response = await axios.get("http://localhost:8080/api/v1/cart/getcart/3"); 
+              console.log("id"+uId)
+              const response = await axios.get("http://localhost:8080/api/v1/cart/getcart/${uId}"); 
               setCartItems(response.data);
-              console.log(response.data)
+              console.log("res :"+response.data)
               
             } catch (error) {
               console.error('Error fetching cart:', error);
             }
           };
       
-          cart();
+          cart(uId);
     },[])
 
   const handleQuantityChange = (itemId, newQuantity) => {
@@ -38,7 +51,7 @@ const CartTable = ({ cartTable, setCartTable }) => {
   const handleDelete = async (itemId) => {
     try {
       const response = await axios.delete("http://localhost:8080/api/v1/cart/deletecartitem/3/2"); 
-      console.log(response)
+      console.log("res :"+response)
       // setCartItems(response.data);
     } catch (error) {
       console.error('Error deleting cart:', error);
@@ -74,9 +87,9 @@ const CartTable = ({ cartTable, setCartTable }) => {
                 {cartItems.map(item => (
                   <tr key={item.id}>
                     <td>{count}</td>
-                    <td><img src={item[0].imageURL} alt={item[0].pname} style={{ width: '100px' }} /></td>
-                    <td>{item[0].pname}</td>
-                    <td>${item[0].price - item[0].discount}</td>
+                    <td><img src={item.imageURL} alt={item.pname} style={{ width: '100px' }} /></td>
+                    <td>{item.pname}</td>
+                    <td>${item.price - item.discount}</td>
                     <td>
                       <input
                         type="number"

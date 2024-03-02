@@ -13,173 +13,173 @@ import { jwtDecode } from 'jwt-decode';
 
 const Nav = () => {
 
-  const simulatedImages = [
-    {
-      p_id: 1,
-      brand: "Chanel",
-      gender: "Unisex",
-      p_name: "Aaaaa",
-      discount: "10",
-      imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
-      type: "Eau de Parfum",
-      price: 100.00,
-      size: "50ml",
-    },
-    {
-      p_id: 2,
-      brand: "Dior",
-      gender: "Male",
-      p_name: "BBBBBB",
-      discount: "10",
-      imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
-      type: "Eau de Toilette",
-      price: 85.50,
-      size: "100ml",
-    },
-    {
-      p_id: 3,
-      brand: "Gucci",
-      gender: "Female",
-      p_name: "Adfgt",
-      discount: "10",
-      imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
-      type: "Eau de Parfum",
-      price: 120.00,
-      size: "75ml",
-    },
-    {
-      p_id: 4,
-      brand: "Versace",
-      gender: "Male",
-      p_name: "thgmbn",
-      discount: "0",
-      imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
-      type: "Eau de Cologne",
-      price: 75.25,
-      size: "50ml",
-    },
-    {
-      p_id: 5,
-      brand: "Calvin Klein",
-      gender: "Female",
-      p_name: "Adfgmbn",
-      discount: "0",
-      imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
-      type: "Eau de Toilette",
-      price: 60.50,
-      size: "50ml",
-    },
-    {
-      p_id: 6,
-      brand: "Yves Saint Laurent",
-      gender: "Unisex",
-      p_name: "hgmbn",
-      discount: "10",
-      imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
-      type: "Eau de Parfum",
-      price: 110.00,
-      size: "75ml",
-    },
-    {
-      p_id: 7,
-      brand: "Bvlgari",
-      gender: "Male",
-      p_name: "ggmbn",
-      discount: "0",
-      imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      type: "Eau de Toilette",
-      price: 95.75,
-      size: "100ml",
-    },
-    {
-      p_id: 8,
-      brand: "Marc Jacobs",
-      gender: "Female",
-      p_name: "gthbn",
-      discount: "10",
-      imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
-      type: "Eau de Parfum",
-      price: 85.00,
-      size: "50ml",
-    },
-    {
-      p_id: 9,
-      brand: "Tom Ford",
-      gender: "Male",
-      p_name: "dfgthbn",
-      discount: "10",
-      imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
-      type: "Eau de Cologne",
-      price: 120.50,
-      size: "75ml",
-    },
-    {
-      p_id: 10,
-      brand: "Prada",
-      gender: "Female",
-      p_name: "Adfghgmbn",
-      discount: "0",
-      imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
-      type: "Eau de Toilette",
-      price: 70.00,
-      size: "100ml",
-    },
-    {
-      p_id: 11,
-      brand: "Chloe",
-      gender: "Unisex",
-      p_name: "bchgmbn",
-      discount: "0",
-      imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      type: "Eau de Parfum",
-      price: 95.00,
-      size: "50ml",
-    },
-    {
-      p_id: 12,
-      brand: "Hugo Boss",
-      gender: "Male",
-      p_name: "BBBBAdfgthbn",
-      discount: "10",
-      imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      type: "Eau de Toilette",
-      price: 80.25,
-      size: "75ml",
-    },
-    {
-      p_id: 13,
-      brand: "Michael Kors",
-      gender: "Female",
-      p_name: "Bdsgfhukm",
-      discount: "0",
-      imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
-      type: "Eau de Parfum",
-      price: 110.50,
-      size: "100ml",
-    },
-    {
-      p_id: 14,
-      brand: "Issey Miyake",
-      gender: "Male",
-      p_name: "xgfghjhmnnm",
-      discount: "10",
-      imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
-      type: "Eau de Cologne",
-      price: 65.00,
-      size: "50ml",
-    },
-    {
-      p_id: 15,
-      brand: "Ralph Lauren",
-      gender: "Female",
-      p_name: "Bgrdtmmgfjklbg",
-      discount: "10",
-      imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
-      type: "Eau de Toilette",
-      price: 75.75,
-      size: "75ml",
-    },
-  ];
+  // const simulatedImages = [
+  //   {
+  //     p_id: 1,
+  //     brand: "Chanel",
+  //     gender: "Unisex",
+  //     p_name: "Aaaaa",
+  //     discount: "10",
+  //     imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
+  //     type: "Eau de Parfum",
+  //     price: 100.00,
+  //     size: "50ml",
+  //   },
+  //   {
+  //     p_id: 2,
+  //     brand: "Dior",
+  //     gender: "Male",
+  //     p_name: "BBBBBB",
+  //     discount: "10",
+  //     imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
+  //     type: "Eau de Toilette",
+  //     price: 85.50,
+  //     size: "100ml",
+  //   },
+  //   {
+  //     p_id: 3,
+  //     brand: "Gucci",
+  //     gender: "Female",
+  //     p_name: "Adfgt",
+  //     discount: "10",
+  //     imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
+  //     type: "Eau de Parfum",
+  //     price: 120.00,
+  //     size: "75ml",
+  //   },
+  //   {
+  //     p_id: 4,
+  //     brand: "Versace",
+  //     gender: "Male",
+  //     p_name: "thgmbn",
+  //     discount: "0",
+  //     imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
+  //     type: "Eau de Cologne",
+  //     price: 75.25,
+  //     size: "50ml",
+  //   },
+  //   {
+  //     p_id: 5,
+  //     brand: "Calvin Klein",
+  //     gender: "Female",
+  //     p_name: "Adfgmbn",
+  //     discount: "0",
+  //     imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
+  //     type: "Eau de Toilette",
+  //     price: 60.50,
+  //     size: "50ml",
+  //   },
+  //   {
+  //     p_id: 6,
+  //     brand: "Yves Saint Laurent",
+  //     gender: "Unisex",
+  //     p_name: "hgmbn",
+  //     discount: "10",
+  //     imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
+  //     type: "Eau de Parfum",
+  //     price: 110.00,
+  //     size: "75ml",
+  //   },
+  //   {
+  //     p_id: 7,
+  //     brand: "Bvlgari",
+  //     gender: "Male",
+  //     p_name: "ggmbn",
+  //     discount: "0",
+  //     imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  //     type: "Eau de Toilette",
+  //     price: 95.75,
+  //     size: "100ml",
+  //   },
+  //   {
+  //     p_id: 8,
+  //     brand: "Marc Jacobs",
+  //     gender: "Female",
+  //     p_name: "gthbn",
+  //     discount: "10",
+  //     imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
+  //     type: "Eau de Parfum",
+  //     price: 85.00,
+  //     size: "50ml",
+  //   },
+  //   {
+  //     p_id: 9,
+  //     brand: "Tom Ford",
+  //     gender: "Male",
+  //     p_name: "dfgthbn",
+  //     discount: "10",
+  //     imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
+  //     type: "Eau de Cologne",
+  //     price: 120.50,
+  //     size: "75ml",
+  //   },
+  //   {
+  //     p_id: 10,
+  //     brand: "Prada",
+  //     gender: "Female",
+  //     p_name: "Adfghgmbn",
+  //     discount: "0",
+  //     imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
+  //     type: "Eau de Toilette",
+  //     price: 70.00,
+  //     size: "100ml",
+  //   },
+  //   {
+  //     p_id: 11,
+  //     brand: "Chloe",
+  //     gender: "Unisex",
+  //     p_name: "bchgmbn",
+  //     discount: "0",
+  //     imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  //     type: "Eau de Parfum",
+  //     price: 95.00,
+  //     size: "50ml",
+  //   },
+  //   {
+  //     p_id: 12,
+  //     brand: "Hugo Boss",
+  //     gender: "Male",
+  //     p_name: "BBBBAdfgthbn",
+  //     discount: "10",
+  //     imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  //     type: "Eau de Toilette",
+  //     price: 80.25,
+  //     size: "75ml",
+  //   },
+  //   {
+  //     p_id: 13,
+  //     brand: "Michael Kors",
+  //     gender: "Female",
+  //     p_name: "Bdsgfhukm",
+  //     discount: "0",
+  //     imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
+  //     type: "Eau de Parfum",
+  //     price: 110.50,
+  //     size: "100ml",
+  //   },
+  //   {
+  //     p_id: 14,
+  //     brand: "Issey Miyake",
+  //     gender: "Male",
+  //     p_name: "xgfghjhmnnm",
+  //     discount: "10",
+  //     imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
+  //     type: "Eau de Cologne",
+  //     price: 65.00,
+  //     size: "50ml",
+  //   },
+  //   {
+  //     p_id: 15,
+  //     brand: "Ralph Lauren",
+  //     gender: "Female",
+  //     p_name: "Bgrdtmmgfjklbg",
+  //     discount: "10",
+  //     imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg',
+  //     type: "Eau de Toilette",
+  //     price: 75.75,
+  //     size: "75ml",
+  //   },
+  // ];
 
   const [userData, setUserData] = useState({
     userName: '',
@@ -195,7 +195,7 @@ const Nav = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState('');
-  const [selectedType, setSelectedType] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [suggestionSelected, setSuggestionSelected] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState('');
@@ -226,12 +226,12 @@ const Nav = () => {
     e.preventDefault();
 
     if (suggestionSelected) {
-      const exactMatch = simulatedImages.find(
+      const exactMatch = products.find(
         (item) => item.p_name.toLowerCase() === selectedSuggestion.toLowerCase()
       );
 
       if (exactMatch) {
-        navigate(`/product/${exactMatch.p_id}`);
+        navigate(`/product/${exactMatch.pid}`);
       } else {
         const queryParams = selectedSuggestion ? `query=${selectedSuggestion}` : '';
         navigate(`/product?${queryParams}`);
@@ -271,7 +271,12 @@ const Nav = () => {
   const closeProfilePopup = () => {
     setShowProfilePopup(false);
   };
-
+  const handleLogout = () => {
+    // Clear JWT token from storage
+    localStorage.removeItem('jwtToken');
+    // Redirect to the login page
+    navigate.push('/login');
+  };
   useEffect(() => {
     const fetchProducts = async (uId) => {
       try {
@@ -286,38 +291,40 @@ const Nav = () => {
 
   const handleSelect = (e, selectedValue, searchType) => {
     e.preventDefault();
+  
     if (searchType === 'brand') {
       setSelectedBrand(selectedValue);
       const queryParams = selectedValue ? `brand=${selectedValue}` : '';
       navigate(`/shop?${queryParams}`);
-    } else if (searchType === 'type') {
-      setSelectedType(selectedValue);
-      const queryParams = selectedValue ? `type=${selectedValue}` : '';
+    } else if (searchType === 'category') {
+      setSelectedCategory(selectedValue);
+      const queryParams = selectedValue ? `category=${selectedValue}` : '';
       navigate(`/shop?${queryParams}`);
-      // Handle type search
-      // You may want to customize this part based on your specific requirements
-   
+      console.log(`Searching for Category: ${selectedValue}`);
     }
-    const filteredBrands = products
-      .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.brand);
-
-    const filteredTypes = products
-      .filter((item) => item.category.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.category);
-
-    const filteredPNames = products
-      .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.p_name);
-
-    const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
-
+  
+   
+    // const filteredBrands = nav
+    //   .filter((item) => item.brand && item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
+    //   .map((item) => item.brand);
+  
+    // const filteredTypes = nav
+    //   .filter((item) => item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase()))
+    //   .map((item) => item.category);
+  
+    // const filteredPNames = nav
+    //   .filter((item) => item.p_name && item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
+    //   .map((item) => item.p_name);
+  
+    // const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
+  
     if (searchResults.length > 0) {
       navigate(`/shop?query=${searchResults[0]}`);
     }
   };
+  
   const getAutoSuggestions = (query) => {
-    const filteredProducts = simulatedImages
+    const filteredProducts = nav
       .filter((product) =>
         product.p_name.toLowerCase().includes(query.toLowerCase())
       )
@@ -332,12 +339,12 @@ const Nav = () => {
   }, []);
 
   const genders = [...new Set(nav.map(navItem => navItem.gender))];
-  const typesByGender = {};
+  const categorysByGender = {};
   const brandsByGender = {};
 
-  const uniqueTypes = [...new Set(products.map(item => item.category))];
+  const uniqueCategorys = [...new Set(products.map(item => item.category))];
   const uniqueBrands = [...new Set(products.map(item => item.brand))];
-  //////////////////////////////////////////////////////
+
   const [wishListProducts, setWishListProducts] = useState([
     // Sample initial products data
     { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
@@ -395,13 +402,13 @@ const Nav = () => {
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown>
-              <Dropdown.Toggle variant="secondary" id="typesDropdown" style={{ background: ' #630229', marginRight: '155px' }}>
-                Types
+              <Dropdown.Toggle variant="secondary" id="categorysDropdown" style={{ background: ' #630229', marginRight: '155px' }}>
+                Categorys
               </Dropdown.Toggle>
               <Dropdown.Menu className='dropdownmenu' style={{ background: ' #630229' }}>
-                {uniqueTypes.map(type => (
-                  <Dropdown.Item key={type} onClick={(e) => handleSelect(e, type, 'type')}>
-                    <span className="dropdown-item" style={{ color: "#ffffff", fontSize: "14px" }}>{type}</span>
+                {uniqueCategorys.map(category => (
+                  <Dropdown.Item key={category} onClick={(e) => handleSelect(e, category, 'category')}>
+                    <span className="dropdown-item" style={{ color: "#ffffff", fontSize: "14px" }}>{category}</span>
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
@@ -565,7 +572,7 @@ const Nav = () => {
                   </form>
                   <div className="d-flex justify-content-between">
                     <button className='btn m-2 border border-light' style={{ background: "##630229", fontSize: "15px", color: "#ffffff" }} onClick={closeProfilePopup}>Close</button>
-                    <button className='btn m-2 border border-light' style={{ background: "##630229", fontSize: "15px", color: "#ffffff", border: "2px" }}>Logout</button>
+                    <button className='btn m-2 border border-light' style={{ background: "##630229", fontSize: "15px", color: "#ffffff", border: "2px" }} onClick={handleLogout}>Logout</button>
                   </div>
                 </div>
               </div>

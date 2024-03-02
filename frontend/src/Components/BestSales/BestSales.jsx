@@ -28,7 +28,7 @@ const BestSales = () => {
     return (
         <div className='bestSalesItem'>
           {genders.map(gender => {
-            const himBestSaleGender = bestSales.filter(bestSale => bestSale.gender === "MEN");
+            const himBestSaleGender = bestSales.filter(bestSale => bestSale.gender === "Men");
             const shuffledHimBestSales = himBestSaleGender.sort(() => Math.random() - 0.5);
 
             const herBestSaleGender = bestSales.filter(bestSale => bestSale.gender === "Women");
@@ -44,8 +44,8 @@ const BestSales = () => {
                         {shuffledHimBestSales
                             .slice(0, 4)
                             .map((bestSales, index) => (
-                            <div key={index} className="col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center bestSaleImg">
-                                <Link to={`/product/${bestSales.pId}`}><img src={bestSales.imageURL} className="img-fluid m-2" alt="" /></Link>
+                            <div key={index} className="col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center bestSaleImg">
+                                <Link to={`/product/${bestSales.pid}`}><img src={bestSales.imageURL} className="img-fluid m-2" alt="" /></Link>
                             </div>
                             ))}
                         </div>
@@ -57,9 +57,9 @@ const BestSales = () => {
                         <h2>FOR HER</h2>
                         <div className="row d-flex justify-content-center align-items-center m-0">
                         {shuffledHerBestSales
-                            .slice(0, 3)
+                            .slice(0, 4)
                             .map((bestSales, index) => (
-                            <div key={index} className="col-lg-4 col-md-6 col-12 d-flex justify-content-center align-items-center bestSaleImg">
+                            <div key={index} className="col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center bestSaleImg">
                                 <Link to={`/product/${bestSales.pId}`}><img src={bestSales.imageURL} className="img-fluid m-2" alt="" /></Link>
                             </div>
                             ))}
