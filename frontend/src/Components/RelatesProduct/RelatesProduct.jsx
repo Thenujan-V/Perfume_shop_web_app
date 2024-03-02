@@ -36,7 +36,7 @@ const RelatesProduct = (props) => {
       <div className='category-buttons d-flex justify-content-around'>
         <button onClick={() => setSelectedCategory('gender')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Gender</button>
         <button onClick={() => setSelectedCategory('brand')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Brand</button>
-        <button onClick={() => setSelectedCategory('type')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Type</button>
+        <button onClick={() => setSelectedCategory('category')} style={{background:' #630229',color:"#ffffff",padding:"8px"}} className='btn rounded'>Type</button>
       </div>
       <hr />
       <div className='row relatedProduct-item'>

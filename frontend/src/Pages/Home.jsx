@@ -14,8 +14,11 @@ const Home = () => {
 
       <HomeDp />
       <NewArrivals />
+      <hr />
       <ExclusiveOffers />
+      <hr />
       <BestSales />
+      <hr />
       <FreeCharge />
 
 
