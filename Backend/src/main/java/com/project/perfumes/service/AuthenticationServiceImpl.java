@@ -45,7 +45,8 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
         User user = userRepository.findByEmail(signinRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("invalid email or password"));
         System.out.println((auth.getAuthorities().stream().findAny().get()));
-        String jwt = jwtService.generateToken(user, String.valueOf(auth.getAuthorities().stream().findAny().get()));
+        System.out.println(user.getId());
+        String jwt = jwtService.generateToken(user, String.valueOf(auth.getAuthorities().stream().findAny().get()), user.getId());
         String refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
 
         JwtAutenticationResponse jwtAutenticationResponse = new JwtAutenticationResponse();

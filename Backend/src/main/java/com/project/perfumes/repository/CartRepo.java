@@ -2,9 +2,11 @@ package com.project.perfumes.repository;
 
 import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.entity.ProductEntity;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +30,10 @@ public interface CartRepo extends JpaRepository<CartEntity, Long> {
     @Modifying
     @Query("DELETE FROM CartEntity c WHERE c.uId = :uId and c.pId = :pId")
     void deleteCartItem(Long uId, Long pId);
+
+        @Modifying
+        @Query("UPDATE CartEntity SET quantity = :newQuantity WHERE uId = :uId AND pId = :pId")
+        void updateQuantity(@Param("uId") Long uId, @Param("pId") Long pId, @Param("newQuantity") Integer newQuantity);
+
+
 }
