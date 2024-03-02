@@ -48,7 +48,7 @@ const Footer = () => {
       </div>
     </div>
   
-    <div className="bg-secondary py-555">
+    <div className="bg-secondary py-0" sstyle={{ marginBottom: "0px" }}>
       <div className="container">
         <p className="m-0 text-center text-light">
           &copy; 2024 Fragrance Finesse. All rights reserved.

@@ -30,7 +30,7 @@ const Contact = () => {
       </div>
 
       
-        <div className="container" style={{ border: '2px solid #630229'}}>
+        <div className="container1" style={{ border: '4px solid #630229'}}>
 
         <div className='messageus'>
           <h2  >Message Us</h2> <br />
