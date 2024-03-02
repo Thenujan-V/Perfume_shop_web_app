@@ -21,7 +21,7 @@ const AboutUs = () => {
             <li><strong>Innovation:</strong> We embrace creativity and innovation, constantly seeking new ways to push the boundaries of fragrance design and delivery.</li>
             <li><strong>Community:</strong> We value community engagement and give back to causes that matter to us, fostering positive change and making a meaningful impact.</li>
           </ul>
-          <Link to="/contact" className="btn btn-primary">Contact Us</Link>
+          <Link to="/contact" className="btn m-2" style={{background:"#630229", fontSize: "15px" ,color:"#ffffff"}}>Contact Us</Link>
         </div>
       </div>
     </div>

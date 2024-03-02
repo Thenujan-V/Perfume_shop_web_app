@@ -4,12 +4,13 @@ import com.project.perfumes.dto.ProductDto;
 import com.project.perfumes.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@EnableJpaRepositories
 public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     @Query("SELECT p FROM ProductEntity p WHERE p.deliveryCharge = 0")
     List<ProductEntity> findFreeDeliveryProducts();
@@ -34,7 +35,7 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Long> {
     @Query("SELECT p FROM ProductEntity p ORDER BY p.buycount  DESC")
     List<ProductEntity> getbestSelles();
 
-    @Query("SELECT p FROM ProductEntity p ORDER BY p.created_at  DESC")
+    @Query("SELECT p FROM ProductEntity p ORDER BY p.createdAt  DESC")
     List<ProductEntity> newArrivals();
 
 }

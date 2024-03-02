@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto createProducts(ProductDto productDto) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(productDto, productEntity);
+        productEntity.setStatus("available");
+        productEntity.setBuycount(0);
+        productEntity.setUpdated_at(new Date());
         productRepo.save(productEntity);
 
         return productDto;

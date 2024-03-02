@@ -263,18 +263,26 @@ const FilterPage = () => {
   }, [selectedBrand, selectedGender, selectedType, selectedSize, priceRange]);
 
     return (
-      <div className='row m-0filterPage'>
+      <div className='row m-0 filterPage'>
         <div className="row m-0">
-        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-5 p-3 filterLeft ">
+        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-1 mb-1 p-3 filterLeft "style={{background:' #630229'}}>
         <h2>FILTER</h2>
+<<<<<<< HEAD
           <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-5'>
           <option value="">All Gender</option>
           <option value="Men">Him</option>
           <option value="Women">Her</option>
           <option value="Unisex">Unisex</option>
+=======
+          <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-4 rounded' >
+          <option value="" style={{background:' #630229'}}>ALL PERFUM</option>
+          <option value="Male" style={{background:' #630229',color:"#ffffff"}}>MALE</option>
+          <option value="Female" style={{background:' #630229',color:"#ffffff"}}>Female</option>
+          <option value="Unisex" style={{background:' #630229',color:"#ffffff"}}>Unisex</option>
+>>>>>>> cb87bc06c3f9b381f2ba94ae6cd39c88cf766397
         </select>
 
-        <select value={selectedBrand} onChange={(e) => setSelectedBrand(e.target.value)} className='mt-4'>
+        <select value={selectedBrand}  onChange={(e) => setSelectedBrand(e.target.value)} className='mt-4 rounded'>
           <option value="">All Brands</option>
         
           {Array.from(new Set(productData.map(product => product.brand))).map((brand, index) => (
@@ -282,14 +290,14 @@ const FilterPage = () => {
           ))}
         </select>
 
-        <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} className='mt-4'>
+        <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)} className='mt-4 rounded'>
           <option value="">All Types</option>
           {Array.from(new Set(productData.map(product => product.category))).map((type, index) => (
             <option key={index} value={type}>{type}</option>
           ))}
         </select>
 
-        <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)} className='mt-4'>
+        <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)} className='mt-4 rounded'>
           <option value="">All Sizes</option>
           {Array.from(new Set(productData.map(product => product.size))).map((size, index) => (
             <option key={index} value={size}>{size}</option>
@@ -297,20 +305,20 @@ const FilterPage = () => {
         </select>
 
       
-        <label className='mt-4'>
-        Price Range:
+        <label className='mt-4 priceRange'>
+        <h5>Price Range:</h5>
         <input
           type="range"
           min={0}
           max={100000}
           step={1}
           value={priceRange.min}
-          onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) })}
+          onChange={(e) => setPriceRange({ ...priceRange, min: parseInt(e.target.value) })} 
         />
-        <span>${priceRange.min} - ${priceRange.max}</span>
+        <span style={{color:' #ffffff'}}>${priceRange.min} - ${priceRange.max}</span>
       </label>
-      <label className='mt-4'>
-        Max Price:
+      <label className='mt-4' style={{background:' #630229'}}>
+        <h5>Max Price:</h5>
         <input
           type="range"
           min={priceRange.min}
@@ -319,7 +327,7 @@ const FilterPage = () => {
           value={priceRange.max}
           onChange={(e) => setPriceRange({ ...priceRange, max: parseInt(e.target.value) })}
         />
-        <span>${priceRange.max}</span>
+        <span style={{color:' #ffffff'}}>${priceRange.max}</span>
       </label>
             </div>
             <div className='col-lg-10 col-md-9 col-sm-12 col-12 filterPageRight'>

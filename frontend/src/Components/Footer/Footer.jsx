@@ -40,7 +40,7 @@ const Footer = () => {
         </div>
         <div className="col-md-3 mt-4 ml-md-3" >
           <h4>Informations</h4>
-          <Link to="/about" className="text-light d-block">About Us</Link> 
+          <Link to="/about" className="text-light d-block" >About Us</Link> 
           <Link to="/contact" className="text-light d-block">Contact Us</Link>
           <Link to="/terms and condition" className="text-light d-block">Terms & Conditions</Link>
           <Link to="/privacy-policy" className="text-light d-block">Privacy Policy</Link>
@@ -48,9 +48,9 @@ const Footer = () => {
       </div>
     </div>
   
-    <div className="bg-secondary py-555">
+    <div className="bg-secondary " style={{background:' #ffffff'}}>
       <div className="container">
-        <p className="m-0 text-center text-light">
+        <p className="m-0 text-center " style={{color:' black',background:' #ffffff'}}>
           &copy; 2024 Fragrance Finesse. All rights reserved.
         </p>
       </div>
