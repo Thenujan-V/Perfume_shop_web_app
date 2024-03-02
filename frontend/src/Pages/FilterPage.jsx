@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemCard from '../Components/ItemCard/ItemCard';
 import './Register/Register.css';
 import { useLocation ,useNavigate} from 'react-router-dom';
-import { FixedSizeList as List } from 'react-window';
+// import { FixedSizeList as List } from 'react-window';
 import _debounce from 'lodash/debounce';
 
   const simulatedData = [
@@ -10,7 +10,7 @@ import _debounce from 'lodash/debounce';
         p_id: 1,
         brand: "Chanel",
         gender: "Unisex",
-        p_name:"Aaaaa",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg', 
         type: "Eau de Parfum",
@@ -21,7 +21,7 @@ import _debounce from 'lodash/debounce';
         p_id: 2,
         brand: "Dior",
         gender: "Male",
-        p_name:"BBBBBB",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
         type: "Eau de Toilette",
@@ -32,7 +32,7 @@ import _debounce from 'lodash/debounce';
         p_id :3,
         brand: "Gucci",
         gender: "Female",
-        p_name:"Adfgt",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
         type: "Eau de Parfum",
@@ -43,7 +43,7 @@ import _debounce from 'lodash/debounce';
         p_id: 4,
         brand: "Versace",
         gender: "Male",
-        p_name:"thgmbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"0",
         imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
         type: "Eau de Cologne",
@@ -54,7 +54,7 @@ import _debounce from 'lodash/debounce';
         p_id: 5,
         brand: "Calvin Klein",
         gender: "Female",
-        p_name:"Adfgmbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"0",
         imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
         type: "Eau de Toilette",
@@ -65,7 +65,7 @@ import _debounce from 'lodash/debounce';
         p_id: 6,
         brand: "Yves Saint Laurent",
         gender: "Unisex",
-        p_name:"hgmbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg', 
         type: "Eau de Parfum",
@@ -76,7 +76,7 @@ import _debounce from 'lodash/debounce';
         p_id: 7,
         brand: "Bvlgari",
         gender: "Male",
-        p_name:"ggmbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"0",
         imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         type: "Eau de Toilette",
@@ -87,7 +87,7 @@ import _debounce from 'lodash/debounce';
         p_id: 8,
         brand: "Marc Jacobs",
         gender: "Female",
-        p_name:"gthbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
         type: "Eau de Parfum",
@@ -98,7 +98,7 @@ import _debounce from 'lodash/debounce';
         p_id: 9,
         brand: "Tom Ford",
         gender: "Male",
-        p_name:"dfgthbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
         type: "Eau de Cologne",
@@ -109,7 +109,7 @@ import _debounce from 'lodash/debounce';
         p_id: 10,
         brand: "Prada",
         gender: "Female",
-        p_name:"Adfghgmbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"0",
         imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg', 
         type: "Eau de Toilette",
@@ -120,7 +120,7 @@ import _debounce from 'lodash/debounce';
         p_id: 11,
         brand: "Chloe",
         gender: "Unisex",
-        p_name:"bchgmbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"0",
         imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         type: "Eau de Parfum",
@@ -131,7 +131,7 @@ import _debounce from 'lodash/debounce';
         p_id: 12,
         brand: "Hugo Boss",
         gender: "Male",
-        p_name:"BBBBAdfgthbn",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         type: "Eau de Toilette",
@@ -142,7 +142,7 @@ import _debounce from 'lodash/debounce';
         p_id: 13,
         brand: "Michael Kors",
         gender: "Female",
-        p_name:"Bdsgfhukm",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"0",
         imageurl: 'https://images.pexels.com/photos/755992/pexels-photo-755992.jpeg?auto=compress&cs=tinysrgb&w=400',
         type: "Eau de Parfum",
@@ -153,7 +153,7 @@ import _debounce from 'lodash/debounce';
         p_id: 14,
         brand: "Issey Miyake",
         gender: "Male",
-        p_name:"xgfghjhmnnm",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://w0.peakpx.com/wallpaper/607/199/HD-wallpaper-evening-pic-natura-thumbnail.jpg',
         type: "Eau de Cologne",
@@ -164,7 +164,7 @@ import _debounce from 'lodash/debounce';
         p_id: 15,
         brand: "Ralph Lauren",
         gender: "Female",
-        p_name:"Bgrdtmmgfjklbg",
+        p_name:"Adfgthvbnh thgmbn",
         discount:"10",
         imageurl: 'https://pxbar.com/wp-content/uploads/2023/09/hidden-girl-pic.jpg', 
         type: "Eau de Toilette",
@@ -194,9 +194,8 @@ const FilterPage = () => {
     }
     else if(selectedTypeFromUrl){
       setSelectedType(selectedTypeFromUrl)
-    }
+     }
   }, [selectedBrandFromUrl],[selectedTypeFromUrl]);
-
 
 
   const debouncedFilterData = _debounce(() => {
@@ -248,7 +247,7 @@ const FilterPage = () => {
     return (
       <div className='row m-0 filterPage'>
         <div className="row m-0">
-        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-1 mb-1 p-3 filterLeft " style={{background:' #630229'}}>
+        <div className="col-lg-2 col-md-3 col-sm-12 col-12 d-flex justify-content-start align-items-start flex-column filter mt-1 mb-1 p-3 filterLeft "style={{background:' #630229'}}>
         <h2>FILTER</h2>
           <select value={selectedGender} onChange={(e) => setSelectedGender(e.target.value)} className='mt-4 rounded' >
           <option value="" style={{background:' #630229'}}>ALL PERFUM</option>
@@ -328,6 +327,6 @@ const FilterPage = () => {
   };
 
 
-
   export default FilterPage;
+
 

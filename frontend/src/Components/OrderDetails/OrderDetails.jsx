@@ -1,137 +1,150 @@
-// 
-import React, { useEffect, useState } from 'react';
-import './OrderDetails.css';
-import { Container, Row, Col } from 'react-bootstrap';
-
-const orderId = "ORD123456789";
+import React, { useState, useEffect } from 'react'
+import './OrderDetails.css'
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import axios from 'axios';
 
 const OrderDetails = () => {
+//     const [completedOrders, setCompletedOrders] = useState([]);
+//     const [ongoingOrders, setOngoingOrders] = useState([]);
+//     const [pendingOrders, setPendingOrders] = useState([]);
+  
+//     // Function to fetch orders from the backend
+//     const fetchOrders =async  () => {
+//       // Assuming you have an API endpoint to fetch orders
+//       // You can replace this with your actual API call
+//       // Fetch completed orders
+//       // Fetch ongoing orders
+//       // Fetch pending orders
+//       try {
+//         // Assuming you have separate endpoints to fetch completed, ongoing, and pending orders
+//         const completedResponse = await axios.get('your-backend-url/completed-orders');
+//         const ongoingResponse = await axios.get('your-backend-url/ongoing-orders');
+//         const pendingResponse = await axios.get('your-backend-url/pending-orders');
+    
+//         // Assuming each response contains data in the format { orders: [...] }
+//         const completedOrders = completedResponse.data.orders;
+//         const ongoingOrders = ongoingResponse.data.orders;
+//         const pendingOrders = pendingResponse.data.orders;
+    
+//         // Assuming you want to combine all orders into a single array
+//         const allOrders = [...completedOrders, ...ongoingOrders, ...pendingOrders];
+    
+//         return allOrders;
+//       } catch (error) {
+//         console.error('Error fetching orders:', error);
+//         return []; // Return an empty array in case of an error
+//       }
+//     };
+//     useEffect(() => {
 
-    // const [products, setProducts] = useState([]);
-    // const deliveryCharge = 42
-    // const totalPrice = () => {
+//         fetchOrders();
+//       }, []);
+//   return (
+//     <div>OrderDetails 
+// <div>
+//       <h2>Completed Orders</h2>
+//       {completedOrders.map(order => (
+//         <OrderCard key={order.id} order={order} />
+//       ))}
 
-    //     const subtotal = products.reduce((total, product) => total + product[1].price, 0);
-    //     const totalDiscount = products.reduce((total, product) => total + product[1].discount, 0);
-    //     const finalSubtotal = subtotal - totalDiscount;
+//       <h2>Ongoing Orders</h2>
+//       {ongoingOrders.map(order => (
+//         <OrderCard key={order.id} order={order} />
+//       ))}
 
-    //     return finalSubtotal + deliveryCharge;
-    // };
+//       <h2>Pending Orders</h2>
+//       {pendingOrders.map(order => (
+//         <OrderCard key={order.id} order={order} />
+//       ))}
+//     </div>
+//     </div>
+//   )
+// }
+// const OrderCard = ({ order }) => {
+//     return (
+//       <Card style={{ width: '18rem' }}>
+//         <Card.Body>
+//           <Card.Title>Order ID: {order.id}</Card.Title>
+//           <Card.Subtitle className="mb-2 text-muted">Placed on: {order.date}</Card.Subtitle>
+//           <Card.Img variant="top" src={order.product.image} />
+//           <Card.Text>Product: {order.product.name}</Card.Text>
+//           <Card.Text>Quantity: {order.quantity}</Card.Text>
+//           <Card.Text>Total Price: {order.totalPrice}</Card.Text>
+//           <Card.Text>Delivery Address: {order.deliveryAddress}</Card.Text>
+//           <Card.Text>Estimated Delivery Days: {order.estimatedDeliveryDays}</Card.Text>
+//           <Card.Text>Tracking Process: {order.trackingProcess}</Card.Text>
+//         </Card.Body>
+//       </Card>
+//     );
+const [order, setOrder] = useState({
+  id: 123456,
+  placedOn: '2024-02-29',
+  deliveryPeriod: '3-5 days',
+  status: 'Processing',
+  products: [
+      {
+          id: 1,
+          name: 'Product 1',
+          image: 'product1.jpg',
+          quantity: 2,
+          finalPrice: '$20.00'
+      },
+      {
+          id: 2,
+          name: 'Product 2',
+          image: 'product2.jpg',
+          quantity: 1,
+          finalPrice: '$15.00'
+      }
+      // Add more products as needed
+  ]
+});
 
-    return (
-        <div>
-            <Container>
-                <Row>
-                    <Col>
-                        <h5> <i>Order Details</i></h5>
-                        <p>Order ID: {orderId}</p>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <p>Order Placed on: </p>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <p>Estimated Delivery period:</p>
+return (
+  <div>
+      
+      <table>
+          <thead>
+              <tr>
+                  <th>Order ID</th>
+                  <th>Order Placed On</th>
+                  <th>Estimated Delivery Period</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>{order.id}</td>
+                  <td>{order.placedOn}</td>
+                  <td>{order.deliveryPeriod}</td>
+                  <td>{order.status}</td>
+              </tr>
+          </tbody>
+      </table>
 
-                    </Col>
-                </Row>
-                <br />
-                <Row>
-                    <Col>
-                       
-                        {/* <div className='ProductDetails'>
-                            
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
+      <table>
+          <thead>
+              <tr>
+                  <th>Product Image</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Final Price</th>
+              </tr>
+          </thead>
+          <tbody>
+              {order.products.map(product => (
+                  <tr key={product.id}>
+                      <td><img src={product.image} alt={product.name} /></td>
+                      <td>{product.name}</td>
+                      <td>{product.quantity}</td>
+                      <td>{product.finalPrice}</td>
+                  </tr>
+              ))}
+          </tbody>
+      </table>
+  </div>
+);
+  };
+  
+export default OrderDetails
 
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {products.map(product => (
-                                        <tr key={product.id}>
-                                            <td><img src={product.imageUrl} alt={product.name} style={{ width: '50px', height: '50px' }} /></td>
-                                            <td>{product.id}</td>
-                                            <td>{product.name}</td>
-                                            <td>{product.quantity}</td>
-                                            <td>${product.price}</td>
-
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div> */}
-                        {/* <div className="col-md-5">
-                            <div className="row">
-                                <div className="col-md-12">
-
-                                    <table className="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Subtotal</th>
-                                                <th>Discount</th>
-                                                <th>Discounted Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {products.map((product, index) => (
-                                                <tr key={index}>
-                                                    <td>{product[1].pname}</td>
-                                                    <td>({product[1].price}*{product[0].quantity}) <br></br> = ${product[1].price * product[0].quantity}</td>
-                                                    <td style={{ color: "red" }}>{product[1].discount}%</td>
-                                                    <td>${(product[1].price - (product[1].discount * product[1].price / 100)) * product[0].quantity}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan="3" style={{ color: "green" }}>Subtotal:</td>
-                                                <td style={{ color: "green" }}></td>
-                                            </tr>
-                                            <tr>
-                                                <td colSpan="3" style={{ color: "red" }}>Delivery Charge:</td>
-                                                <td style={{ color: "red" }}>${deliveryCharge}</td>
-                                            </tr>
-                                            <tr>
-                                                <td colSpan="3" style={{ color: "green" }}>Total Price:</td>
-                                                <td style={{ color: "green" }}>${totalPrice()}</td>
-                                            </tr>
-
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> */}
-
-                    </Col>
-
-                </Row>
-                {/* <Row>
-                    <Col>
-                        <h5><i>Delivery detials</i></h5>
-
-                    </Col>
-
-                </Row>
-                <br />
-                <Row>
-                    <Col>
-                        <h5><i>Tracking Process</i></h5>
-                        {/* Tracking process component */}
-                    {/* </Col>
-                </Row> */} 
-            </Container>
-        </div>
-    );
-};
-
-export default OrderDetails;
