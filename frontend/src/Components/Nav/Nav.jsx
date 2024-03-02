@@ -199,6 +199,8 @@ const Nav = () => {
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [suggestionSelected, setSuggestionSelected] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState('');
+  const [products, setProducts] = useState([]);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -214,8 +216,6 @@ const Nav = () => {
       try {
         const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
         setUserData(response.data);
-        console.log("ooooo")
-        console.log(response.data)
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -272,6 +272,18 @@ const Nav = () => {
     setShowProfilePopup(false);
   };
 
+  useEffect(() => {
+    const fetchProducts = async (uId) => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/products/");
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };  
+    fetchProducts(uId)
+  }, []);
+
   const handleSelect = (e, selectedValue, searchType) => {
     e.preventDefault();
     if (searchType === 'brand') {
@@ -286,15 +298,15 @@ const Nav = () => {
       // You may want to customize this part based on your specific requirements
    
     }
-    const filteredBrands = simulatedImages
+    const filteredBrands = products
       .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
       .map((item) => item.brand);
 
-    const filteredTypes = simulatedImages
-      .filter((item) => item.type.toLowerCase().includes(searchQuery.toLowerCase()))
-      .map((item) => item.type);
+    const filteredTypes = products
+      .filter((item) => item.category.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.category);
 
-    const filteredPNames = simulatedImages
+    const filteredPNames = products
       .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
       .map((item) => item.p_name);
 
@@ -316,15 +328,15 @@ const Nav = () => {
 
 
   useEffect(() => {
-    setNav(simulatedImages);
+    setNav(products);
   }, []);
 
   const genders = [...new Set(nav.map(navItem => navItem.gender))];
   const typesByGender = {};
   const brandsByGender = {};
 
-  const uniqueTypes = [...new Set(simulatedImages.map(item => item.type))];
-  const uniqueBrands = [...new Set(simulatedImages.map(item => item.brand))];
+  const uniqueTypes = [...new Set(products.map(item => item.category))];
+  const uniqueBrands = [...new Set(products.map(item => item.brand))];
   //////////////////////////////////////////////////////
   const [wishListProducts, setWishListProducts] = useState([
     // Sample initial products data

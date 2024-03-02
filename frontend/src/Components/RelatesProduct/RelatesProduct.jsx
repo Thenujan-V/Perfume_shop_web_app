@@ -12,7 +12,7 @@ const RelatesProduct = (props) => {
     console.log('allProducts:', allProducts);
   console.log('selectedCategory:', selectedCategory);
     return allProducts.filter((item) => {
-        if (product.p_id !== item.p_id) {
+        if (product.pid !== item.pid) {
             console.log("A")
         if (selectedCategory === 'gender') {
             console.log("B")
@@ -20,9 +20,9 @@ const RelatesProduct = (props) => {
         } else if (selectedCategory === 'brand') {
             console.log("c")
           return product.brand === item.brand;
-        } else if (selectedCategory === 'type') {
+        } else if (selectedCategory === 'category') {
             console.log("e")
-          return product.type === item.type;
+          return product.category === item.category;
         }
        
       }
@@ -36,7 +36,7 @@ const RelatesProduct = (props) => {
       <div className='category-buttons d-flex justify-content-around'>
         <button onClick={() => setSelectedCategory('gender')}>Gender</button>
         <button onClick={() => setSelectedCategory('brand')}>Brand</button>
-        <button onClick={() => setSelectedCategory('type')}>Type</button>
+        <button onClick={() => setSelectedCategory('category')}>Type</button>
       </div>
       <hr />
       <div className='row relatedProduct-item'>
@@ -44,9 +44,9 @@ const RelatesProduct = (props) => {
         filterRelatedProducts().map((item, i) => (
           <div key={i} className='col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center m-0'>
             <ItemCard
-              p_id={item.p_id}
-              p_name={item.p_name}
-              imageurl={item.imageurl}
+              p_id={item.pid}
+              p_name={item.pname}
+              imageurl={item.imageURL}
               price={item.price}
               discount={item.discount}
             />
