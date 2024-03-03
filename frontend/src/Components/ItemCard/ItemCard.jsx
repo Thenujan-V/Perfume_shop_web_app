@@ -8,31 +8,26 @@ import { getUserData } from '../storage/GetUserData';
 import { ShopContext } from '../../Context/ShopContext';
 const ItemCard = (props) => {
   const { addToCart } = useContext(ShopContext);
-
-
-  const jwt_decode = require('jwt-decode');
-  const userToken = getUserData();
-  const decodeToken = jwt_decode.jwtDecode(userToken)
   
-  const uId = decodeToken.uId;
-console.log('uid',uId)
-
-
-  const addToCartList = async (uid,pid) => {
-  //   console.log("uid"+pid)
-  //   await axios.post(`http://localhost:8080/api/v1/cart/createcart/${uid}/${pid}`,{})
-  // .then(response => {
-  //   if(response.data == 'Cart already exists.'){
-  //     alert('Cart Already Exists')
-  //   }
-  //   else{
-  //     addToCart(pid);
-  //   }
-  // })
-  // .catch(error => {
-  //   console.error('Error adding to cart:', error);
-  // });
-  }
+  const addToCartList = async (pid) => {
+    const userToken = getUserData();
+    if (userToken) {
+      const jwt_decode = require('jwt-decode');
+      const decodeToken = jwt_decode(userToken);
+      const uId = decodeToken.uId;
+      try {
+        const response = await axios.post(`http://localhost:8080/api/v1/cart/createcart/${uId}/${pid}`, {});
+        if (response.data === 'Cart already exists.') {
+          alert('Cart Already Exists');
+        } else {
+          addToCart(pid);
+        }
+      } catch (error) {
+        console.error('Error adding to cart:', error);
+      }
+    }
+  };
+  
 
 
   const addToWishList = () => {
@@ -63,7 +58,7 @@ console.log('uid',uId)
                   <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }}  />
                 </button>
 
-                <button className="nav-link icons" onClick={addToCartList(uId, props.p_id)}  style={{marginBottom:"20px",marginRight:"20px"}}>
+                <button className="nav-link icons" onClick={() => addToCartList(props.p_id)}  style={{marginBottom:"20px",marginRight:"20px"}}>
                   <FontAwesomeIcon icon={faShoppingCart} style={{ color: "#ffffff", fontSize: "24px" }}  />
                 </button>
              </div>

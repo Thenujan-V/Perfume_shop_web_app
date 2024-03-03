@@ -20,32 +20,51 @@ const ProductDisplay = (props) => {
     address: ''
   });
 
-  const jwt_decode = require('jwt-decode');
-  const userToken = getUserData();
-  const decodeToken = jwtDecode(userToken)
   
-  const uId = decodeToken.uId;
-
   const handleAddToCart = () => {
-    console.log("uid"+uId)
-    axios.post(`http://localhost:8080/api/v1/cart/createcart/${uId}/${product.pid}`, { productId: product.pid })
-  .then(response => {
-    if(response.data == 'Cart already exists.'){
-      alert('Cart Already Exists')
+    const userToken = getUserData();
+    if (!userToken) {
+      navigate('/login');
+      return;
     }
-    else{
-    addToCart(product.id);
-    }
-  })
-  .catch(error => {
-    console.error('Error adding to cart:', error);
-  });
+    const decodeToken = jwtDecode(userToken);
+    const uId = decodeToken.uId;
+  
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    };
+  
+    axios.post(`http://localhost:8080/api/v1/cart/createcart/${uId}/${product.pid}`, { productId: product.pid }, config)
+      .then(response => {
+        if (response.data === 'Cart already exists.') {
+          alert('Cart Already Exists');
+        } else {
+          addToCart(product.id);
+        }
+      })
+      .catch(error => {
+        console.error('Error adding to cart:', error);
+      });
   };
+
   const handleAddToWishlist = () => {
-    axios.post('http://localhost:8080/api/v1/addToWishlist',{productId: product.id })
+    const userToken = getUserData();
+    
+    const decodeToken = jwtDecode(userToken);
+    const uId = decodeToken.uId;
+  
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    };
+  
+    axios.post(`http://localhost:8080/api/v1/addToWishlist`, { productId: product.id }, config)
       .then(response => {
         console.log(response.data);
-        setIsInWishlist(true); 
+        setIsInWishlist(true);
       })
       .catch(error => {
         console.error('Error adding to wishlist:', error);
@@ -55,17 +74,34 @@ const ProductDisplay = (props) => {
   const navigate=useNavigate()
   
 
-  const handleCheckOut = () => {
-    axios.post(`http://localhost:8080/api/v1/orderitems/${uId}`,{productId: product.id })
-      .then(response => {
-        navigate("/checkout")
-      window.location.reload();
-        
-      })
-      .catch(error => {
-        console.error('Error checkout:', error);
-      });
+ 
+
+const handleCheckOut = () => {
+  const userToken = getUserData();
+  if (!userToken) {
+    navigate('/login');
+    return;
+  }
+  
+  const decodeToken = jwtDecode(userToken);
+  const uId = decodeToken.uId;
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userToken}`
     }
+  };
+
+  axios.post(`http://localhost:8080/api/v1/orderitems/${uId}`, { productId: product.id }, config)
+    .then(response => {
+      navigate("/checkout");
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error checkout:', error);
+    });
+};
+
 
   return (
     <div className='row ProductDisplay m-0'>
