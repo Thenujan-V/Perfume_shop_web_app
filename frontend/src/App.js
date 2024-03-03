@@ -35,6 +35,8 @@ function App() {
             <Route path=":productId" element={<Product />}/>
 
           </Route>
+          <Route path="/product" element={<Product />}/>  
+          
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/order" element={<Order/>}/>
 

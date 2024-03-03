@@ -3,11 +3,15 @@ import './Nav.css';
 import logo from '../Assets/logo.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faShoppingCart, faUser, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
+
+import { faHeart, faShoppingCart, faUser, faSearch,faTimes ,faTrash} from '@fortawesome/free-solid-svg-icons';
+
 import { Button, Dropdown, DropdownButton, Navbar, NavDropdown, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios';
+import { getUserData } from '../storage/GetUserData';
+import { jwtDecode } from 'jwt-decode';
 
 const Nav = () => {
 
@@ -197,9 +201,29 @@ const Nav = () => {
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const [suggestionSelected, setSuggestionSelected] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState('');
+  const [products, setProducts] = useState([]);
+
   const location = useLocation();
   const navigate = useNavigate();
 
+
+  const jwt_decode = require('jwt-decode');
+  const userToken = getUserData();
+  const decodeToken = jwtDecode(userToken)
+  
+  const uId = decodeToken.uId;
+
+  useEffect(() => {
+    const fetchUserData = async (uId) => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };  
+    fetchUserData(uId)
+  }, []);
   const handleSearch = (e) => {
     e.preventDefault();
 
@@ -250,6 +274,18 @@ const Nav = () => {
     setShowProfilePopup(false);
   };
 
+  useEffect(() => {
+    const fetchProducts = async (uId) => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/products/");
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };  
+    fetchProducts(uId)
+  }, []);
+
   const handleSelect = (e, selectedValue, searchType) => {
     e.preventDefault();
     if (searchType === 'brand') {
@@ -260,7 +296,26 @@ const Nav = () => {
       setSelectedType(selectedValue);
       const queryParams = selectedValue ? `type=${selectedValue}` : '';
       navigate(`/shop?${queryParams}`);
-      console.log(`Searching for type: ${selectedValue}`);
+      // Handle type search
+      // You may want to customize this part based on your specific requirements
+   
+    }
+    const filteredBrands = products
+      .filter((item) => item.brand.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.brand);
+
+    const filteredTypes = products
+      .filter((item) => item.category.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.category);
+
+    const filteredPNames = products
+      .filter((item) => item.p_name.toLowerCase().includes(searchQuery.toLowerCase()))
+      .map((item) => item.p_name);
+
+    const searchResults = [...filteredBrands, ...filteredTypes, ...filteredPNames];
+
+    if (searchResults.length > 0) {
+      navigate(`/shop?query=${searchResults[0]}`);
     }
   };
   const getAutoSuggestions = (query) => {
@@ -275,15 +330,15 @@ const Nav = () => {
 
 
   useEffect(() => {
-    setNav(simulatedImages);
+    setNav(products);
   }, []);
 
   const genders = [...new Set(nav.map(navItem => navItem.gender))];
   const typesByGender = {};
   const brandsByGender = {};
 
-  const uniqueTypes = [...new Set(simulatedImages.map(item => item.type))];
-  const uniqueBrands = [...new Set(simulatedImages.map(item => item.brand))];
+  const uniqueTypes = [...new Set(products.map(item => item.category))];
+  const uniqueBrands = [...new Set(products.map(item => item.brand))];
   //////////////////////////////////////////////////////
   const [wishListProducts, setWishListProducts] = useState([
     // Sample initial products data
@@ -308,13 +363,16 @@ const Nav = () => {
   const addToCart = (productId) => {
     // Implement addToCart function logic here
   };
-  ////////////////////////////////////////////
+ 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ">
-      <div className="container-fluid" >
+    <nav className="navbar navbar-expand-lg navbar-light">
+      <div className="container-fluid">
+        {/* Your logo */}
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="" style={{ width: '140px', height: '45px', marginLeft: '20px', paddingRight: '20px' }} />
         </Link>
+
+        {/* Toggle button */}
         <button
           className="navbar-toggler"
           type="button"
@@ -327,37 +385,44 @@ const Nav = () => {
         >
           <span className="navbar-toggler-icon" style={{ color: "#ffffff", fontSize: "20px" }}></span>
         </button>
+
+        {/* Navbar items */}
         <div className="collapse navbar-collapse" id="navbarNav" style={{ color: "#ffffff", fontSize: "24px" }}>
-          <div className="navbar-nav me-auto mb-2 mb-lg-0">
-            <Dropdown >
-              <Dropdown.Toggle variant="secondary" id="brandsDropdown" style={{ background: ' #630229', marginRight: '15px' }}>
-                Brands
-              </Dropdown.Toggle>
-              <Dropdown.Menu className='dropdownmenu' style={{ background: ' #630229' }}>
-                {uniqueBrands.map(brand => (
-                  <Dropdown.Item key={brand} onClick={(e) => handleSelect(e, brand, 'brand')}>
-                    <span className="dropdown-item" style={{ color: "#ffffff", fontSize: "14px" }}>{brand}</span>
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle variant="secondary" id="typesDropdown" style={{ background: ' #630229', marginRight: '155px' }}>
-                Types
-              </Dropdown.Toggle>
-              <Dropdown.Menu className='dropdownmenu' style={{ background: ' #630229' }}>
-                {uniqueTypes.map(type => (
-                  <Dropdown.Item key={type} onClick={(e) => handleSelect(e, type, 'type')}>
-                    <span className="dropdown-item" style={{ color: "#ffffff", fontSize: "14px" }}>{type}</span>
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-          {/* Search */}
-          <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
+          {/* Dropdown for Brands */}
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="brandsDropdown" style={{ background: ' #630229', marginRight: '15px' }}>
+              Brands
+            </Dropdown.Toggle>
+            <Dropdown.Menu className='dropdownmenu' style={{ background: ' #630229' }}>
+              {/* Brands list */}
+              {uniqueBrands.map(brand => (
+                <Dropdown.Item key={brand} onClick={(e) => handleSelect(e, brand, 'brand')}>
+                  <span className="dropdown-item" style={{ color: "#ffffff", fontSize: "14px" }}>{brand}</span>
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* Dropdown for Types */}
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="typesDropdown" style={{ background: ' #630229', marginRight: '155px' }}>
+              Types
+            </Dropdown.Toggle>
+            <Dropdown.Menu className='dropdownmenu' style={{ background: ' #630229' }}>
+              {/* Types list */}
+              {uniqueTypes.map(type => (
+                <Dropdown.Item key={type} onClick={(e) => handleSelect(e, type, 'type')}>
+                  <span className="dropdown-item" style={{ color: "#ffffff", fontSize: "14px" }}>{type}</span>
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* Search form */}
+          <form className="d" onSubmit={handleSearch}>
+            {/* Search input */}
             <input
-              className="form-control me-2"
+              className="form-control "
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -370,6 +435,7 @@ const Nav = () => {
                 setSelectedSuggestion('');
               }}
             />
+            {/* Suggestions */}
             <div className="suggestions">
               {!suggestionSelected && suggestedProducts.map((suggestion, index) => (
                 <div key={index} onClick={() => {
@@ -381,152 +447,129 @@ const Nav = () => {
                 </div>
               ))}
             </div>
-            <button className="btn " type="submit">
+            {/* Search button */}
+            <button className="btn" type="submit">
               <FontAwesomeIcon icon={faSearch} style={{ color: "#ffffff", fontSize: "24px" }} />
             </button>
           </form>
 
           {/* Icons */}
           <div className="navbar-nav icon">
-
+            {/* Favorites icon */}
             <div className="nav-link icons" onClick={toggleFavoritesPopup}>
               <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
             </div>
-            <input type="text" />
-            {/* <Link className="nav-link icons" to="/favorites"><FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} /></Link> */}
-            <Link className="nav-link icons" to="/cart"><FontAwesomeIcon icon={faShoppingCart} style={{ color: "#ffffff", fontSize: "24px" }} /></Link>
-            <div className="nav-link icons" onClick={toggleProfilePopup}><FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} /></div>
 
+            {/* Cart icon */}
+            <Link className="nav-link icons" to="/cart">
+              <FontAwesomeIcon icon={faShoppingCart} style={{ color: "#ffffff", fontSize: "24px" }} />
+            </Link>
 
-            {/* Favorites Popup */}
-            {showFavoritesPopup && (
-
-              // <div className="popup">
-              //   <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
-              //     <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
-              //     <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
-              //       <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
-              //     </div>
-              //     <h4>Wishlist</h4>
-
-              //     <table className="table table-bordered">
-              //       <tbody>
-
-              //         {wishListProducts.map(product => (
-              //           <tr key={product.id}>
-
-              //             <td><img src={product.image} alt={product.name} onClick={() => redirectToProductDetail(product.id)} /></td>
-              //             <td>{product.name}</td>
-              //             <td><FontAwesomeIcon icon={faTrash} onClick={() => deleteProduct(product.id)} /></td>
-              //             <td><FontAwesomeIcon icon={faShoppingCart} onClick={() => addToCart(product.id)} /></td>
-              //           </tr>
-              //         ))}
-              //       </tbody>
-              //     </table>
-
-              //     <div className="d-flex justify-content-between">
-              //       <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
-              //     </div>
-              //   </div>
-              // </div>
-              <div className="popup">
-                <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
-                  <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
-                  <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
-                    {/* Assuming FontAwesomeIcon is imported properly */}
-                    {/* <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} /> */}
-                    <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
-  <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
-</div>
-                  </div>
-                  <h4>Wishlist</h4>
-                  {/* Table */}
-                  <table className="table table-bordered ">
-                    
-                    <tbody>
-                      {/* Table rows */}
-                      {wishListProducts.map(product => (
-                        <tr key={product.id}>
-                          <td><img src={product.image} alt={product.name} className="img-fluid"
-                            style={{ width: "40px", height: "40px" }} onClick={() => redirectToProductDetail(product.id)} /></td>
-                          <td>{product.name}</td>
-                          <td><FontAwesomeIcon icon={faTrash} onClick={() => deleteProduct(product.id)} /></td>
-                          <td><FontAwesomeIcon icon={faShoppingCart} onClick={() => addToCart(product.id)} /></td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {/* Popup content */}
-                  <div className="d-flex justify-content-between">
-                    <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
-                  </div>
-                </div>
-              </div>
-
-            )}
-            {/* Profile Popup */}
-            {showProfilePopup && (
-              <div className="popup" >
-                <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px" }}>
-                  <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
-                  <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{ fontSize: "55px" }} /></div>
-                  <h4>Hi, {userData.firstname}</h4>
-                  <form>
-                    <div className="mb-3">
-                      <label className="form-label">User Name:</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={userData.firstName}
-                        onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
-
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">Email address:</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={userData.email}
-                        onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">Phone Number:</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={userData.phoneno}
-                        onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label className="form-label">Address:</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        value={userData.address}
-                        onChange={(e) => setUserData({ ...userData, address: e.target.value })}
-                      />
-                    </div>
-                  </form>
-                  <div className="d-flex justify-content-between">
-                    <button className='btn m-2 border border-light' style={{ background: "##630229", fontSize: "15px", color: "#ffffff" }} onClick={closeProfilePopup}>Close</button>
-                    <button className='btn m-2 border border-light' style={{ background: "##630229", fontSize: "15px", color: "#ffffff", border: "2px" }}>Logout</button>
-                  </div>
-                </div>
-              </div>
-
-
-            )}
-
-
+            {/* User icon - Toggle Profile Popup */}
+            <div className="nav-link icons" onClick={toggleProfilePopup}>
+              <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} />
+            </div>
           </div>
         </div>
+
+        {/* Favorites Popup */}
+        {showFavoritesPopup && (
+          <div className="popup">
+            {/* Popup content */}
+            <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
+              <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
+              {/* Favorites icon */}
+              <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
+                <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
+              </div>
+              {/* Wishlist */}
+              <h4>Wishlist</h4>
+              <table className="table table-bordered">
+                <tbody>
+                  {wishListProducts.map(product => (
+                    <tr key={product.id}>
+                      <td><img src={product.image} alt={product.name} onClick={() => redirectToProductDetail(product.id)} /></td>
+                      <td>{product.name}</td>
+                      <td><FontAwesomeIcon icon={faTrash} onClick={() => deleteProduct(product.id)} /></td>
+                      <td><FontAwesomeIcon icon={faShoppingCart} onClick={() => addToCart(product.id)} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {/* Close button */}
+              <div className="d-flex justify-content-between">
+                <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Profile Popup */}
+        {showProfilePopup && (
+          <div className="popup">
+            {/* Popup content */}
+            <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px" }}>
+              <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
+              {/* User icon */}
+              <div className="icon d-flex justify-content-center align-items-center">
+                <FontAwesomeIcon icon={faUser} style={{ fontSize: "55px" }} />
+              </div>
+              {/* User information and form */}
+              <h4>Hi, {userData.firstname}</h4>
+              <form>
+                {/* User details input fields */}
+                <div className="mb-3">
+                  <label className="form-label">User Name:</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={userData.userName}
+                    onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Email address:</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={userData.email}
+                    onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Phone Number:</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={userData.phoneNumber}
+                    onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Address:</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={userData.address}
+                    onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+                  />
+                </div>
+              </form>
+              {/* Close and Logout buttons */}
+              <div className="d-flex justify-content-between">
+                <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeProfilePopup}>
+                  <FontAwesomeIcon icon={faTimes} style={{ color: "#ffffff", fontSize: "24px" }} />
+                </button>
+                <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff", border: "2px" }}>
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
 }
 
 export default Nav;
-

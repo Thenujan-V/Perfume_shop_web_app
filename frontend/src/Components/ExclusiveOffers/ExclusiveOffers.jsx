@@ -33,7 +33,7 @@ const ExclusiveOffers = () => {
           <h2>EXCLUSIVE OFFERS</h2>
           <div className="row m-0 exclusiveOffersLeft">
             <div className="col-lg-5 col-12 d-flex justify-content-center align-items-center ">
-              <img  src="https://c4.wallpaperflare.com/wallpaper/261/349/79/landscape-mountains-nature-lake-boats-hd-wallpaper-preview.jpg" alt="" className='img-fluid' />
+              <img  src="https://cdn16.nnnow.com/web-images/large/styles/OBJWVHT8HS9/1668662860282/8.jpg" alt="" className='img-fluid' />
             </div>
             <div className="col-lg-7 col-12 exclusiveOffersRight">
               <div className="row ">
@@ -43,7 +43,7 @@ const ExclusiveOffers = () => {
                   .map((exclusiveOffer, index) => (
                     <div className="col-lg-6 col-6  d-flex justify-content-center align-items-center exclusiveOffersRightItem" key={index}>
                       {/* Replace the empty src attributes with actual image URLs */}
-                      <Link to={`/product/${exclusiveOffer.id}`}><img src={exclusiveOffer.imageURL} alt="" className='img-fluid' /></Link>
+                      <Link to={`/product/${exclusiveOffer.pid}`}><img src={exclusiveOffer.imageURL} alt="" className='img-fluid' /></Link>
                     </div>
                   ))}
               </div>

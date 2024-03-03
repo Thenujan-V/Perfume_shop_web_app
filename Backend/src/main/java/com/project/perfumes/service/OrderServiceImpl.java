@@ -1,23 +1,26 @@
 package com.project.perfumes.service;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.project.perfumes.dto.CartDto;
+import com.project.perfumes.dto.OrderDto;
 import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.entity.OrderEntity;
 import com.project.perfumes.entity.OrderproductsEntity;
 import com.project.perfumes.repository.CartRepo;
 import com.project.perfumes.repository.OrderProductsRepo;
 import com.project.perfumes.repository.OrderRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderRepo orderRepo;
+
 
     @Autowired
     private CartRepo cartRepo;
@@ -35,11 +38,13 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public List<OrderEntity> createOrderProducts(Long uId, CartDto cartDto) {
-        System.out.println("1");
         OrderproductsEntity orderproductsEntity = new OrderproductsEntity();
         OrderEntity orderEntity = new OrderEntity();
 
         List<CartEntity> cartItems =  cartRepo.findProducts(uId);
+        System.out.println("uid   :"+uId);
+
+//        List <Integer> cId = cartRepo.findCid(uId);
         List <Integer> oID = orderRepo.findOid(uId);
         List <Integer> pID = cartRepo.findPid(uId);
         List <Integer> quantity = cartRepo.findQuantity(uId);
@@ -51,22 +56,39 @@ public class OrderServiceImpl implements OrderService{
             orderproductsEntity1.setOId(Long.valueOf(oID.get(0)));
             orderproductsEntity1.setPId(Long.valueOf(pID.get(i)));
             orderproductsEntity1.setQuantity(Integer.valueOf(quantity.get(i)));
-
-            System.out.println("oid    :" + Long.valueOf(oID.get(0)));
-            System.out.println("pid    :" + Long.valueOf(pID.get(i)));
-            System.out.println("quantity    :" + Integer.valueOf(quantity.get(i)));
-
+            System.out.println(Long.valueOf(pID.get(i)));
             orderProductsRepo.save(orderproductsEntity1);
+            cartRepo.deleteCartItem(uId, Long.valueOf(pID.get(i)));
         }
-
-
         return null;
     }
 
     @Override
     public List<Object[]> getItems(Long uId) {
         List<Integer> OrderId =  orderRepo.findOid(uId);
-        System.out.println(OrderId.get(0));
         return orderRepo.getAllOrderdItems(OrderId.get(0));
+    }
+
+    @Override
+    public List<OrderDto> setUserDetails(Long uId, Long oId, OrderDto orderDto) {
+        String firstName = orderDto.getFirstName();
+//        String lastName = orderDto.getLastName();
+        String address = orderDto.getUserAddress();
+        String mail = orderDto.getEmail();
+        Integer phoneNo = orderDto.getPhoneNo();
+        System.out.println("111111");
+        orderRepo.setUserDetails(uId, oId, firstName, address, mail, phoneNo);
+
+        return null;
+    }
+
+    @Override
+    public List<Object[]> getOrdersDetails(Long uId) {
+        OrderproductsEntity orderproductsEntity = new OrderproductsEntity();
+        OrderEntity orderEntity = new OrderEntity();
+
+
+
+        return null;
     }
 }
