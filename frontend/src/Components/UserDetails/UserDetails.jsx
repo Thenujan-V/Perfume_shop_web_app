@@ -104,9 +104,16 @@ const UserDetails = () => {
           <div className="row">
             <div className="col-md-6">
               <div className="mb-3">
-                <label htmlFor="firstName" className="form-label">Full Name<span className="required-sign" style={{ color: 'red' }}> *</span></label>
+                <label htmlFor="firstName" className="form-label">First Name<span className="required-sign" style={{ color: 'red' }}> *</span></label>
                 <input type="text" className="form-control" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required />
                 {formErrors.firstName && <div style={{ color: 'red' }}>{formErrors.firstName}</div>}
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor="firstName" className="form-label">Last Name<span className="required-sign" style={{ color: 'red' }}> *</span></label>
+                <input type="text" className="form-control" id="firstName" name="firstName" value={formData.lastName} onChange={handleChange} required />
+                {formErrors.lastName && <div style={{ color: 'red' }}>{formErrors.lastName}</div>}
               </div>
             </div>
           </div>

@@ -27,13 +27,15 @@ const ProductDisplay = (props) => {
   const uId = decodeToken.uId;
 
   const handleAddToCart = () => {
-    // console.log("pid "+ pid)
     console.log("uid"+uId)
-    // addToCart(product.id);
     axios.post(`http://localhost:8080/api/v1/cart/createcart/${uId}/${product.pid}`, { productId: product.pid })
   .then(response => {
-    console.log(response.data);
+    if(response.data == 'Cart already exists.'){
+      alert('Cart Already Exists')
+    }
+    else{
     addToCart(product.id);
+    }
   })
   .catch(error => {
     console.error('Error adding to cart:', error);
@@ -54,17 +56,16 @@ const ProductDisplay = (props) => {
   
 
   const handleCheckOut = () => {
-    axios.post('http://localhost:8080/api/v1/orderitems/3',{productId: product.id })
+    axios.post(`http://localhost:8080/api/v1/orderitems/${uId}`,{productId: product.id })
       .then(response => {
-        console.log(response.data);
-        setIsInWishlist(true); 
-        navigate("/")
+        navigate("/checkout")
+      window.location.reload();
         
       })
       .catch(error => {
-        console.error('Error adding to wishlist:', error);
+        console.error('Error checkout:', error);
       });
-  }
+    }
 
   return (
     <div className='row ProductDisplay m-0'>

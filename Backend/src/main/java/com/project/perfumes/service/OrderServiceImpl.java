@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,6 +22,7 @@ public class OrderServiceImpl implements OrderService{
     private OrderRepo orderRepo;
 
 
+    @Autowired
     private CartRepo cartRepo;
     @Autowired
     private OrderProductsRepo orderProductsRepo;
@@ -40,6 +42,9 @@ public class OrderServiceImpl implements OrderService{
         OrderEntity orderEntity = new OrderEntity();
 
         List<CartEntity> cartItems =  cartRepo.findProducts(uId);
+        System.out.println("uid   :"+uId);
+
+//        List <Integer> cId = cartRepo.findCid(uId);
         List <Integer> oID = orderRepo.findOid(uId);
         List <Integer> pID = cartRepo.findPid(uId);
         List <Integer> quantity = cartRepo.findQuantity(uId);
@@ -51,15 +56,10 @@ public class OrderServiceImpl implements OrderService{
             orderproductsEntity1.setOId(Long.valueOf(oID.get(0)));
             orderproductsEntity1.setPId(Long.valueOf(pID.get(i)));
             orderproductsEntity1.setQuantity(Integer.valueOf(quantity.get(i)));
-
-            System.out.println("oid    :" + Long.valueOf(oID.get(0)));
-            System.out.println("pid    :" + Long.valueOf(pID.get(i)));
-            System.out.println("quantity    :" + Integer.valueOf(quantity.get(i)));
-
+            System.out.println(Long.valueOf(pID.get(i)));
             orderProductsRepo.save(orderproductsEntity1);
+            cartRepo.deleteCartItem(uId, Long.valueOf(pID.get(i)));
         }
-
-
         return null;
     }
 
