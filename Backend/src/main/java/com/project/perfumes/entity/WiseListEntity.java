@@ -1,11 +1,9 @@
 package com.project.perfumes.entity;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
-
 @Entity
 @Data
 @Getter
@@ -22,6 +20,4 @@ public class WiseListEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdAt;
-
-
 }

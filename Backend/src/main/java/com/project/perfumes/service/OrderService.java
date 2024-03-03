@@ -15,4 +15,6 @@ public interface OrderService{
     List<Object[]> getItems(Long uId);
 
     List<OrderDto> setUserDetails(Long uId, Long oId, OrderDto orderDto);
+
+    List<Object[]> getOrdersDetails(Long uId);
 }

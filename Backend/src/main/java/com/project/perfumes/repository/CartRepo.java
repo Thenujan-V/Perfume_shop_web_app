@@ -1,8 +1,6 @@
 package com.project.perfumes.repository;
 
 import com.project.perfumes.entity.CartEntity;
-import com.project.perfumes.entity.ProductEntity;
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +18,7 @@ public interface CartRepo extends JpaRepository<CartEntity, Long> {
     List<Object[]> findAllProducts(Long uId);
 
     @Query("SELECT c FROM CartEntity c WHERE c.uId = :uId")
-    List<CartEntity> findProducts(Long uId);
+    List<CartEntity> findProducts(@Param("uId") Long uId);
 
     @Query("SELECT c.pId FROM CartEntity c WHERE c.uId = :uId")
     List<Integer> findPid(Long uId);
@@ -31,9 +29,8 @@ public interface CartRepo extends JpaRepository<CartEntity, Long> {
     @Query("DELETE FROM CartEntity c WHERE c.uId = :uId and c.pId = :pId")
     void deleteCartItem(Long uId, Long pId);
 
-        @Modifying
-        @Query("UPDATE CartEntity SET quantity = :newQuantity WHERE uId = :uId AND pId = :pId")
-        void updateQuantity(@Param("uId") Long uId, @Param("pId") Long pId, @Param("newQuantity") Integer newQuantity);
-
+    @Modifying
+    @Query("UPDATE CartEntity SET quantity = :newQuantity WHERE uId = :uId AND pId = :pId")
+    void updateQuantity(@Param("uId") Long uId, @Param("pId") Long pId, @Param("newQuantity") Integer newQuantity);
 
 }

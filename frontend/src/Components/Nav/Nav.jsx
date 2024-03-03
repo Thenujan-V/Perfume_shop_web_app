@@ -39,50 +39,50 @@ const Nav = () => {
   const navigate = useNavigate();
 
 
-  const jwt_decode = require('jwt-decode');
-  const userToken = getUserData();
-  const decodeToken = jwtDecode(userToken)
   
-  const uId = decodeToken.uId;
-
+  
   useEffect(() => {
-    const fetchUserData = async (uId) => {
-      try {
-        const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
-        setUserData(response.data);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };  
-    fetchUserData(uId)
+    const jwt_decode = require('jwt-decode');
+       const userToken = getUserData();
+       if(userToken){
+          const decodeToken = jwtDecode(userToken)
+          const uId = decodeToken.uId;
+          const fetchUserData = async (uId) => {
+            try {
+              const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
+              setUserData(response.data);
+            } catch (error) {
+              console.error('Error fetching user data:', error);
+            }
+          };  
+          fetchUserData(uId)
+        }
+    
   }, []);
-  const handleSearch = (e) => {
-    e.preventDefault();
+ const handleSearch = (e) => {
+  e.preventDefault();
 
-    if (suggestionSelected) {
-      const exactMatch = products.find(
-        (item) => item.p_name.toLowerCase() === selectedSuggestion.toLowerCase()
-      );
+  console.log('suggestionSelected:', suggestionSelected);
+  console.log('products:', products);
+  console.log('selectedSuggestion:', selectedSuggestion);
 
-      if (exactMatch) {
-        navigate(`/product/${exactMatch.pid}`);
-      } else {
-        const queryParams = selectedSuggestion ? `query=${selectedSuggestion}` : '';
-        navigate(`/product?${queryParams}`);
-      }
+  if (suggestionSelected && products && selectedSuggestion) {
+    const exactMatch = products.find(
+      (item) => item.pname && item.pname.toLowerCase() === selectedSuggestion.toLowerCase()
+    );
+
+    if (exactMatch) {
+      navigate(`/product/${exactMatch.pid}`);
+    } else {
+      const queryParams = selectedSuggestion ? `query=${selectedSuggestion}` : '';
+      navigate(`/product?${queryParams}`);
     }
-  };
+  }
+};
 
+  
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/v1/user/3'); // Replace with your API endpoint
-      setUserData(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
+  
 
   const handleProfileUpdate = async () => {
     try {
@@ -106,13 +106,11 @@ const Nav = () => {
     setShowProfilePopup(false);
   };
   const handleLogout = () => {
-    // Clear JWT token from storage
     localStorage.removeItem('jwtToken');
-    // Redirect to the login page
-    navigate.push('/login');
+    navigate('/');
   };
   useEffect(() => {
-    const fetchProducts = async (uId) => {
+    const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/v1/products/");
         setProducts(response.data);
@@ -120,7 +118,7 @@ const Nav = () => {
         console.error('Error fetching user data:', error);
       }
     };  
-    fetchProducts(uId)
+    fetchProducts()
   }, []);
 
   const handleSelect = (e, selectedValue, searchType) => {
@@ -168,11 +166,11 @@ const Nav = () => {
     // Sample initial products data
     { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
     { id: 2, name: "Product 2", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" },
-    { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
-   { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
-    { id: 2, name: "Product 2", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" },
-    { id: 1, name: "Product 1", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
-    { id: 2, name: "Product 2", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" }
+    { id: 3, name: "Product 3", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+   { id: 4, name: "Product 4", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+    { id: 5, name: "Product 5", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" },
+    { id: 6, name: "Product 6", image: "https://puls-img.chanel.com/1687527727352-parfumvisual1jpg_1150x1080.jpg" },
+    { id: 7, name: "Product 7", image: "https://img.lazcdn.com/g/p/22d7e7be3174c18109982a8853d3fb46.jpg_720x720q80.jpg" }
     
   ]);
   const redirectToProductDetail = (productId) => {
@@ -187,13 +185,16 @@ const Nav = () => {
   const addToCart = (productId) => {
     // Implement addToCart function logic here
   };
-  ////////////////////////////////////////////
+ console.log('ud',userData)
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ">
-      <div className="container-fluid" >
+    <nav className="navbar navbar-expand-lg navbar-light">
+      <div className="container-fluid">
+        {/* Your logo */}
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="" style={{ width: '140px', height: '45px', marginLeft: '20px', paddingRight: '20px' }} />
         </Link>
+
+        {/* Toggle button */}
         <button
           className="navbar-toggler"
           type="button"
@@ -206,6 +207,8 @@ const Nav = () => {
         >
           <span className="navbar-toggler-icon" style={{ color: "#ffffff", fontSize: "20px" }}></span>
         </button>
+
+        {/* Navbar items */}
         <div className="collapse navbar-collapse" id="navbarNav" style={{ color: "#ffffff", fontSize: "24px" }}>
           <div className="navbar-nav me-auto mb-2 mb-lg-0">
             <Dropdown >
@@ -236,7 +239,7 @@ const Nav = () => {
           {/* Search */}
           <form className="d-flex flex-grow-1" onSubmit={handleSearch}>
             <input
-              className="form-control me-2"
+              className="form-control "
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -249,6 +252,7 @@ const Nav = () => {
                 setSelectedSuggestion('');
               }}
             />
+            {/* Suggestions */}
             <div className="suggestions">
               {!suggestionSelected && suggestedProducts.map((suggestion, index) => (
                 <div key={index} onClick={() => {
@@ -260,54 +264,21 @@ const Nav = () => {
                 </div>
               ))}
             </div>
-            <button className="btn " type="submit">
+            {/* Search button */}
+            <button className="btn" type="submit">
               <FontAwesomeIcon icon={faSearch} style={{ color: "#ffffff", fontSize: "24px" }} />
             </button>
           </form>
 
-          {/* Icons */}
           <div className="navbar-nav icon">
-
+            {/* Favorites icon */}
             <div className="nav-link icons" onClick={toggleFavoritesPopup}>
               <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
             </div>
-            <input type="text" />
-            {/* <Link className="nav-link icons" to="/favorites"><FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} /></Link> */}
-            <Link className="nav-link icons" to="/cart"><FontAwesomeIcon icon={faShoppingCart} style={{ color: "#ffffff", fontSize: "24px" }} /></Link>
-            <div className="nav-link icons" onClick={toggleProfilePopup}><FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} /></div>
+    
 
 
-            {/* Favorites Popup */}
             {showFavoritesPopup && (
-
-              // <div className="popup">
-              //   <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
-              //     <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
-              //     <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
-              //       <FontAwesomeIcon icon={faHeart} style={{ color: "#ffffff", fontSize: "24px" }} />
-              //     </div>
-              //     <h4>Wishlist</h4>
-
-              //     <table className="table table-bordered">
-              //       <tbody>
-
-              //         {wishListProducts.map(product => (
-              //           <tr key={product.id}>
-
-              //             <td><img src={product.image} alt={product.name} onClick={() => redirectToProductDetail(product.id)} /></td>
-              //             <td>{product.name}</td>
-              //             <td><FontAwesomeIcon icon={faTrash} onClick={() => deleteProduct(product.id)} /></td>
-              //             <td><FontAwesomeIcon icon={faShoppingCart} onClick={() => addToCart(product.id)} /></td>
-              //           </tr>
-              //         ))}
-              //       </tbody>
-              //     </table>
-
-              //     <div className="d-flex justify-content-between">
-              //       <button className='btn m-2 border border-light' style={{ background: "#630229", fontSize: "15px", color: "#ffffff" }} onClick={closeFavoritesPopup}>Close</button>
-              //     </div>
-              //   </div>
-              // </div>
               <div className="popup">
                 <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
                   <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
@@ -401,13 +372,23 @@ const Nav = () => {
 
             )}
 
+            {/* Cart icon */}
+            <Link className="nav-link icons" to="/cart">
+              <FontAwesomeIcon icon={faShoppingCart} style={{ color: "#ffffff", fontSize: "24px" }} />
+            </Link>
 
+            {/* User icon - Toggle Profile Popup */}
+            <div className="nav-link icons" onClick={toggleProfilePopup}>
+              <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} />
+            </div>
           </div>
         </div>
+
+       
+
       </div>
     </nav>
   );
 }
 
 export default Nav;
-

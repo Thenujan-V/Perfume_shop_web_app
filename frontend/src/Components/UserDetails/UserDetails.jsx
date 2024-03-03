@@ -1,36 +1,32 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { getUserData } from '../storage/GetUserData';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 const UserDetails = () => {
   const [formData, setFormData] = useState({
-    title: '',
     firstName: '',
     phoneNumber: '',
+    streetAddress: '',
     email: '',
-    streetAddress: ''
+    
   });
-
+console.log(formData)
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     phoneNumber: '',
     email: ''
   });
   const [userDetails, setUserDetails] = useState([])
-//   useEffect(() =>{
-//     const fetchUserDatas = async (uId) => {
-//         try {
-//           const response = await axios.get("http://localhost:8080/api/v1/user/1"); 
-//           setUserDetails(response.data);
-//           console.log(response.data)
-//         } catch (error) {
-//           console.error('Error fetching ExclusiveOffers:', error);
-//         }
-//       };
-  
-//       fetchUserDatas();
-// },[])
+  const [products, setProducts] = useState([]);
+  const [oid, setOid] = useState('');
+  const deliveryCharge = 42
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -45,6 +41,9 @@ const UserDetails = () => {
     if (formData.firstName.trim() === '') {
       errors.firstName = 'First name is required';
     }
+    // if (formData.lastName.trim() === '') {
+    //   errors.firstName = 'Last name is required';
+    // }
     if (formData.phoneNumber.trim() === '') {
       errors.phoneNumber = 'Phone number is required';
     }
@@ -55,25 +54,21 @@ const UserDetails = () => {
     }
 
     if (Object.keys(errors).length === 0) {
-      // No errors, form can be submitted
-      // Add code here to submit form data to your database
+      
       console.log('Form submitted:', formData);
     } else {
-      // Update formErrors state with validation errors
       setFormErrors(errors);
     }
   };
-
-
-    const [products, setProducts] = useState([]);
-    const deliveryCharge = 42
-
     useEffect(() =>{
     
       const fetchOrderDats = async () => {
           try {
-            const response = await axios.get("http://localhost:8080/api/v1/order/orderitems/3"); 
+            const response = await axios.get("http://localhost:8080/api/v1/order/orderitems/1"); 
             setProducts(response.data);
+            
+            console.log(response.data[0][0].oid)
+            setOid(response.data[0][0].oid)
             
           } catch (error) {
             console.error('Error fetching oeder datas:', error);
@@ -82,6 +77,53 @@ const UserDetails = () => {
     
         fetchOrderDats();
   },[])
+
+  const jwt_decode = require('jwt-decode');
+  const userToken = getUserData();
+  const decodeToken = jwtDecode(userToken);
+  
+  const uId = decodeToken.uId;
+
+  const [defaultUserDetails, setDefaultUserDetails] = useState([])
+ 
+
+  
+console.log("oid     :",oid)
+  useEffect(() =>{
+    
+    const fetchUserDatas = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/api/v1/user/${uId}`); 
+          setDefaultUserDetails(response.data);
+          console.log(response.data)                                       
+          
+        } catch (error) {
+          console.error('Error fetching user datas:', error);
+        }
+      };
+  
+      fetchUserDatas(uId);
+},[])
+
+  const navigate = useNavigate()
+
+  // const orderId = products[0][0].oid
+
+  const updateUserDatas = async () => {
+    try {
+      const response = await axios.put(`http://localhost:8080/userdetail/${uId}/${oid}`,{
+        "firstName":"formData.firstName",
+        "email":"formData.email",
+        "phoneNo":"formData.phoneNumber",
+        "userAddress":"formData.streetAddress"
+      }); 
+      
+      
+    } catch (error) {
+      console.error('Error fetching update user details:', error);
+    }
+    navigate("/order")
+  };
   
  
     const totalPrice = () => {
@@ -104,11 +146,18 @@ const UserDetails = () => {
           <div className="row">
             <div className="col-md-6">
               <div className="mb-3">
-                <label htmlFor="firstName" className="form-label">Full Name<span className="required-sign" style={{ color: 'red' }}> *</span></label>
+                <label htmlFor="firstName" className="form-label">First Name<span className="required-sign" style={{ color: 'red' }}> *</span></label>
                 <input type="text" className="form-control" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required />
                 {formErrors.firstName && <div style={{ color: 'red' }}>{formErrors.firstName}</div>}
               </div>
             </div>
+            {/* <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor="firstName" className="form-label">Last Name<span className="required-sign" style={{ color: 'red' }}> *</span></label>
+                <input type="text" className="form-control" id="firstName" name="firstName" value={formData.lastName} onChange={handleChange} required />
+                {formErrors.lastName && <div style={{ color: 'red' }}>{formErrors.lastName}</div>}
+              </div>
+            </div> */}
           </div>
           <div className="mb-3">
             <label htmlFor="phoneNumber" className="form-label">Phone Number<span className="required-sign" style={{ color: 'red' }}> *</span></label>
@@ -126,7 +175,7 @@ const UserDetails = () => {
           </div>
           <div>
             <button type="button" className='btn btn-success m-3'>Cancel Order</button>
-            <button type="submit" className='btn btn-success m-3'>Place Order</button>
+            <button type="submit" className='btn btn-success m-3' onClick={updateUserDatas}>Place Order</button>
           </div>
         </form>
       </div>
@@ -151,6 +200,7 @@ const UserDetails = () => {
                               <td>({product[1].price}*{product[0].quantity}) <br></br> = ${product[1].price * product[0].quantity}</td>
                               <td style={{color:"red"}}>{product[1].discount}%</td>
                               <td>${(product[1].price - (product[1].discount * product[1].price / 100)) * product[0].quantity}</td>
+                              {/* <input type="hidden" value={product[0].oid} onChange={(e) => setOid(e.target.value)} /> */}
                           </tr>
                       ))}
                   </tbody>

@@ -33,4 +33,9 @@ public class OrderController {
     private List<OrderDto> userDetails(@PathVariable Long uId, @PathVariable Long oId, @RequestBody OrderDto orderDto){
         return orderService.setUserDetails(uId, oId, orderDto);
     }
+
+    @GetMapping("/orderdetails/{uId}")
+    private List<Object[]> getOrdersDetails(@PathVariable Long uId){
+        return orderService.getOrdersDetails(uId);
+    }
 }

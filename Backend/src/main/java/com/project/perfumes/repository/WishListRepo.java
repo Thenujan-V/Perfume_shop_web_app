@@ -1,5 +1,4 @@
 package com.project.perfumes.repository;
-
 import com.project.perfumes.dto.WiseListDto;
 import com.project.perfumes.entity.CartEntity;
 import com.project.perfumes.entity.ProductEntity;

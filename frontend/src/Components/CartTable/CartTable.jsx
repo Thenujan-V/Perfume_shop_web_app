@@ -6,6 +6,7 @@ import Product from '../../Pages/Product';
 import axios from 'axios';
 import { getUserData } from '../storage/GetUserData';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 const CartTable = ({ cartTable, setCartTable }) => {
   const count=1
   const [cartItems, setCartItems] = useState([]);
@@ -15,6 +16,7 @@ const CartTable = ({ cartTable, setCartTable }) => {
     phoneNumber: '',
     address: ''
   });
+  const navigate=useNavigate()
 
   const jwt_decode = require('jwt-decode');
   const userToken = getUserData();
@@ -24,10 +26,8 @@ const CartTable = ({ cartTable, setCartTable }) => {
     useEffect(() =>{
         const cart = async (uId) => {
             try {
-              console.log("id"+uId)
-              const response = await axios.get("http://localhost:8080/api/v1/cart/getcart/${uId}"); 
+              const response = await axios.get(`http://localhost:8080/api/v1/cart/getcart/${uId}`); 
               setCartItems(response.data);
-              console.log("res :"+response.data)
               
             } catch (error) {
               console.error('Error fetching cart:', error);
@@ -48,21 +48,27 @@ const CartTable = ({ cartTable, setCartTable }) => {
     return cartItems.reduce((total, item) => total + ((item[0].price - item[0].discount) * item[1].quantity), 0);
   };
 
-  const handleDelete = async (itemId) => {
+  const handleDelete = async (uId, itemId) => {
     try {
-      const response = await axios.delete("http://localhost:8080/api/v1/cart/deletecartitem/3/2"); 
-      console.log("res :"+response)
-      // setCartItems(response.data);
+      const response = await axios.delete(`http://localhost:8080/api/v1/cart/deletecartitem/${uId}/${itemId}`,{ }); 
     } catch (error) {
       console.error('Error deleting cart:', error);
     }
 
     const updatedCart = cartItems.filter(item => item.id !== itemId);
     setCartItems(updatedCart);
+    window.location.reload();
   };
 
-  const handleCheckout = () => {
-    // Handle checkout logic here
+  const handleCheckOut = async () => {
+    try {
+      const response = await axios.post(`http://localhost:8080/api/v1/order/create/${uId}`,{}); 
+      navigate("/checkout")
+      window.location.reload();
+    } 
+    catch (error) {
+      console.error('Error deleting cart:', error);
+    }
   };
   
   return (
@@ -85,21 +91,21 @@ const CartTable = ({ cartTable, setCartTable }) => {
               </thead>
               <tbody>
                 {cartItems.map(item => (
-                  <tr key={item.id}>
+                  <tr key={item[0].pid}>
                     <td>{count}</td>
-                    <td><img src={item.imageURL} alt={item.pname} style={{ width: '100px' }} /></td>
-                    <td>{item.pname}</td>
-                    <td>${item.price - item.discount}</td>
+                    <td><img src={item[0].imageURL} alt={item[0].pname} style={{ width: '100px' }} /></td>
+                    <td>{item[0].pname}</td>
+                    <td>${item[0].price - item[0].discount}</td>
                     <td>
                       <input
                         type="number"
                         value={item[1].quantity}
-                        onChange={e => handleQuantityChange(item.id, parseInt(e.target.value))}
+                        onChange={e => handleQuantityChange(item[0].id, parseInt(e.target.value))}
                       />
                     </td>
                     <td>${(item[0].price - item[0].discount) * item[1].quantity}</td>
                     <td>
-                      <button type="button" className="btn btn-secondary" onClick={() => handleDelete(item.id)}>Delete</button>
+                      <button type="button" className="btn btn-secondary" onClick={() => handleDelete(uId, item[0].pid)}>Delete</button>
                     </td>
                   </tr>
                 ))}
@@ -109,6 +115,13 @@ const CartTable = ({ cartTable, setCartTable }) => {
         </div>
       </div>
       <div>Total Price after Discount: ${calculateTotalPrice()}</div>
+      <button
+          style={{ background: '#630229', color: '#ffffff', padding: '8px' }}
+          className='btn rounded'
+          onClick={handleCheckOut}
+        >
+          Check Out
+        </button>
     </div>
   );
 }
