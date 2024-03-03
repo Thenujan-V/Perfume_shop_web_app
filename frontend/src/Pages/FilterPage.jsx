@@ -198,7 +198,10 @@ const FilterPage = () => {
     else if(selectedCategoryFromUrl){
       setSelectedCategory(selectedCategoryFromUrl)
      }
-  }, [selectedBrandFromUrl],[selectedCategoryFromUrl]);
+     else if(selectedSizeFromUrl){
+      setSelectedSize(selectedSizeFromUrl)
+     }
+  }, [selectedBrandFromUrl],[selectedCategoryFromUrl],[selectedSizeFromUrl]);
 
 
   useEffect(() =>{
@@ -225,6 +228,7 @@ const FilterPage = () => {
   
     if (selectedGender) {
       filtered = filtered.filter((product) => product.gender === selectedGender);
+      console.log("filter gender"+filtered)
     }
   
     if (selectedBrand) {
@@ -236,7 +240,7 @@ const FilterPage = () => {
     }
   
     if (selectedSize) {
-      filtered = filtered.filter((product) => product.size === selectedSize);
+      filtered = filtered.filter((product) => parseInt(product.size) === parseInt(selectedSize));
     }
   
     filtered = filtered.filter(
@@ -274,7 +278,7 @@ const FilterPage = () => {
           <option value="Unisex" style={{background:' #630229',color:"#ffffff"}}>Unisex</option>
         </select>
 
-        <select value={selectedBrand}  onChange={(e) => setSelectedBrand(e.target.value)} className='mt-4 rounded'>
+        <select value={selectedBrand}  onChange={(e) => setSelectedBrand(e.target.value)} className='mt-4 rounded' style={{width:"150px"}}>
           <option value="">All Brands</option>
         
           {Array.from(new Set(productData.map(product => product.brand))).map((brand, index) => (
