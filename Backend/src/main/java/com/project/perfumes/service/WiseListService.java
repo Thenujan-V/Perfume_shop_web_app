@@ -4,7 +4,7 @@ import com.project.perfumes.entity.ProductEntity;
 
 import java.util.List;
 
-public class WiseListService {
+public interface WiseListService {
     WiseListDto createWiseList(Long uId, Long pId);
 
     List<ProductEntity> getAllWiseList(Long uId);
