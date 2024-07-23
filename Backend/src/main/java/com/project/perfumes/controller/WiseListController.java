@@ -28,7 +28,8 @@ public class WiseListController {
         if (wiseListService.checkWiselist(uId, pId)) { //method checks if the product already exists in the wishlist for the given user 
             return ResponseEntity.status(HttpStatus.OK).body("Product already exists.");// If it does, it returns a response with status OK and a message indicating that the product already exists.
         } else {
-            WiseListDto createdCart = wiseListService.createWiseList(uId, pId); If not, it creates a new entry in the wishlist using 
+            WiseListDto createdCart = wiseListService.createWiseList(uId, pId);
+//            If not, it creates a new entry in the wishlist using
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCart.toString());
             //returns a response with status CREATED and the created wishlist item.
         }

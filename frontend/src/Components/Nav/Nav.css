@@ -176,7 +176,11 @@ nav{
   top: 10px;
 }
 
-
+.searchIcon{
+  position: absolute;
+  top: 28px;
+  /* background-color: gold; */
+}
 .suggestions {
   font-size: 20px;
   position: absolute;
@@ -193,16 +197,11 @@ nav{
   position: fixed;
   top: 20px;
   left: 0;
-  width: 100%;
-<<<<<<< HEAD
-  /* height: 100%; */
-  background: rgba(0, 0, 0, 0.5);
-=======
-  height: 100%;
->>>>>>> 009a14f3f5914f980d00caf6690b136be1268ef2
-  display: flex;
+  width: 500px;
+  max-height: 100%;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 
@@ -234,7 +233,6 @@ nav{
 } */
 
 
-<<<<<<< HEAD
 /* .navbar-nav .profile-popup {
   position: fixed;
   top: 50%;
@@ -246,8 +244,6 @@ nav{
   text-align: center;
   z-index: 1000;
 } */
-=======
->>>>>>> 009a14f3f5914f980d00caf6690b136be1268ef2
 
 
 

@@ -49,7 +49,7 @@ const Nav = () => {
           const uId = decodeToken.uId;
           const fetchUserData = async (uId) => {
             try {
-              const response = await axios.get("http://localhost:8080/api/v1/user/${uId}");
+              const response = await axios.get(`http://localhost:8080/api/v1/user/${uId}`);
               setUserData(response.data);
             } catch (error) {
               console.error('Error fetching user data:', error);
@@ -243,7 +243,7 @@ const Nav = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              style={{ maxWidth: '250px' }}
+              style={{ maxWidth: '290px' , position:"absolute" , top:"18px"}}
               value={searchQuery}
               onChange={(e) => {
                 const query = e.target.value;
@@ -265,8 +265,8 @@ const Nav = () => {
               ))}
             </div>
             {/* Search button */}
-            <button className="btn" type="submit">
-              <FontAwesomeIcon icon={faSearch} style={{ color: "#ffffff", fontSize: "24px" }} />
+            <button className="btn" type="submit" style={{border:"none"}}>
+              <FontAwesomeIcon icon={faSearch} style={{ color: "#ffffff", fontSize: "24px" }} className='searchIcon'/>
             </button>
           </form>
 
@@ -279,8 +279,8 @@ const Nav = () => {
 
 
             {showFavoritesPopup && (
-              <div className="popup">
-                <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
+              <div className="popups">
+                <div className="popup-contents popupboxs" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
                   <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
                   <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
                     {/* Assuming FontAwesomeIcon is imported properly */}
@@ -316,47 +316,51 @@ const Nav = () => {
             )}
             {/* Profile Popup */}
             {showProfilePopup && (
-              <div className="popup" >
+              // userData.userName != '' ? (
+                <div className="popup" >
                 <div className="popup-content popupbox" style={{ background: "#630229", fontSize: "15px" }}>
                   <span className="close-button" onClick={toggleProfilePopup}>&times;</span>
                   <div className="icon d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faUser} style={{ fontSize: "55px" }} /></div>
                   <h4>Hi, {userData.firstname}</h4>
                   <form>
                     <div className="mb-3">
-                      <label className="form-label">User Name:</label>
+                      {/* <label className="form-label">User Name:</label> */}
                       <input
                         className="form-control"
                         type="text"
                         value={userData.firstName}
                         onChange={(e) => setUserData({ ...userData, userName: e.target.value })}
-
+                        style={{height:"40px"}}
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Email address:</label>
+                      {/* <label className="form-label">Email address:</label> */}
                       <input
                         className="form-control"
                         type="text"
                         value={userData.email}
                         onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                        style={{height:"40px"}}
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Phone Number:</label>
+                      {/* <label className="form-label">Phone Number:</label> */}
                       <input
                         className="form-control"
                         type="text"
                         value={userData.phoneno}
                         onChange={(e) => setUserData({ ...userData, phoneNumber: e.target.value })}
+                        style={{height:"40px"}}
                       />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Address:</label>
+                      {/* <label className="form-label">Address:</label> */}
                       <input
                         className="form-control"
                         type="text"
                         value={userData.address}
                         onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+                        style={{height:"40px"}}
                       />
                     </div>
                   </form>
@@ -368,9 +372,12 @@ const Nav = () => {
                   </div>
                 </div>
               </div>
-
-
-            )}
+              // ) : (null
+                // <div><Link to='/'></Link></div>
+                // <p>ff</p>
+            // )
+          )
+          }
 
             {/* Cart icon */}
             <Link className="nav-link icons" to="/cart">
@@ -378,9 +385,18 @@ const Nav = () => {
             </Link>
 
             {/* User icon - Toggle Profile Popup */}
-            <div className="nav-link icons" onClick={toggleProfilePopup}>
+            {userData.userName != '' ? (
+              <div className="nav-link icons" onClick={toggleProfilePopup}>
               <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} />
-            </div>
+            </div> 
+            ) : (
+              <Link className="nav-link icons" to="/">
+              <FontAwesomeIcon icon={faUser} style={{ color: "#ffffff", fontSize: "24px" }} />
+            </Link>
+            )}
+
+
+            
           </div>
         </div>
 
