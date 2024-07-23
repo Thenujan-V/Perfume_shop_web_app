@@ -66,7 +66,7 @@ const Nav = () => {
   console.log('products:', products);
   console.log('selectedSuggestion:', selectedSuggestion);
 
-  if (suggestionSelected && products && selectedSuggestion) {
+  if ( products && selectedSuggestion) {
     const exactMatch = products.find(
       (item) => item.pname && item.pname.toLowerCase() === selectedSuggestion.toLowerCase()
     );
@@ -250,6 +250,7 @@ const Nav = () => {
                 setSearchQuery(query);
                 setSuggestedProducts(getAutoSuggestions(query));
                 setSelectedSuggestion('');
+                setSuggestionSelected(false);
               }}
             />
             {/* Suggestions */}
@@ -280,7 +281,7 @@ const Nav = () => {
 
             {showFavoritesPopup && (
               <div className="popups">
-                <div className="popup-contents popupboxs" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
+                <div className="popup-content popupboxs" style={{ background: "#630229", fontSize: "15px", overflowY: "scroll" }}>
                   <span className="close-button" onClick={closeFavoritesPopup}>&times;</span>
                   <div className="icon d-flex justify-content-center align-items-center" onClick={toggleFavoritesPopup}>
                     {/* Assuming FontAwesomeIcon is imported properly */}
@@ -372,10 +373,6 @@ const Nav = () => {
                   </div>
                 </div>
               </div>
-              // ) : (null
-                // <div><Link to='/'></Link></div>
-                // <p>ff</p>
-            // )
           )
           }
 
